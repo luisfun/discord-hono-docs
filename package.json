@@ -3,17 +3,24 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "fix": "prettier . --write",
     "dev": "astro dev",
-    "start": "astro dev",
     "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "preview": "astro preview"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "arrowParens": "avoid"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.19.0",
-    "astro": "^4.3.5",
-    "sharp": "^0.32.5",
     "@astrojs/check": "^0.5.4",
+    "@astrojs/starlight": "^0.19.0",
+    "astro": "^4.4.0",
+    "sharp": "^0.33.2",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
   }
 }
