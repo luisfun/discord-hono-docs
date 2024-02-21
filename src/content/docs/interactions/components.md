@@ -1,20 +1,40 @@
 ---
-title: Command
+title: Components
 sidebar:
-  order: 2
+  order: 3
 ---
 
 ```ts
-// commands.ts
-import { Command } from 'discord-hono'
+// handlers.ts
+import { CommandHandlers, Components, Button } from 'discord-hono'
 
-export const commands = [
-  new Command('name', 'description'),
-  new Command('ping', 'response pong'),
-]
+export const handlers = new CommandHandlers().on('component', c =>
+  c.res({
+    content: 'Components',
+    components: new Components().row(
+      new Button('button-1', 'Button'),
+      new Button('button-2', 'Second'),
+    ),
+  }),
+)
 ```
 
-Check the [Official Docs](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming) for the first argument (name) of `Command`.
+## .row()
+
+```ts
+const components = new Components()
+  .row(new Button('button-1', 'First'), new Button('button-2', 'Second'))
+  .row(new Button('button-3', 'Third'), new Button('button-4', 'Force'))
+```
+
+```
+[First] [Second]
+[Third] [Force]
+```
+
+`.row()` has the same feature as [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows).
+
+## Component elements
 
 ## Method
 
@@ -42,7 +62,7 @@ const commands = [
 
 Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/application-commands#application-command-object).
 
-## Option elements
+## Option
 
 ```ts
 import {

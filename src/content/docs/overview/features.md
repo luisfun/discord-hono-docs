@@ -1,14 +1,14 @@
 ---
-title: The Future
+title: Features
 sidebar:
   order: 2
 ---
 
 ## Current Direction
 
-We will cover as much as possible of the following.
+We will support as much as possible of the following.
 
-- Runs on Cloudflare Workers
+- Run on Cloudflare Workers
 - Covering Interactions with Discord
 
 The following items are not basically supported.  
