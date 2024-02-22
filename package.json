@@ -1,7 +1,10 @@
 {
   "name": "discord-hono-docs",
-  "type": "module",
   "version": "0.0.1",
+  "author": "Luis (https://github.com/LuisFun)",
+  "homepage": "https://github.com/LuisFun/discord-hono-docs",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
     "fix": "prettier . --write",
     "dev": "astro dev",
