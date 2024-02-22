@@ -1,7 +1,7 @@
 ---
 title: Command
 sidebar:
-  order: 2
+  order: 3
 ---
 
 ```ts
@@ -19,8 +19,6 @@ Check the [Official Docs](https://discord.com/developers/docs/interactions/appli
 ## Method
 
 ```ts
-import { Command, Option } from 'discord-hono'
-
 const commands = [
   new Command('name', 'description')
     .id()
@@ -73,8 +71,6 @@ Option is String option.
 ### Method
 
 ```ts
-import { Command, Option } from 'discord-hono'
-
 const commands = [
   new Command('ping', 'response pong').options(
     new Option('name', 'description')

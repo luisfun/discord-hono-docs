@@ -34,6 +34,11 @@ export default defineConfig({
           translations: { ja: 'APIエンドポイント' },
           autogenerate: { directory: 'api-endpoint' },
         },
+        {
+          label: 'Builder',
+          translations: { ja: 'ビルダー' },
+          autogenerate: { directory: 'builder' },
+        },
       ],
     }),
   ],

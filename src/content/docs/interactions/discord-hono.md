@@ -6,28 +6,88 @@ sidebar:
 
 ```ts
 // index.ts
-import { DiscordHono, CommandHandlers } from 'discord-hono'
-
-const handlers = new CommandHandlers().on('ping', c => c.resText('Pong!!'))
+import { DiscordHono } from 'discord-hono'
 
 const app = new DiscordHono()
-app.handlers(handlers)
+app.command('ping', c => c.resText('Pong!!'))
+
 export default app
 ```
 
-## .handlers()
+## .command()
 
-```ts
-import { CommandHandlers, ComponentHandlers } from 'discord-hono'
-
-const command = new CommandHandlers().on('ping', c => c.res(/*****/))
-const component = new ComponentHandlers().on('button', c => c.res(/*****/))
-
-app.handlers(command)
-app.handlers(component)
+```ts "ping" "image"
+export const commands = [
+  new Command('ping', 'response Pong'),
+  new Command('image', 'response Image'),
+]
+const app = new DiscordHono()
+  .command('ping', c => c.resText('Pong!!'))
+  .command('image', c => c.resText('Image!!'))
 ```
 
-Accept all `***Handlers`.
+The first argument of `Command()` must match the first argument of `.command()`.  
+The second argument of the matched `.command()` is executed.
+
+## .component()
+
+```ts "button-1" "button-2"
+const app = new DiscordHono()
+  .command('component', c =>
+    c.res({
+      content: 'No button clicked yet',
+      components: new Components().row(
+        new Button('button-1', 'Button'),
+        new Button('button-2', 'Second'),
+      ),
+    }),
+  )
+  .component('button-1', c => c.resUpdateText('Button clicked'))
+  .component('button-2', c => c.resUpdateText('Second clicked'))
+```
+
+The first argument of the component element `Button()` must match the first argument of `.component()`.  
+The second argument of the matched `.component()` is executed.
+
+## .modal()
+
+```ts "modal-1"
+const app = new DiscordHono()
+  .command('modal', c =>
+    c.resModal(
+      new Modal('modal-1', 'Modal Title')
+        .row(new TextInput('text-1', 'Text'))
+        .row(new TextInput('text-2', 'Second')),
+    ),
+  )
+  .modal('modal-1', c => c.resText('Modal submitted'))
+```
+
+The first argument of `Modal()` must match the first argument of `.modal()`.  
+The second argument of the matched `.modal()` is executed.
+
+## .cron()
+
+```ts "0 0 * * *"
+const app = new DiscordHono()
+  .cron('0 0 * * *', c => c.postText('CHANNEL_ID', 'Daily Post'))
+  .cron('', c => c.postText('CHANNEL_ID', 'Other Cron Triggers Post'))
+```
+
+```toml "0 0 * * *"
+// wrangler.toml
+name = "example"
+main = "src/index.ts"
+compatibility_date = "2024-02-08"
+[triggers]
+crons = [ "0 * * * *", "0 0 * * *" ]
+```
+
+The first argument of `.cron()` must match the toml file crons.  
+The second argument of the matched `.cron()` is executed.
+
+If `''` is specified, it matches all remaining crons.  
+If you do not need to separate processing by crons, you can specify only `''`.
 
 ## .discordKey()
 
@@ -44,7 +104,7 @@ This is used when you save the key with a different name, or in environments oth
 
 ## .fetch()
 
-Please refer [here](https://hono.dev/api/hono#fetch).  
+Please refer to [here](https://hono.dev/api/hono#fetch).  
 We try to be as similar as possible to Hono's fetch().
 
 ## .scheduled()

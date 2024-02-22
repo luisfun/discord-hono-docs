@@ -15,6 +15,6 @@ The following items are not basically supported.
 However, if sponsorship is obtained, it is likely to be addressed.
 
 - Runs on non-Cloudflare environments
-- API Endpoint Requests and Responses
+- All API Endpoints Requests and Responses
 
-This is a restriction we have added because we do development as a hobby.
+I decided not to support everything because the maintenance cost would be too high for something I’m developing as a hobby.
