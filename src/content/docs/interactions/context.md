@@ -19,6 +19,40 @@ Context can be received as the second argument of `app.command()`, `app.componen
 Please refer to [here](https://hono.dev/api/context).  
 We try to make it as similar to Hono as possible.
 
+## get: req
+
+command, component, modal
+
+Interaction Request are included as is.
+
+## get: interaction
+
+command, component, modal
+
+`c.interaction` = `JSON.parse(await c.req.text())`
+
+Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object).
+
+## get: values
+
+command
+
+```ts
+const app = new DiscordHono().command('ping', c => c.res(c.values.OPTION_NAME))
+```
+
+It contains data for command options.
+
+## get: cronEvent
+
+cron
+
+```ts "cronEvent"
+const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
+```
+
+It has the event value of the [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) first argument.
+
 ## .resBase()
 
 command, component, modal
@@ -123,13 +157,3 @@ If the argument is empty, only deletion is performed.
 .resEphemeral() .followupEphemeral() .resRepostEphemeral()
 
 Send a message that is only visible to the user who performed the interaction.
-
-## .cronEvent
-
-cron
-
-```ts "cronEvent"
-const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
-```
-
-It has the event value of the [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) first argument.

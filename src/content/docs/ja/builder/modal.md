@@ -22,7 +22,7 @@ const modal = new Modal('unique-id', 'Modal Title')
   .row(new TextInput('text-2', 'MultiInput', 'Multi'))
 ```
 
-`.row()` has the same feature as [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows).
+`.row()` は [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows) と同じ機能です。
 
 ## TextInput
 
@@ -36,7 +36,7 @@ const modal = new Modal('unique-id', 'Modal Title')
   .row(new TextInput('text-2', 'MultiInput', 'Multi' as Style))
 ```
 
-The third argument specifies the style of the TextInput. The default is `Single`.
+第3引数には TextInput のスタイルを指定します。デフォルトは `Single` です。
 
 ### Method
 
@@ -51,4 +51,4 @@ const modal = new Modal('unique-id', 'Modal Title').row(
 )
 ```
 
-Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/message-components#text-input-object).
+[公式ドキュメント](https://discord.com/developers/docs/interactions/message-components#text-input-object)を参照してください。

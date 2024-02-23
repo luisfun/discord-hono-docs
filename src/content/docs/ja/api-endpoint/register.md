@@ -27,5 +27,5 @@ await register(
 )
 ```
 
-When you specify the fourth argument, it registers a command to a single guild (server) immediately.  
-If you do not specify the fourth argument, it can be registered globally.
+第4引数を指定すると、1つのguild（サーバー）に対して、即座にコマンドを登録します。  
+第4引数に何も入れなければ、グローバルなコマンドを登録します。

@@ -22,7 +22,7 @@ export default app
 await postMessage('DISCORD_TOKEN', 'Channel ID', 'string or data', ...files)
 ```
 
-The third argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).
+第3引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData)。
 
 ## deleteMessage()
 
@@ -41,9 +41,9 @@ await followupMessage(
 )
 ```
 
-The third argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).
+第3引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData)。
 
-`c.followup()` uses this.
+`c.followup()` では、これを使っています。
 
 ## followupDeleteMessage()
 
@@ -51,4 +51,4 @@ The third argument is a string or [APIInteractionResponseCallbackData](https://d
 await followupDeleteMessage('Application ID', 'Interaction Token', 'Message ID')
 ```
 
-`c.followupDelete()`, `c.resRepost()` uses this.
+`c.followupDelete()`、`c.resRepost()` では、これを使っています。

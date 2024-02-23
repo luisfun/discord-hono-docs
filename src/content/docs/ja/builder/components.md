@@ -26,12 +26,12 @@ const components = new Components()
   .row(new Button('button-3', '333'), new Button('button-4', '4444'))
 ```
 
-```bash title="Discord Bot Components Response"
+```bash title="Discord Bot コンポーネントレスポンス"
 [1][22]
 [333][4444]
 ```
 
-`.row()` has the same feature as [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows).
+`.row()` は [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows) と同じ機能です。
 
 ## Button
 
@@ -46,9 +46,9 @@ const components = new Components().row(
 )
 ```
 
-`unique-id` is used to identify `app.component()`.  
-Also, do not use `;` for `unique-id`.  
-The third argument specifies the style of the button. The default is `Primary`.
+`unique-id` は `app.component()` で識別するために使います。  
+また、`unique-id` に `;` は使用できません。  
+第3引数にはボタンのスタイルを指定します。デフォルトは `Primary` です。
 
 ### Method
 
@@ -62,10 +62,10 @@ const components = new Components().row(
 )
 ```
 
-Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/message-components#button-object).
+[公式ドキュメント](https://discord.com/developers/docs/interactions/message-components#button-object)を参照してください。
 
-There are some notes that differ from the official one.  
-`.custom_id()` are limited to a total of 99 characters with `unique-id`.
+公式ドキュメントと異なる注意点があります。  
+`.custom_id()` は `unique-id` を含めて99文字までです。
 
 ## LinkButton
 
@@ -78,9 +78,9 @@ const components = new Components().row(
 )
 ```
 
-The link button should contain a URL instead of a unique-id. Also, style cannot be specified.
+リンクボタンには、unique-id の代わりに URL を指定する必要があります。また、ボタンのスタイルは指定できません。
 
-Method is basically the same as for a Button.
+メソッドは基本的に Button と同じです。
 
 ## Select elements
 
@@ -97,11 +97,11 @@ import {
 const components = new Components().row(new ChannelSelect('unique-id'))
 ```
 
-See [here](https://discord.com/developers/docs/interactions/message-components#component-object-component-types) for Component Types.  
-`Select` is String Select.
+コンポーネント Type については[こちら](https://discord.com/developers/docs/interactions/message-components#component-object-component-types)を参照してください。  
+`Select` は String Select です。
 
-`unique-id` is used to identify `app.component()`.  
-Also, do not use `;` for `unique-id`.
+`unique-id` は `app.component()` で識別するために使用されます。  
+また、`unique-id` に `;` は使用できません。
 
 ### Method
 
@@ -118,9 +118,9 @@ const components = new Components().row(
 )
 ```
 
-Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/message-components#select-menu-object).
+[公式ドキュメント](https://discord.com/developers/docs/interactions/message-components#select-menu-object)を参照してください。
 
-Depending on the type of option, some fields (methods) cannot be used.
+オプションによって使用できないフィールド（メソッド）があります。
 
-There are some notes that differ from the official one.  
-`.custom_id()` are limited to a total of 99 characters with `unique-id`.
+公式ドキュメントと異なる注意点があります。  
+`.custom_id()` は `unique-id` を含めて99文字までです。

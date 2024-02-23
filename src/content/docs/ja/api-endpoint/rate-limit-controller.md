@@ -24,12 +24,12 @@ const manyPosts = async () => {
 
 ## set/get: res
 
-Set the Response.
+Response を入れる用です。
 
 ## get: headers
 
-Response X-Rate-Limit headers.
+Response の X-Rate-Limit ヘッダーです。
 
 ## .wait()
 
-I will make sure that my future self operates nicely.
+いい感じに待機するようにします。将来の僕が

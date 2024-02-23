@@ -5,7 +5,6 @@ sidebar:
 ---
 
 ```ts
-// index.ts
 import { DiscordHono } from 'discord-hono'
 
 const app = new DiscordHono()

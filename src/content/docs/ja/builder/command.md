@@ -13,7 +13,7 @@ const commands = [
 ]
 ```
 
-Check the [Official Docs](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming) for the first argument (name) of `Command`.
+`Command` の第1引数につては、[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming)を確認してください。
 
 ## Method
 
@@ -21,7 +21,7 @@ Check the [Official Docs](https://discord.com/developers/docs/interactions/appli
 const commands = [
   new Command('name', 'description')
     .id()
-    .type(2) // 1,2,3 default 1 --- 1: CHAT_INPUT, 2: USER, 3: MESSAGE
+    .type(2) // 1,2,3 デフォルト 1 --- 1: CHAT_INPUT, 2: USER, 3: MESSAGE
     .application_id()
     .guild_id()
     .name_localizations()
@@ -37,7 +37,7 @@ const commands = [
 ]
 ```
 
-Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/application-commands#application-command-object).
+[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object)を参照してください。
 
 ## Option elements
 
@@ -64,8 +64,8 @@ const commands = [
 ]
 ```
 
-Each option is available for each type [here](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type).  
-Option is String option.
+[こちら](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type)の Type ごとのオプションを用意しています。  
+ただの Option は String option です。
 
 ### Method
 
@@ -87,6 +87,6 @@ const commands = [
 ]
 ```
 
-Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure).
+[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure)を参照してください。
 
-Depending on the type of option, some fields (methods) cannot be used.
+オプションによって使用できないフィールド（メソッド）があります。
