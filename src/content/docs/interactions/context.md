@@ -8,8 +8,8 @@ sidebar:
 import { DiscordHono } from 'discord-hono'
 
 const app = new DiscordHono()
-  .command('ping', c => c.resText('Pong!!'))
-  .command('hello', c => c.resText('world!!'))
+  .command('ping', c => c.res('Pong!!'))
+  .command('hello', c => c.res('world!!'))
 ```
 
 Context can be received as the second argument of `app.command()`, `app.component()`, `app.modal()`, `app.cron()`.

@@ -31,8 +31,8 @@ const componentHandler = async (c: ComponentContext<Env>) => {
   const db = c.env.DB
   /* 何かしらの処理 */
   return c.resModal(
-    new Modal('modal', 'This is Modal').row(
-      new TextInput('id', 'Type something'),
+    new Modal('modal', 'これはモーダル').row(
+      new TextInput('id', '何か入力して'),
     ),
   )
 }
@@ -40,7 +40,7 @@ const componentHandler = async (c: ComponentContext<Env>) => {
 const modalHandler = async (c: ModalContext<Env>) => {
   const db = c.env.DB
   /* 何かしらの処理 */
-  return c.res('Modal Submit')
+  return c.res('モーダルが送信された')
 }
 
 const cronHandler = async (c: CronContext<Env>) => {

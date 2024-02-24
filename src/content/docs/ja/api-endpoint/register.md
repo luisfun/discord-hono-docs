@@ -13,9 +13,9 @@ import { Command, Option, register } from 'discord-hono'
 dotenv.config({ path: '.dev.vars' })
 
 const commands = [
-  new Command('ping', 'response pong'),
-  new Command('image', 'response image file').options(
-    new Option('text', 'with text').required(),
+  new Command('ping', 'pong を返答'),
+  new Command('image', '画像ファイルを返答').options(
+    new Option('text', 'テキスト付で').required(),
   ),
 ]
 

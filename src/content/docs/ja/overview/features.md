@@ -11,8 +11,7 @@ sidebar:
 - Cloudflare Workers での動作
 - Discord の Interactions をカバーする
 
-次の項目は基本的に対応しません。  
-しかし、スポンサーが付けば、対応する可能性は高いです。
+次の項目は基本的に対応しません。
 
 - Cloudflare 以外の環境での動作
 - 全ての API エンドポイントのリクエストとレスポンス

@@ -9,7 +9,7 @@ import { Command } from 'discord-hono'
 
 const commands = [
   new Command('name', 'description'),
-  new Command('ping', 'response pong'),
+  new Command('ping', 'pong を返答'),
 ]
 ```
 
@@ -27,8 +27,8 @@ const commands = [
     .name_localizations()
     .description_localizations()
     .options(
-      new Option('text', 'first text'),
-      new Option('second', 'second text'),
+      new Option('text', 'テキスト1つ目'),
+      new Option('second', 'テキスト2つ目'),
     )
     .default_member_permissions()
     .dm_permission()
@@ -57,9 +57,9 @@ import {
 } from 'discord-hono'
 
 const commands = [
-  new Command('ping', 'response pong').options(
+  new Command('ping', 'pong を返答').options(
     new Option('name', 'description'),
-    new Option('text', 'response text'),
+    new Option('text', 'テキストを返答'),
   ),
 ]
 ```
@@ -71,14 +71,14 @@ const commands = [
 
 ```ts
 const commands = [
-  new Command('ping', 'response pong').options(
+  new Command('ping', 'pong を返答').options(
     new Option('name', 'description')
       .name_localizations()
       .description_localizations()
       .required() // .required(true) = .required()
       .choices(
-        { name: 'choice 1', value: 'string 1' },
-        { name: 'choice 2', value: 'string 2' },
+        { name: '選択肢1', value: 'string 1' },
+        { name: '選択肢2', value: 'string 2' },
       )
       .min_length()
       .max_length()

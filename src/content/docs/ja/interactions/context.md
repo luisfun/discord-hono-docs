@@ -8,8 +8,8 @@ sidebar:
 import { DiscordHono } from 'discord-hono'
 
 const app = new DiscordHono()
-  .command('ping', c => c.resText('Pong!!'))
-  .command('hello', c => c.resText('world!!'))
+  .command('ping', c => c.res('Pong!!'))
+  .command('hello', c => c.res('world!!'))
 ```
 
 `app.command()`、`app.component()`、`app.modal()`、`app.cron()` の第2引数で Context を受け取ることできます。
@@ -59,7 +59,7 @@ command, component, modal
 
 ```ts "resBase"
 const app = new DiscordHono().command('ping', c =>
-  c.resBase({ type: 4, data: { content: 'Response Text' } }),
+  c.resBase({ type: 4, data: { content: 'テキストを返答' } }),
 )
 ```
 
@@ -84,7 +84,7 @@ command, component, modal
 
 ```ts "resDefer" "followup"
 const app = new DiscordHono().command('ping', c =>
-  c.resDefer(async c => await c.followup('Followup Text')),
+  c.resDefer(async c => await c.followup('Followup テキスト')),
 )
 ```
 
@@ -104,7 +104,7 @@ command, component
 ```ts "resModal"
 const app = new DiscordHono().command('ping', c =>
   c.resModal(
-    new Modal('unique-id', 'Title').row(new TextInput('text-id', 'Label')),
+    new Modal('unique-id', 'タイトル').row(new TextInput('text-id', 'テキストラベル')),
   ),
 )
 ```
@@ -131,7 +131,7 @@ component
 
 ```ts "resUpdateDefer"
 const app = new DiscordHono().component('button', c =>
-  c.resUpdateDefer(async c => await c.followup('Followup Text')),
+  c.resUpdateDefer(async c => await c.followup('Followup テキスト')),
 )
 ```
 
@@ -143,7 +143,7 @@ component
 
 ```ts "resRepost"
 const app = new DiscordHono().component('button', c =>
-  c.resRepost('Repost Text'),
+  c.resRepost('再投稿テキスト'),
 )
 ```
 

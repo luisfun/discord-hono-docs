@@ -11,8 +11,7 @@ We will support as much as possible of the following.
 - Run on Cloudflare Workers
 - Covering Interactions with Discord
 
-The following items are not basically supported.  
-However, if sponsorship is obtained, it is likely to be addressed.
+The following items are not basically supported.
 
 - Runs on non-Cloudflare environments
 - All API Endpoints Requests and Responses

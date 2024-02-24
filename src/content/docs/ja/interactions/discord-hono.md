@@ -17,8 +17,8 @@ export default app
 
 ```ts "ping" "image"
 export const commands = [
-  new Command('ping', 'response Pong'),
-  new Command('image', 'response Image'),
+  new Command('ping', 'Pong を返答'),
+  new Command('image', 'Image を返答'),
 ]
 const app = new DiscordHono()
   .command('ping', c => c.resText('Pong!!'))
@@ -36,13 +36,13 @@ const app = new DiscordHono()
     c.res({
       content: 'まだボタンはクリックされていない',
       components: new Components().row(
-        new Button('button-1', 'Button'),
-        new Button('button-2', 'Second'),
+        new Button('button-1', 'ボタン'),
+        new Button('button-2', '2つ目'),
       ),
     }),
   )
-  .component('button-1', c => c.resUpdateText('Button がクリックされた'))
-  .component('button-2', c => c.resUpdateText('Second がクリックされた'))
+  .component('button-1', c => c.resUpdateText('ボタン がクリックされた'))
+  .component('button-2', c => c.resUpdateText('2つ目 がクリックされた'))
 ```
 
 コンポーネント要素 `Button()` の第1引数と `.component()` の第1引数を一致させてください。  
@@ -54,9 +54,9 @@ const app = new DiscordHono()
 const app = new DiscordHono()
   .command('modal', c =>
     c.resModal(
-      new Modal('modal-1', 'Modal Title')
-        .row(new TextInput('text-1', 'Text'))
-        .row(new TextInput('text-2', 'Second')),
+      new Modal('modal-1', 'モーダル タイトル')
+        .row(new TextInput('text-1', 'テキスト'))
+        .row(new TextInput('text-2', '2つ目')),
     ),
   )
   .modal('modal-1', c => c.resText('モーダルが送信された'))

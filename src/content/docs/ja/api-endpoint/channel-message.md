@@ -9,8 +9,8 @@ const app = new DiscordHono()
 app.command('ping', async c => {
   const token = c.env.DISCORD_TOKEN
   const channelId = c.interaction.channel.id
-  await postMessage(token, channelId, 'Another post')
-  return c.res('Response post')
+  await postMessage(token, channelId, '別の投稿')
+  return c.res('投稿を返答')
 })
 
 export default app

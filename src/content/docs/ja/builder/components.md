@@ -11,8 +11,8 @@ const app = new DiscordHono().command('component', c =>
   c.res({
     content: 'Components',
     components: new Components().row(
-      new Button('button-1', 'Button'),
-      new Button('button-2', 'Second'),
+      new Button('button-1', 'ボタン'),
+      new Button('button-2', '2つ目'),
     ),
   }),
 )
@@ -41,8 +41,8 @@ import { Components, Button } from 'discord-hono'
 type Style = 'Primary' | 'Secondary' | 'Success' | 'Danger'
 
 const components = new Components().row(
-  new Button('button', 'Button', 'Secondary'),
   new Button('unique-id', 'label', 'Primary' as Style),
+  new Button('button', 'ボタン', 'Secondary'),
 )
 ```
 
@@ -74,7 +74,7 @@ import { Components, LinkButton } from 'discord-hono'
 
 const components = new Components().row(
   new LinkButton('https://github.com', 'Github'),
-  new LinkButton('url', 'label'),
+  new LinkButton('url', 'ラベル'),
 )
 ```
 
