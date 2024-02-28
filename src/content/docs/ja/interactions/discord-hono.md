@@ -4,25 +4,25 @@ sidebar:
   order: 1
 ---
 
-```ts
+```ts "DiscordHono"
 import { DiscordHono } from 'discord-hono'
 
 const app = new DiscordHono()
-app.command('ping', c => c.resText('Pong!!'))
+app.command('ping', c => c.res('Pong!!'))
 
 export default app
 ```
 
 ## .command()
 
-```ts "ping" "image"
+```ts /command(?!s)/ "ping" "image"
 export const commands = [
   new Command('ping', 'Pong を返答'),
   new Command('image', 'Image を返答'),
 ]
 const app = new DiscordHono()
-  .command('ping', c => c.resText('Pong!!'))
-  .command('image', c => c.resText('Image!!'))
+  .command('ping', c => c.res('Pong!!'))
+  .command('image', c => c.res('Image!!'))
 ```
 
 `Command()` の第1引数と `.command()` の第1引数を一致させてください。  
@@ -30,9 +30,9 @@ const app = new DiscordHono()
 
 ## .component()
 
-```ts "button-1" "button-2"
+```ts /component(?!s)/ "button-1" "button-2"
 const app = new DiscordHono()
-  .command('component', c =>
+  .command('components', c =>
     c.res({
       content: 'まだボタンはクリックされていない',
       components: new Components().row(
@@ -41,8 +41,8 @@ const app = new DiscordHono()
       ),
     }),
   )
-  .component('button-1', c => c.resUpdateText('ボタン がクリックされた'))
-  .component('button-2', c => c.resUpdateText('2つ目 がクリックされた'))
+  .component('button-1', c => c.resUpdate('ボタン がクリックされた'))
+  .component('button-2', c => c.resUpdate('2つ目 がクリックされた'))
 ```
 
 コンポーネント要素 `Button()` の第1引数と `.component()` の第1引数を一致させてください。  
@@ -50,7 +50,7 @@ const app = new DiscordHono()
 
 ## .modal()
 
-```ts "modal-1"
+```ts /modal(?!')/ "modal-1"
 const app = new DiscordHono()
   .command('modal', c =>
     c.resModal(
@@ -59,7 +59,7 @@ const app = new DiscordHono()
         .row(new TextInput('text-2', '2つ目')),
     ),
   )
-  .modal('modal-1', c => c.resText('モーダルが送信された'))
+  .modal('modal-1', c => c.res('モーダルが送信された'))
 ```
 
 `Modal()` の第1引数と `.modal()` の第1引数を一致させてください。  
@@ -67,10 +67,14 @@ const app = new DiscordHono()
 
 ## .cron()
 
-```ts "0 0 * * *"
+```ts "cron" "0 0 * * *"
 const app = new DiscordHono()
-  .cron('0 0 * * *', c => c.postText('CHANNEL_ID', '毎日投稿'))
-  .cron('', c => c.postText('CHANNEL_ID', '他のCronトリガーの投稿'))
+  .cron('0 0 * * *', async c =>
+    postMessage(c.env.DISCORD_TOKEN, 'CHANNEL_ID', '毎日投稿'),
+  )
+  .cron('', async c =>
+    postMessage(c.env.DISCORD_TOKEN, 'CHANNEL_ID', '他のCronトリガーの投稿'),
+  )
 ```
 
 ```toml "0 0 * * *"
@@ -90,7 +94,7 @@ cron ごとに処理を分ける必要がないときは、 `''` だけを指定
 
 ## .discordKey()
 
-```ts
+```ts "discordKey"
 app.discordKey(env => ({
   APPLICATION_ID: env.YOUR_DISCORD_APPLICATION_ID,
   PUBLIC_KEY: env.YOUR_DISCORD_PUBLIC_KEY,

@@ -37,7 +37,7 @@ command, component, modal
 
 command
 
-```ts
+```ts "values"
 const app = new DiscordHono().command('ping', c => c.res(c.values.OPTION_NAME))
 ```
 
@@ -78,11 +78,11 @@ const app = new DiscordHono()
 
 引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。
 
-## .resDefer() .followup()
+## .resDefer()
 
 command, component, modal
 
-```ts "resDefer" "followup"
+```ts "resDefer"
 const app = new DiscordHono().command('ping', c =>
   c.resDefer(async c => await c.followup('Followup テキスト')),
 )
@@ -91,7 +91,27 @@ const app = new DiscordHono().command('ping', c =>
 3秒以内に Discord のインタラクションに応答しないとエラーが発生します。  
 時間のかかる処理を行うときは、`.resDefer()` を使用して、その後の処理を引数に含めるといいでしょう。
 
+## .followup()
+
+command, component, modal
+
+```ts "followup"
+const app = new DiscordHono().command('ping', c =>
+  c.resDefer(
+    async c =>
+      await c.followup('Followup テキスト or Data', {
+        blob: Blob,
+        name: 'image-blob.png',
+      }),
+  ),
+)
+```
+
 `.followup()` は Defer の後のメッセージの更新に利用します。
+
+第1引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。  
+第2引数は FileData または FileData[] です。  
+FileData = { blob: Blob, name: 'file.name' }
 
 ## .followupDelete()
 
@@ -104,7 +124,9 @@ command, component
 ```ts "resModal"
 const app = new DiscordHono().command('ping', c =>
   c.resModal(
-    new Modal('unique-id', 'タイトル').row(new TextInput('text-id', 'テキストラベル')),
+    new Modal('unique-id', 'タイトル').row(
+      new TextInput('text-id', 'テキストラベル'),
+    ),
   ),
 )
 ```

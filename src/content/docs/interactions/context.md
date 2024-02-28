@@ -37,7 +37,7 @@ Please refer to the [Official Docs](https://discord.com/developers/docs/interact
 
 command
 
-```ts
+```ts "values"
 const app = new DiscordHono().command('ping', c => c.res(c.values.OPTION_NAME))
 ```
 
@@ -78,11 +78,11 @@ const app = new DiscordHono()
 
 The argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).
 
-## .resDefer() .followup()
+## .resDefer()
 
 command, component, modal
 
-```ts "resDefer" "followup"
+```ts "resDefer"
 const app = new DiscordHono().command('ping', c =>
   c.resDefer(async c => await c.followup('Followup Text')),
 )
@@ -91,7 +91,27 @@ const app = new DiscordHono().command('ping', c =>
 If you don’t respond to a Discord interaction within 3 seconds, an error will occur.  
 When performing time-consuming tasks, it’s a good idea to use `.resDefer()` and include the subsequent processing as an argument.
 
+## .followup()
+
+command, component, modal
+
+```ts "followup"
+const app = new DiscordHono().command('ping', c =>
+  c.resDefer(
+    async c =>
+      await c.followup('Followup Text or Data', {
+        blob: Blob,
+        name: 'image-blob.png',
+      }),
+  ),
+)
+```
+
 `.followup()` is used to update messages after Defer.
+
+The first argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).  
+The second argument is FileData or FileData[].  
+FileData = { blob: Blob, name: 'file.name' }
 
 ## .followupDelete()
 

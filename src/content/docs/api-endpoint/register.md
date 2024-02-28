@@ -4,7 +4,7 @@ sidebar:
   order: 1
 ---
 
-```ts
+```ts "register"
 // register.ts
 import dotenv from 'dotenv'
 import process from 'node:process'

@@ -4,7 +4,7 @@ sidebar:
   order: 1
 ---
 
-```ts
+```ts "Command"
 import { Command } from 'discord-hono'
 
 const commands = [

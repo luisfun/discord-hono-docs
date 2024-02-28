@@ -6,7 +6,7 @@ sidebar:
     text: β
 ---
 
-```ts
+```ts "Modal" "TextInput"
 import { Modal, TextInput } from 'discord-hono'
 
 const modal = new Modal('unique-id', 'モーダルタイトル').row(
@@ -16,7 +16,7 @@ const modal = new Modal('unique-id', 'モーダルタイトル').row(
 
 ## .row()
 
-```ts
+```ts "row"
 const modal = new Modal('unique-id', 'モーダルタイトル')
   .row(new TextInput('text-1', 'テキストラベル'))
   .row(new TextInput('text-2', '複数行入力', 'Multi'))
@@ -26,7 +26,7 @@ const modal = new Modal('unique-id', 'モーダルタイトル')
 
 ## TextInput
 
-```ts
+```ts "TextInput"
 import { Modal, TextInput } from 'discord-hono'
 
 type Style = 'Single' | 'Multi'

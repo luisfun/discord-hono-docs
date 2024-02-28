@@ -4,12 +4,12 @@ sidebar:
   order: 2
 ---
 
-```ts
+```ts "Components" "Button"
 import { DiscordHono, Components, Button } from 'discord-hono'
 
 const app = new DiscordHono().command('component', c =>
   c.res({
-    content: 'Components',
+    content: 'components',
     components: new Components().row(
       new Button('button-1', 'ボタン'),
       new Button('button-2', '2つ目'),
@@ -20,7 +20,7 @@ const app = new DiscordHono().command('component', c =>
 
 ## .row()
 
-```ts
+```ts "row"
 const components = new Components()
   .row(new Button('button-1', '1'), new Button('button-2', '22'))
   .row(new Button('button-3', '333'), new Button('button-4', '4444'))
@@ -35,7 +35,7 @@ const components = new Components()
 
 ## Button
 
-```ts
+```ts "Button"
 import { Components, Button } from 'discord-hono'
 
 type Style = 'Primary' | 'Secondary' | 'Success' | 'Danger'
@@ -69,7 +69,7 @@ const components = new Components().row(
 
 ## LinkButton
 
-```ts
+```ts "LinkButton"
 import { Components, LinkButton } from 'discord-hono'
 
 const components = new Components().row(

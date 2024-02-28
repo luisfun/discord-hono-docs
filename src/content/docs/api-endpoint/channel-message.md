@@ -2,7 +2,7 @@
 title: Channel Message
 ---
 
-```ts
+```ts "postMessage"
 import { DiscordHono, postMessage } from 'discord-hono'
 
 const app = new DiscordHono()
@@ -18,7 +18,7 @@ export default app
 
 ## postMessage()
 
-```ts
+```ts "postMessage"
 await postMessage('DISCORD_TOKEN', 'Channel ID', 'string or data', ...files)
 ```
 
@@ -26,13 +26,13 @@ The third argument is a string or [APIInteractionResponseCallbackData](https://d
 
 ## deleteMessage()
 
-```ts
+```ts "deleteMessage"
 await deleteMessage('DISCORD_TOKEN', 'Channel ID', 'Message ID')
 ```
 
 ## followupMessage()
 
-```ts
+```ts "followupMessage"
 await followupMessage(
   'Application ID',
   'Interaction Token',
@@ -47,7 +47,7 @@ The third argument is a string or [APIInteractionResponseCallbackData](https://d
 
 ## followupDeleteMessage()
 
-```ts
+```ts "followupDeleteMessage"
 await followupDeleteMessage('Application ID', 'Interaction Token', 'Message ID')
 ```
 

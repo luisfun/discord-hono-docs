@@ -4,25 +4,25 @@ sidebar:
   order: 1
 ---
 
-```ts
+```ts "DiscordHono"
 import { DiscordHono } from 'discord-hono'
 
 const app = new DiscordHono()
-app.command('ping', c => c.resText('Pong!!'))
+app.command('ping', c => c.res('Pong!!'))
 
 export default app
 ```
 
 ## .command()
 
-```ts "ping" "image"
+```ts /command(?!s)/ "ping" "image"
 export const commands = [
   new Command('ping', 'response Pong'),
   new Command('image', 'response Image'),
 ]
 const app = new DiscordHono()
-  .command('ping', c => c.resText('Pong!!'))
-  .command('image', c => c.resText('Image!!'))
+  .command('ping', c => c.res('Pong!!'))
+  .command('image', c => c.res('Image!!'))
 ```
 
 The first argument of `Command()` must match the first argument of `.command()`.  
@@ -30,9 +30,9 @@ The second argument of the matched `.command()` is executed.
 
 ## .component()
 
-```ts "button-1" "button-2"
+```ts /component(?!s)/ "button-1" "button-2"
 const app = new DiscordHono()
-  .command('component', c =>
+  .command('components', c =>
     c.res({
       content: 'No button clicked yet',
       components: new Components().row(
@@ -41,8 +41,8 @@ const app = new DiscordHono()
       ),
     }),
   )
-  .component('button-1', c => c.resUpdateText('Button clicked'))
-  .component('button-2', c => c.resUpdateText('Second clicked'))
+  .component('button-1', c => c.resUpdate('Button clicked'))
+  .component('button-2', c => c.resUpdate('Second clicked'))
 ```
 
 The first argument of the component element `Button()` must match the first argument of `.component()`.  
@@ -50,7 +50,7 @@ The second argument of the matched `.component()` is executed.
 
 ## .modal()
 
-```ts "modal-1"
+```ts /modal(?!')/ "modal-1"
 const app = new DiscordHono()
   .command('modal', c =>
     c.resModal(
@@ -59,7 +59,7 @@ const app = new DiscordHono()
         .row(new TextInput('text-2', 'Second')),
     ),
   )
-  .modal('modal-1', c => c.resText('Modal submitted'))
+  .modal('modal-1', c => c.res('Modal submitted'))
 ```
 
 The first argument of `Modal()` must match the first argument of `.modal()`.  
@@ -67,10 +67,14 @@ The second argument of the matched `.modal()` is executed.
 
 ## .cron()
 
-```ts "0 0 * * *"
+```ts "cron" "0 0 * * *"
 const app = new DiscordHono()
-  .cron('0 0 * * *', c => c.postText('CHANNEL_ID', 'Daily Post'))
-  .cron('', c => c.postText('CHANNEL_ID', 'Other Cron Triggers Post'))
+  .cron('0 0 * * *', async c =>
+    postMessage(c.env.DISCORD_TOKEN, 'CHANNEL_ID', 'Daily Post'),
+  )
+  .cron('', async c =>
+    postMessage(c.env.DISCORD_TOKEN, 'CHANNEL_ID', 'Other Cron Triggers Post'),
+  )
 ```
 
 ```toml "0 0 * * *"
@@ -90,7 +94,7 @@ If you do not need to separate processing by crons, you can specify only `''`.
 
 ## .discordKey()
 
-```ts
+```ts "discordKey"
 app.discordKey(env => ({
   APPLICATION_ID: env.YOUR_DISCORD_APPLICATION_ID,
   PUBLIC_KEY: env.YOUR_DISCORD_PUBLIC_KEY,
