@@ -16,7 +16,7 @@ export default app
 ## .command()
 
 ```ts /command(?!s)/ "ping" "image"
-export const commands = [
+const commands = [
   new Command('ping', 'Pong を返答'),
   new Command('image', 'Image を返答'),
 ]

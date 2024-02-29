@@ -30,14 +30,14 @@ export default defineConfig({
           autogenerate: { directory: 'interactions' },
         },
         {
-          label: 'API Endpoint',
-          translations: { ja: 'APIエンドポイント' },
-          autogenerate: { directory: 'api-endpoint' },
-        },
-        {
           label: 'Builder',
           translations: { ja: 'ビルダー' },
           autogenerate: { directory: 'builder' },
+        },
+        {
+          label: 'API Endpoint',
+          translations: { ja: 'APIエンドポイント' },
+          autogenerate: { directory: 'api-endpoint' },
         },
       ],
     }),
