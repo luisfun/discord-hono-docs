@@ -113,3 +113,13 @@ We try to be as similar as possible to Hono's fetch().
 ## .scheduled()
 
 If you use `export default app`, `.scheduled()` is included.
+
+## Init Options
+
+```ts
+import { verifyKey } from 'discord-interactions'
+const app = new DiscordHono({ verify: verifyKey })
+```
+
+Option to use `verifyKey` of `discord-interactions`.  
+If you are in a cloudflare workers environment, you do not need to use it.

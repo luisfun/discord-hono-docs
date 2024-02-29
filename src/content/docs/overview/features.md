@@ -4,6 +4,10 @@ sidebar:
   order: 2
 ---
 
+- **Easy Build** - Verify included. Code for each command is easier to write.
+- **Lightweight** - We make them as light as possible. Discord Hono has zero dependencies.
+- **TypeScript** - TypeScript support.
+
 ## Current Direction
 
 We will support as much as possible of the following.

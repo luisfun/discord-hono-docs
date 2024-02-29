@@ -113,3 +113,13 @@ app.discordKey(env => ({
 ## .scheduled()
 
 `export default app` を使っていれば、`.scheduled()` は含まれています。
+
+## 初期オプション
+
+```ts
+import { verifyKey } from 'discord-interactions'
+const app = new DiscordHono({ verify: verifyKey })
+```
+
+`discord-interactions` の `verifyKey` を使うオプションです。  
+Cloudflare Workers の環境であれば、使う必要はありません。
