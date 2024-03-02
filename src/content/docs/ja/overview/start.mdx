@@ -1,0 +1,109 @@
+---
+title: 始める
+sidebar:
+  order: 1
+---
+
+import { Steps } from '@astrojs/starlight/components'
+
+<Steps>
+
+1. 新しいプロジェクトを作成 - [Workers ガイド](https://developers.cloudflare.com/workers/get-started/guide/)
+
+   ```shell
+   npm create cloudflare@latest
+   ```
+
+2. discord-hono をインストール
+
+   ```shell
+   npm i discord-hono
+   npm i -D discord-api-types # TypeScript を使うとき
+   npm i -D dotenv # 'npm run register' を使うとき
+   ```
+
+3. コードを書く
+
+   ```ts
+   // src/index.ts
+   import { DiscordHono } from 'discord-hono'
+
+   const app = new DiscordHono().command('hello', c => c.res('world'))
+   export default app
+   ```
+
+   ```ts
+   // src/register.ts
+   import dotenv from 'dotenv'
+   import process from 'node:process'
+   import { Command, register } from 'discord-hono'
+   dotenv.config({ path: '.dev.vars' })
+
+   await register(
+     [new Command('hello', 'world を返答')],
+     process.env.DISCORD_APPLICATION_ID,
+     process.env.DISCORD_TOKEN,
+     process.env.DISCORD_TEST_GUILD_ID,
+   )
+   ```
+
+4. 環境変数を設定 - [Discord ドキュメント](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#creating-an-app-on-discord)
+
+   [ダッシュボード](https://discord.com/developers/applications) で新しいアプリを作成する。  
+   `APPLICATION ID`、`PUBLIC KEY`、`TOKEN` をコピーして、`.dev.var` ファイルへ貼り付ける。
+
+   ```
+   // .dev.var
+   DISCORD_APPLICATION_ID: "..."
+   DISCORD_PUBLIC_KEY: "..."
+   DISCORD_TOKEN: "..."
+   DISCORD_TEST_GUILD_ID: "..."
+   ```
+
+   シークレットを保存する。
+
+   ```sh
+   npx wrangler secret put DISCORD_APPLICATION_ID
+   npx wrangler secret put DISCORD_PUBLIC_KEY
+   npx wrangler secret put DISCORD_TOKEN
+   ```
+
+5. コマンドの登録とデプロイ
+
+   `package.json` に scripts を加える。
+
+   ```json
+   // package.json
+   "scripts": {
+     "register": "tsc && node dist/register.js",
+   },
+   ```
+
+   スクリプトを実行する。
+
+   ```shell
+   npm run register
+   npm run deploy
+   ```
+
+6. エンドポイントURLを設定 - [Cloudflare Workers](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
+
+   [INTERACTIONS ENDPOINT URL](https://discord.com/developers/applications) に `https://YOUER_PROJECT.YOUER_DOMAIN.workers.dev` を入力する。
+
+7. ボットのテスト
+
+   [ダッシュボード](https://discord.com/developers/applications) から招待URLを作成する。  
+   `YOUR_APP` > `OAuth2` タブ > `OAuth2 URL Generator` > チェック SCOPES: `bot` > URL `Copy`  
+   ブラウザにURLを貼り付ける。
+
+   招待したサーバーで `/hello` を投稿する。
+
+8. 開発を楽しむ
+
+</Steps>
+
+## Examples
+
+- [シンプルな Example](https://github.com/LuisFun/discord-hono-example)
+- [AI で遊ぶ](https://github.com/LuisFun/discord-bot-cloudflare-ai) - Cloudflare AI を利用
+- [web サイトのニュースを配信](https://github.com/LuisFun/discord-bot-hoyo-news) - Cloudflare D1, Browser Rendering, Cron を利用

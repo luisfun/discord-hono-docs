@@ -1,0 +1,109 @@
+---
+title: Getting Started
+sidebar:
+  order: 1
+---
+
+import { Steps } from '@astrojs/starlight/components'
+
+<Steps>
+
+1. Create a new project - [Workers guide](https://developers.cloudflare.com/workers/get-started/guide/)
+
+   ```sh
+   npm create cloudflare@latest
+   ```
+
+2. Install discord-hono
+
+   ```shell
+   npm i discord-hono
+   npm i -D discord-api-types # When using TypeScript
+   npm i -D dotenv # When using 'npm run register'
+   ```
+
+3. Write code
+
+   ```ts
+   // src/index.ts
+   import { DiscordHono } from 'discord-hono'
+
+   const app = new DiscordHono().command('hello', c => c.res('world'))
+   export default app
+   ```
+
+   ```ts
+   // src/register.ts
+   import dotenv from 'dotenv'
+   import process from 'node:process'
+   import { Command, register } from 'discord-hono'
+   dotenv.config({ path: '.dev.vars' })
+
+   await register(
+     [new Command('hello', 'response world')],
+     process.env.DISCORD_APPLICATION_ID,
+     process.env.DISCORD_TOKEN,
+     process.env.DISCORD_TEST_GUILD_ID,
+   )
+   ```
+
+4. Set environment variables - [Discord Docs](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#creating-an-app-on-discord)
+
+   Create a New Application from [Dashboard](https://discord.com/developers/applications).  
+   Copy your `APPLICATION ID`, `PUBLIC KEY` and `TOKEN`, and put them `.dev.var` file.
+
+   ```
+   // .dev.var
+   DISCORD_APPLICATION_ID: "..."
+   DISCORD_PUBLIC_KEY: "..."
+   DISCORD_TOKEN: "..."
+   DISCORD_TEST_GUILD_ID: "..."
+   ```
+
+   Storing secrets.
+
+   ```sh
+   npx wrangler secret put DISCORD_APPLICATION_ID
+   npx wrangler secret put DISCORD_PUBLIC_KEY
+   npx wrangler secret put DISCORD_TOKEN
+   ```
+
+5. Register commands and deploy
+
+   Add to `package.json` scripts.
+
+   ```json
+   // package.json
+   "scripts": {
+     "register": "tsc && node dist/register.js",
+   },
+   ```
+
+   Run Scripts.
+
+   ```sh
+   npm run register
+   npm run deploy
+   ```
+
+6. Set endpoint url - [Cloudflare Workers](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
+
+   Enter `https://YOUER_PROJECT.YOUER_DOMAIN.workers.dev` in the [INTERACTIONS ENDPOINT URL](https://discord.com/developers/applications).
+
+7. Test bot
+
+   Create an invite URL from the [Dashboard](https://discord.com/developers/applications).  
+   `YOUR_APP` > `OAuth2` tab > `OAuth2 URL Generator` > Check SCOPES: `bot` > URL `Copy`  
+   Paste the URL into the browser.
+
+   Post `/hello` on the invited server.
+
+8. Enjoy Development
+
+</Steps>
+
+## Examples
+
+- [Simple Example](https://github.com/LuisFun/discord-hono-example)
+- [Playing with AI](https://github.com/LuisFun/discord-bot-cloudflare-ai) - Using Cloudflare AI
+- [Deliver website news](https://github.com/LuisFun/discord-bot-hoyo-news) - Using Cloudflare D1, Browser Rendering, Cron
