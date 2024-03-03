@@ -19,5 +19,3 @@ The following items are not basically supported.
 
 - Runs on non-Cloudflare environments
 - All API Endpoints Requests and Responses
-
-I decided not to support everything because the maintenance cost would be too high for something I’m developing as a hobby.
