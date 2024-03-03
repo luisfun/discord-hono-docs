@@ -2,15 +2,13 @@
 title: Modal
 sidebar:
   order: 3
-  badge:
-    text: β
 ---
 
 ```ts "Modal" "TextInput"
 import { Modal, TextInput } from 'discord-hono'
 
 const modal = new Modal('unique-id', 'モーダルタイトル').row(
-  new TextInput('text-id', 'テキストラベル'),
+  new TextInput('custom_id', 'テキストラベル'),
 )
 ```
 
@@ -33,7 +31,7 @@ type Style = 'Single' | 'Multi'
 
 const modal = new Modal('unique-id', 'モーダルタイトル')
   .row(new TextInput('text-1', 'テキストラベル'))
-  .row(new TextInput('text-2', '複数行入力', 'Multi' as Style))
+  .row(new TextInput('custom_id', '複数行入力', 'Multi' as Style))
 ```
 
 第3引数には TextInput のスタイルを指定します。デフォルトは `Single` です。
@@ -42,7 +40,7 @@ const modal = new Modal('unique-id', 'モーダルタイトル')
 
 ```ts
 const modal = new Modal('unique-id', 'モーダルタイトル').row(
-  new TextInput('text-1', 'テキストラベル')
+  new TextInput('custom_id', 'テキストラベル')
     .min_length()
     .max_length()
     .required()

@@ -2,15 +2,13 @@
 title: Modal
 sidebar:
   order: 3
-  badge:
-    text: β
 ---
 
 ```ts "Modal" "TextInput"
 import { Modal, TextInput } from 'discord-hono'
 
 const modal = new Modal('unique-id', 'Title').row(
-  new TextInput('text-id', 'Label'),
+  new TextInput('custom_id', 'Label'),
 )
 ```
 
@@ -33,7 +31,7 @@ type Style = 'Single' | 'Multi'
 
 const modal = new Modal('unique-id', 'Modal Title')
   .row(new TextInput('text-1', 'Label'))
-  .row(new TextInput('text-2', 'MultiInput', 'Multi' as Style))
+  .row(new TextInput('custom_id', 'MultiInput', 'Multi' as Style))
 ```
 
 The third argument specifies the style of the TextInput. The default is `Single`.
@@ -42,7 +40,7 @@ The third argument specifies the style of the TextInput. The default is `Single`
 
 ```ts
 const modal = new Modal('unique-id', 'Modal Title').row(
-  new TextInput('text-1', 'Label')
+  new TextInput('custom_id', 'Label')
     .min_length()
     .max_length()
     .required()

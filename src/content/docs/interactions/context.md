@@ -35,13 +35,16 @@ Please refer to the [Official Docs](https://discord.com/developers/docs/interact
 
 ## get: values
 
-command
+command modal
 
 ```ts "values"
-const app = new DiscordHono().command('ping', c => c.res(c.values.OPTION_NAME))
+const app = new DiscordHono()
+  .command('ping', c => c.res(c.values.OPTION_NAME))
+  .modal('modal', c => c.res(c.values.TEXTINPUT_CUSTOM_ID))
 ```
 
-It contains data for command options.
+It contains the value of the command option.  
+In the case of a modal, it contains the string of the custom_id.
 
 ## get: cronEvent
 

@@ -35,13 +35,16 @@ command, component, modal
 
 ## get: values
 
-command
+command modal
 
 ```ts "values"
-const app = new DiscordHono().command('ping', c => c.res(c.values.OPTION_NAME))
+const app = new DiscordHono()
+  .command('ping', c => c.res(c.values.OPTION_NAME))
+  .modal('modal', c => c.res(c.values.TEXTINPUT_CUSTOM_ID))
 ```
 
 コマンドオプションのデータが入っています。
+モーダルの場合、custom_id の string が入っています。
 
 ## get: cronEvent
 
