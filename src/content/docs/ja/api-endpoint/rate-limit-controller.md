@@ -12,7 +12,7 @@ import { ApiRateLimitController, postMessage } from 'discord-hono'
 const manyPosts = async () => {
   const controller = new ApiRateLimitController()
   for (let i = 0; i < 1000; i++) {
-    controller.wait()
+    await controller.wait()
     controller.res = await postMessage(
       c.env.DISCORD_TOKEN,
       c.interaction.channel.id,
