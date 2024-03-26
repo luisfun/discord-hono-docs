@@ -5,6 +5,7 @@ sidebar:
 ---
 
 import { Steps } from '@astrojs/starlight/components'
+import { FileTree } from '@astrojs/starlight/components'
 
 <Steps>
 
@@ -24,27 +25,25 @@ import { Steps } from '@astrojs/starlight/components'
 
 3. Write code
 
-   ```ts
-   // src/index.ts
-   import { DiscordHono } from 'discord-hono'
+   Copy the linked files.
 
-   const app = new DiscordHono().command('hello', c => c.res('world'))
-   export default app
-   ```
+   <FileTree>
+   - src
+     - [index.ts](https://github.com/LuisFun/discord-hono-example/blob/main/src/index.ts)
+     - [register.ts](https://github.com/LuisFun/discord-hono-example/blob/main/src/register.ts)
+   - package.json
+   - [tsconfig.json](https://github.com/LuisFun/discord-hono-example/blob/main/tsconfig.json) When using TypeScript
+   - ...
+   </FileTree>
 
-   ```ts
-   // src/register.ts
-   import dotenv from 'dotenv'
-   import process from 'node:process'
-   import { Command, register } from 'discord-hono'
-   dotenv.config({ path: '.dev.vars' })
-
-   await register(
-     [new Command('hello', 'response world')],
-     process.env.DISCORD_APPLICATION_ID,
-     process.env.DISCORD_TOKEN,
-     process.env.DISCORD_TEST_GUILD_ID,
-   )
+   Add to `package.json` type and scripts.
+   
+   ```json
+   // package.json
+   "type": "module",
+   "scripts": {
+     "register": "tsc && node dist/register.js",
+   },
    ```
 
 4. Set environment variables - [Discord Docs](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#creating-an-app-on-discord)
@@ -70,31 +69,10 @@ import { Steps } from '@astrojs/starlight/components'
 
 5. Register commands and deploy
 
-   Add to `package.json` type and scripts.
-
-   ```json
-   // package.json
-   "type": "module",
-   "scripts": {
-     "register": "tsc && node dist/register.js",
-   },
-   ```
-
-   Add to `tsconfig.json` outDir.
-
-   ```json
-   //tsconfig.json
-   "outDir": "./dist",
-   ```
-
-   Run Scripts.
-
    ```sh
    npm run register
    npm run deploy
    ```
-
-   If you get an error with `npm run register`, try this [tsconfig.json](https://github.com/LuisFun/discord-hono-example/blob/main/tsconfig.json).
 
 6. Set endpoint url - [Cloudflare Workers](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
 
