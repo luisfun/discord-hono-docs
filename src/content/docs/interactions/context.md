@@ -177,6 +177,6 @@ If the argument is empty, only deletion is performed.
 
 ## .\*\*\*Ephemeral()
 
-.resEphemeral() .followupEphemeral() .resRepostEphemeral()
+.resEphemeral() .resRepostEphemeral()
 
 Send a message that is only visible to the user who performed the interaction.

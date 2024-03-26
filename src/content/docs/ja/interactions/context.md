@@ -179,6 +179,6 @@ const app = new DiscordHono().component('button', c =>
 
 ## .\*\*\*Ephemeral()
 
-.resEphemeral() .followupEphemeral() .resRepostEphemeral()
+.resEphemeral() .resRepostEphemeral()
 
 インタラクションを実行したユーザーにのみ見えるメッセージを送信します。
