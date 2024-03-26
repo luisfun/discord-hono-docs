@@ -70,13 +70,21 @@ import { Steps } from '@astrojs/starlight/components'
 
 5. コマンドの登録とデプロイ
 
-   `package.json` に scripts を加える。
+   `package.json` に type と scripts を加える。
 
    ```json
    // package.json
+   "type": "module",
    "scripts": {
      "register": "tsc && node dist/register.js",
    },
+   ```
+
+   `tsconfig.json` に outDir を加える.
+
+   ```json
+   //tsconfig.json
+   "outDir": "./dist",
    ```
 
    スクリプトを実行する。
@@ -85,6 +93,8 @@ import { Steps } from '@astrojs/starlight/components'
    npm run register
    npm run deploy
    ```
+
+   もし `npm run register` でエラーが発生するときは、この [tsconfig.json](https://github.com/LuisFun/discord-hono-example/blob/main/tsconfig.json) を試してみてください。
 
 6. エンドポイントURLを設定 - [Cloudflare Workers](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
 

@@ -70,13 +70,21 @@ import { Steps } from '@astrojs/starlight/components'
 
 5. Register commands and deploy
 
-   Add to `package.json` scripts.
+   Add to `package.json` type and scripts.
 
    ```json
    // package.json
+   "type": "module",
    "scripts": {
      "register": "tsc && node dist/register.js",
    },
+   ```
+
+   Add to `tsconfig.json` outDir.
+
+   ```json
+   //tsconfig.json
+   "outDir": "./dist",
    ```
 
    Run Scripts.
@@ -85,6 +93,8 @@ import { Steps } from '@astrojs/starlight/components'
    npm run register
    npm run deploy
    ```
+
+   If you get an error with `npm run register`, try this [tsconfig.json](https://github.com/LuisFun/discord-hono-example/blob/main/tsconfig.json).
 
 6. Set endpoint url - [Cloudflare Workers](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
 
