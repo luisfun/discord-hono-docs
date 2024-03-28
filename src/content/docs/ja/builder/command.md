@@ -65,8 +65,6 @@ const commands = [
 import {
   Command,
   Option,
-  SubOption,
-  SubGroupOption,
   NumberOption,
   BooleanOption,
   UserOption,
