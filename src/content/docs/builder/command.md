@@ -33,6 +33,8 @@ const commands = [
     .default_member_permissions()
     .dm_permission()
     .nsfw()
+    .integration_types()
+    .contexts()
     .version(),
 ]
 ```
