@@ -33,6 +33,38 @@ command, component, modal
 
 Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object).
 
+## get: sub
+
+command
+
+```ts "sub.string" "sub.group" "sub.command"
+const commands = [
+  new Command('slash', 'slash description').options(
+    new SubCommand('sub1', 'Subcommand 1'),
+    new SubGroup('group', 'group description').options(
+      new SubCommand('sub2', 'Subcommand 2').options(
+        new Option('text', 'text'),
+      ),
+      new SubCommand('sub3', 'Subcommand 3'),
+    ),
+  ),
+]
+const app = new DiscordHono().command('slash', c => {
+  switch (c.sub.string) {
+    case 'sub1':
+      return c.res('sub1')
+    case 'group sub2':
+      return c.res('g-sub2: ' + c.values.text)
+    default:
+      return c.res(c.sub.group + '-' + c.sub.command)
+  }
+})
+```
+
+The first argument of `SubGroup` is in `c.sub.group`.  
+The first argument of `SubCommand` is in `c.sub.command`.  
+`c.sub.string = (c.sub.group ? c.sub.group + ' ' : '') + c.sub.command`
+
 ## get: values
 
 command modal

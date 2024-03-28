@@ -39,14 +39,32 @@ const commands = [
 
 Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/application-commands#application-command-object).
 
-## Option elements
+## Subcommands
+
+```ts
+import { Command, SubGroup, SubCommand } from 'discord-hono'
+
+const commands = [
+  new Command('slash', 'slash description').options(
+    new SubCommand('sub1', 'Subcommand 1'),
+    new SubGroup('group', 'group description').options(
+      new SubCommand('sub2', 'Subcommand 2'),
+      new SubCommand('sub3', 'Subcommand 3'),
+    ),
+  ),
+]
+```
+
+Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups).
+
+`SubCommand.options` can be set to the same `Command.options`.
+
+## Options
 
 ```ts
 import {
   Command,
   Option,
-  SubOption,
-  SubGroupOption,
   NumberOption,
   BooleanOption,
   UserOption,

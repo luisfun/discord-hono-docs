@@ -33,6 +33,38 @@ command, component, modal
 
 [公式ドキュメント](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object)を参照してください。
 
+## get: sub
+
+command
+
+```ts "sub.string" "sub.group" "sub.command"
+const commands = [
+  new Command('slash', 'slash description').options(
+    new SubCommand('sub1', 'サブコマンド 1'),
+    new SubGroup('group', 'サブコマンドグループ description').options(
+      new SubCommand('sub2', 'サブコマンド 2').options(
+        new Option('text', 'テキスト'),
+      ),
+      new SubCommand('sub3', 'サブコマンド 3'),
+    ),
+  ),
+]
+const app = new DiscordHono().command('slash', c => {
+  switch (c.sub.string) {
+    case 'sub1':
+      return c.res('sub1')
+    case 'group sub2':
+      return c.res('g-sub2: ' + c.values.text)
+    default:
+      return c.res(c.sub.group + '-' + c.sub.command)
+  }
+})
+```
+
+`SubGroup` の第一引数が `c.sub.group` に入っています。  
+`SubCommand` の第一引数が `c.sub.command` に入っています。  
+`c.sub.string = (c.sub.group ? c.sub.group + ' ' : '') + c.sub.command`
+
 ## get: values
 
 command modal

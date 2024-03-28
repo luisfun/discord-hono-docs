@@ -39,7 +39,27 @@ const commands = [
 
 [公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object)を参照してください。
 
-## Option elements
+## Subcommands
+
+```ts
+import { Command, SubGroup, SubCommand } from 'discord-hono'
+
+const commands = [
+  new Command('slash', 'slash description').options(
+    new SubCommand('sub1', 'サブコマンド 1'),
+    new SubGroup('group', 'サブコマンドグループ description').options(
+      new SubCommand('sub2', 'サブコマンド 2'),
+      new SubCommand('sub3', 'サブコマンド 3'),
+    ),
+  ),
+]
+```
+
+[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups)を参照してください。
+
+`SubCommand.options` には `Command.options` と同じものを設定できます。
+
+## Options
 
 ```ts
 import {
