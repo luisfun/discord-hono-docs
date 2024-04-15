@@ -9,21 +9,15 @@ import { FileTree } from '@astrojs/starlight/components'
 
 <Steps>
 
-1. Create a new project - [Workers guide](https://developers.cloudflare.com/workers/get-started/guide/)
+1. Create a new project
 
    ```sh
    npm create cloudflare@latest
-   ```
-
-2. Install discord-hono
-
-   ```shell
+   cd YOUER_PROJECT
    npm i discord-hono
    npm i -D discord-api-types # When using TypeScript
    npm i -D dotenv # When using 'npm run register'
    ```
-
-3. Write code
 
    Copy the linked files.
 
@@ -48,13 +42,13 @@ import { FileTree } from '@astrojs/starlight/components'
    },
    ```
 
-4. Set environment variables - [Discord Docs](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#creating-an-app-on-discord)
+2. Setup discord bot - [Discord Docs](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#creating-an-app-on-discord)
 
    Create a New Application from [Dashboard](https://discord.com/developers/applications).  
    Copy your `APPLICATION ID`, `PUBLIC KEY` and `TOKEN`, and put them `.dev.vars` file.
 
    ```
-   // .dev.var
+   // .dev.vars
    DISCORD_APPLICATION_ID: "..."
    DISCORD_PUBLIC_KEY: "..."
    DISCORD_TOKEN: "..."
@@ -69,26 +63,22 @@ import { FileTree } from '@astrojs/starlight/components'
    npx wrangler secret put DISCORD_TOKEN
    ```
 
-5. Register commands and deploy
+   Register commands and deploy.
 
    ```sh
    npm run register
    npm run deploy
    ```
 
-6. Set endpoint url - [Cloudflare Workers](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
+   Set endpoint url.
 
    Enter `https://YOUER_PROJECT.YOUER_DOMAIN.workers.dev` in the [INTERACTIONS ENDPOINT URL](https://discord.com/developers/applications).
 
-7. Test bot
+3. Invite bot
 
    Create an invite URL from the [Dashboard](https://discord.com/developers/applications).  
    `YOUR_APP` > `OAuth2` tab > `OAuth2 URL Generator` > Check SCOPES: `bot` > URL `Copy`  
    Paste the URL into the browser.
-
-   Post `/hello` on the invited server.
-
-8. Enjoy Development
 
 </Steps>
 

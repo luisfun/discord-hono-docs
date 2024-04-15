@@ -9,21 +9,15 @@ import { FileTree } from '@astrojs/starlight/components'
 
 <Steps>
 
-1. 新しいプロジェクトを作成 - [Workers ガイド](https://developers.cloudflare.com/workers/get-started/guide/)
+1. 新しいプロジェクトを作成
 
-   ```shell
+   ```sh
    npm create cloudflare@latest
-   ```
-
-2. discord-hono をインストール
-
-   ```shell
+   cd YOUER_PROJECT
    npm i discord-hono
    npm i -D discord-api-types # TypeScript を使うとき
    npm i -D dotenv # 'npm run register' を使うとき
    ```
-
-3. コードを書く
 
    リンク先のファイルをコピーする。
 
@@ -48,13 +42,13 @@ import { FileTree } from '@astrojs/starlight/components'
    },
    ```
 
-4. 環境変数を設定 - [Discord ドキュメント](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#creating-an-app-on-discord)
+2. Discord bot をセットアップ - [Discord ドキュメント](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#creating-an-app-on-discord)
 
    [ダッシュボード](https://discord.com/developers/applications) で新しいアプリを作成する。  
    `APPLICATION ID`、`PUBLIC KEY`、`TOKEN` をコピーして、`.dev.vars` ファイルへ貼り付ける。
 
    ```
-   // .dev.var
+   // .dev.vars
    DISCORD_APPLICATION_ID: "..."
    DISCORD_PUBLIC_KEY: "..."
    DISCORD_TOKEN: "..."
@@ -69,26 +63,22 @@ import { FileTree } from '@astrojs/starlight/components'
    npx wrangler secret put DISCORD_TOKEN
    ```
 
-5. コマンドの登録とデプロイ
+   コマンドの登録とデプロイ。
 
-   ```shell
+   ```sh
    npm run register
    npm run deploy
    ```
 
-6. エンドポイントURLを設定 - [Cloudflare Workers](https://dash.cloudflare.com/?to=/:account/workers-and-pages)
+   エンドポイントURLを設定。
 
    [INTERACTIONS ENDPOINT URL](https://discord.com/developers/applications) に `https://YOUER_PROJECT.YOUER_DOMAIN.workers.dev` を入力する。
 
-7. ボットのテスト
+3. ボットを招待する
 
    [ダッシュボード](https://discord.com/developers/applications) から招待URLを作成する。  
    `YOUR_APP` > `OAuth2` タブ > `OAuth2 URL Generator` > チェック SCOPES: `bot` > URL `Copy`  
    ブラウザにURLを貼り付ける。
-
-   招待したサーバーで `/hello` を投稿する。
-
-8. 開発を楽しむ
 
 </Steps>
 

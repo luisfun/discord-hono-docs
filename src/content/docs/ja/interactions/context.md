@@ -19,6 +19,10 @@ const app = new DiscordHono()
 [こちら](https://hono.dev/api/context)を参照してください。  
 できるだけ Hono と同じになるようにしています。
 
+## .waitUntil()
+
+`c.waitUntil` = `c.executionCtx.waitUntil`
+
 ## get: req
 
 command, component, modal

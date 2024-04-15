@@ -19,6 +19,10 @@ Context can be received as the second argument of `app.command()`, `app.componen
 Please refer to [here](https://hono.dev/api/context).  
 We try to make it as similar to Hono as possible.
 
+## .waitUntil()
+
+`c.waitUntil` = `c.executionCtx.waitUntil`
+
 ## get: req
 
 command, component, modal
