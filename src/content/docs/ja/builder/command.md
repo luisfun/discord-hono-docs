@@ -13,7 +13,7 @@ const commands = [
 ]
 ```
 
-`Command` の第1引数につては、[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming)を確認してください。
+`Command` の第1引数については、[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming)を確認してください。
 
 ## Method
 
