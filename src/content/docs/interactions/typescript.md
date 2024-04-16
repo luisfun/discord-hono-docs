@@ -4,6 +4,27 @@ sidebar:
   order: 3
 ---
 
+```ts "Env"
+import { DiscordHono } from 'discord-hono'
+
+type Env = {
+  Bindings: {
+    DB: D1Database
+  }
+}
+
+const app = new DiscordHono<Env>()
+app.command('hello', async c => {
+  const db = c.env.DB
+  /* Perform some operation */
+  return c.res('world!!')
+})
+
+export default app
+```
+
+## Context types
+
 ```ts "Env" "CommandContext" "ComponentContext" "ModalContext" "CronContext"
 import type {
   CommandContext,
@@ -54,17 +75,6 @@ const app = new DiscordHono<Env>()
   .modal('modal', modalHandler)
   .cron('', cronHandler)
 export default app
-```
-
-## import type
-
-```ts
-import type {
-  CommandContext,
-  ComponentContext,
-  ModalContext,
-  CronContext,
-} from 'discord-hono'
 ```
 
 It corresponds to the context received as the second argument of each `app.***()`.
