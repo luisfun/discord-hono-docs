@@ -102,7 +102,7 @@ app.discordKey(env => ({
 }))
 ```
 
-[Example](https://github.com/LuisFun/discord-hono-example) と同じような設定であれば、このメソッドは使いません。  
+[Example](https://github.com/luisfun/discord-hono-example) と同じような設定であれば、このメソッドは使いません。  
 これは、キーを別の名前で保存したときや、Cloudflare 以外の環境の時に利用します。
 
 ## .fetch()

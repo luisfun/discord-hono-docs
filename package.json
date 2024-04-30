@@ -1,8 +1,8 @@
 {
   "name": "discord-hono-docs",
   "version": "0.0.1",
-  "author": "Luis (https://github.com/LuisFun)",
-  "homepage": "https://github.com/LuisFun/discord-hono-docs",
+  "author": "Luis (https://github.com/luisfun)",
+  "homepage": "https://github.com/luisfun/discord-hono-docs",
   "license": "MIT",
   "type": "module",
   "scripts": {
