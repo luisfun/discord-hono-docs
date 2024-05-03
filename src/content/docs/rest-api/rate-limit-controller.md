@@ -1,7 +1,7 @@
 ---
 title: ApiRateLimitController
 sidebar:
-  order: 2
+  order: 3
   badge:
     text: β
 ---

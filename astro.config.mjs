@@ -35,9 +35,8 @@ export default defineConfig({
           autogenerate: { directory: 'builder' },
         },
         {
-          label: 'API Endpoint',
-          translations: { ja: 'APIエンドポイント' },
-          autogenerate: { directory: 'api-endpoint' },
+          label: 'REST API',
+          autogenerate: { directory: 'rest-api' },
         },
       ],
     }),

@@ -1,0 +1,76 @@
+---
+title: Tips
+sidebar:
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+## Error: npm run register
+
+Please consider the following modifications. (Either one or a combination)
+
+- package.json
+  - `"type": "module",`
+- tsconfig.json
+  - `"moduleResolution": "Node",`
+  - `"moduleResolution": "Bundler",`
+- register.ts
+  - Add `.js` when importing from other files  
+    `import { commands } from './commands.js'`
+- esbuild etc.
+  - Use a bundling tool to compile `register.js` into a single file
+
+This error means that you need to take into account that the code `index.ts` to be deployed and the code `register.ts` to be registered are executed in different environments.
+
+## Tips for various environments (β)
+
+<Aside type="caution">I have not yet been able to verify these codes.</Aside>
+
+### Hono
+
+```ts "hono.mount" "discord.fetch"
+const discord = new DiscordHono()
+discord.command('hello', c => c.res('Discord World'))
+
+const hono = new Hono()
+hono.get('/', c => c.text('Hono World'))
+hono.mount('/interaction', discord.fetch)
+```
+
+- Browser
+  - `https://YOUER_DOMAIN.com` -> Display: `Hono World`
+- Discord Bot
+  - `/hello` -> Response: `Discord World`
+- Discord Interaction Endpoint
+  - Register URL: `https://YOUER_DOMAIN.com/interaction`
+
+### Deno Deploy
+
+```ts
+import { DiscordHono } from 'npm:discord-hono'
+
+const app = new DiscordHono()
+app.command('ping', c => c.res('Pong!!'))
+
+Deno.serve(app.fetch)
+```
+
+### Fastly Compute
+
+```ts
+import { env } from 'fastly:env'
+import { DiscordHono } from 'discord-hono'
+
+const app = new DiscordHono()
+  .discordKey(() => ({
+    APPLICATION_ID: env('DISCORD_APPLICATION_ID'),
+    PUBLIC_KEY: env('DISCORD_PUBLIC_KEY'),
+    TOKEN: env('DISCORD_TOKEN'),
+  }))
+  .command('ping', c => c.res('Pong!!'))
+
+addEventListener('fetch', event =>
+  event.respondWith(app.fetch(event.request, undefined, event)),
+)
+```
