@@ -92,19 +92,6 @@ crons = [ "0 * * * *", "0 0 * * *" ]
 `''` を指定すると、残りの全ての crons にマッチします。  
 cron ごとに処理を分ける必要がないときは、 `''` だけを指定すればいいです。
 
-## .discordKey()
-
-```ts "discordKey"
-app.discordKey(env => ({
-  APPLICATION_ID: env.YOUR_DISCORD_APPLICATION_ID,
-  PUBLIC_KEY: env.YOUR_DISCORD_PUBLIC_KEY,
-  TOKEN: env.YOUR_DISCORD_TOKEN,
-}))
-```
-
-[Example](https://github.com/luisfun/discord-hono-example) と同じような設定であれば、このメソッドは使いません。  
-これは、キーを別の名前で保存したときや、Cloudflare 以外の環境の時に利用します。
-
 ## .fetch()
 
 [こちら](https://hono.dev/api/hono#fetch)を参照してください。  
@@ -116,10 +103,39 @@ app.discordKey(env => ({
 
 ## 初期オプション
 
+### verify
+
+Cloudflare の環境であれば、使う必要はありません。
+
+[`discord-verify`](https://github.com/ianmitchell/interaction-kit/tree/main/packages/discord-verify)
+
+```ts
+import { verify, PlatformAlgorithm } from 'discord-verify'
+const app = new DiscordHono({
+  verify: (...args) =>
+    verify(...args, crypto.webcrypto.subtle, PlatformAlgorithm.OldNode),
+})
+```
+
+[`discord-interactions`](https://github.com/discord/discord-interactions-js)  
+非推奨：`discord-verify` が上手く動かないとき
+
 ```ts
 import { verifyKey } from 'discord-interactions'
 const app = new DiscordHono({ verify: verifyKey })
 ```
 
-`discord-interactions` の `verifyKey` を使うオプションです。  
-Cloudflare Workers の環境であれば、使う必要はありません。
+### discordEnv
+
+[Example](https://github.com/luisfun/discord-hono-example) と同じような環境変数であれば、使う必要はありません。  
+環境変数を別の名前で保存したときや、Cloudflare 以外の環境の時に利用します。
+
+```ts
+const app = new DiscordHono({
+  discordEnv: env => ({
+    APPLICATION_ID: env.DISCORD_APPLICATION_ID,
+    PUBLIC_KEY: env.DISCORD_PUBLIC_KEY,
+    TOKEN: env.DISCORD_TOKEN,
+  }),
+})
+```

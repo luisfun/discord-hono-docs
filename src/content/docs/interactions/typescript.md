@@ -23,6 +23,24 @@ app.command('hello', async c => {
 export default app
 ```
 
+## Init Options
+
+```ts "InitOptions"
+import type { InitOptions } from 'discord-hono'
+import { DiscordHono } from 'discord-hono'
+
+type Env = {
+  Bindings: {
+    DB: D1Database
+  }
+}
+
+const options: InitOptions<Env> = {
+  /***/
+}
+const app = new DiscordHono<Env>(options)
+```
+
 ## Context types
 
 ```ts "Env" "CommandContext" "ComponentContext" "ModalContext" "CronContext"

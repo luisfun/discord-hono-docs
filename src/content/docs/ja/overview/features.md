@@ -8,14 +8,14 @@ sidebar:
 - **軽量** - できるだけ軽くしています。Discord Hono の依存関係は 0 です。
 - **TypeScript** - TypeScript をサポートしています。
 
-## 現在の方向性
+## 開発の方向性
 
-できるだけ次の項目をサポートします。
+優先的に対応する内容
 
 - Cloudflare Workers での動作
-- Discord の Interactions をカバーする
+- Discord Interactions の受信と応答
 
-次の項目は基本的に対応しません。
+優先度は低いが、少しずつ対応する内容
 
 - Cloudflare 以外の環境での動作
-- 全ての API エンドポイントのリクエストとレスポンス
+- REST API へのリクエストとレスポンス

@@ -92,19 +92,6 @@ The second argument of the matched `.cron()` is executed.
 If `''` is specified, it matches all remaining crons.  
 If you do not need to separate processing by crons, you can specify only `''`.
 
-## .discordKey()
-
-```ts "discordKey"
-app.discordKey(env => ({
-  APPLICATION_ID: env.YOUR_DISCORD_APPLICATION_ID,
-  PUBLIC_KEY: env.YOUR_DISCORD_PUBLIC_KEY,
-  TOKEN: env.YOUR_DISCORD_TOKEN,
-}))
-```
-
-If you have the same setup as in [Example](https://github.com/luisfun/discord-hono-example), this method is not used.  
-This is used when you save the key with a different name, or in environments other than Cloudflare.
-
 ## .fetch()
 
 Please refer to [here](https://hono.dev/api/hono#fetch).  
@@ -116,10 +103,39 @@ If you use `export default app`, `.scheduled()` is included.
 
 ## Init Options
 
+### verify
+
+If it's a Cloudflare environment, there's no need to use it.
+
+[`discord-verify`](https://github.com/ianmitchell/interaction-kit/tree/main/packages/discord-verify)
+
+```ts
+import { verify, PlatformAlgorithm } from 'discord-verify'
+const app = new DiscordHono({
+  verify: (...args) =>
+    verify(...args, crypto.webcrypto.subtle, PlatformAlgorithm.OldNode),
+})
+```
+
+[`discord-interactions`](https://github.com/discord/discord-interactions-js)  
+Deprecated: When `discord-verify` doesn't work well
+
 ```ts
 import { verifyKey } from 'discord-interactions'
 const app = new DiscordHono({ verify: verifyKey })
 ```
 
-Option to use `verifyKey` of `discord-interactions`.  
-If you are in a cloudflare workers environment, you do not need to use it.
+### discordEnv
+
+If it's an environment variable similar to [Example](https://github.com/luisfun/discord-hono-example), there's no need to use it.  
+Use it when you save the environment variable with a different name or when it's an environment other than Cloudflare.
+
+```ts
+const app = new DiscordHono({
+  discordEnv: env => ({
+    APPLICATION_ID: env.DISCORD_APPLICATION_ID,
+    PUBLIC_KEY: env.DISCORD_PUBLIC_KEY,
+    TOKEN: env.DISCORD_TOKEN,
+  }),
+})
+```

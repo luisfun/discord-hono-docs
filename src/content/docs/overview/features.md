@@ -8,14 +8,14 @@ sidebar:
 - **Lightweight** - We make them as light as possible. Discord Hono has zero dependencies.
 - **TypeScript** - TypeScript support.
 
-## Current Direction
+## Development Direction
 
-We will support as much as possible of the following.
+Priority items to address:
 
 - Run on Cloudflare Workers
-- Covering Interactions with Discord
+- Receiving and responding to Discord Interactions
 
-The following items are not basically supported.
+Lower priority, but gradually addressing:
 
-- Runs on non-Cloudflare environments
-- All API Endpoints Requests and Responses
+- Run in environments other than Cloudflare
+- Requests and responses to REST API

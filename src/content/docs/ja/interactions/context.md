@@ -92,19 +92,6 @@ const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
 
 [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) の第一引数の event オブジェクトです。
 
-## .resBase()
-
-command, component, modal
-
-```ts "resBase"
-const app = new DiscordHono().command('ping', c =>
-  c.resBase({ type: 4, data: { content: 'テキストを返答' } }),
-)
-```
-
-引数は [APIInteractionResponse](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponse) です。  
-[公式ドキュメント](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-response-structure)を参照してください。
-
 ## .res()
 
 command, component, modal
@@ -129,6 +116,48 @@ const app = new DiscordHono().command('ping', c =>
 
 3秒以内に Discord のインタラクションに応答しないとエラーが発生します。  
 時間のかかる処理を行うときは、`.resDefer()` を使用して、その後の処理を引数に含めるといいでしょう。
+
+## .resUpdate()
+
+component
+
+```ts "resUpdate"
+const app = new DiscordHono().component('button', c =>
+  c.resUpdate('text or data'),
+)
+```
+
+送信済みのメッセージを上書きします。
+
+引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。
+
+## .resDeferUpdate()
+
+component
+
+```ts "resDeferUpdate"
+const app = new DiscordHono().component('button', c =>
+  c.resDeferUpdate(async c => await c.followup('Followup テキスト')),
+)
+```
+
+メッセージの上書きを遅延させます。
+
+## .resModal()
+
+command, component
+
+```ts "resModal"
+const app = new DiscordHono().command('ping', c =>
+  c.resModal(
+    new Modal('unique-id', 'タイトル').row(
+      new TextInput('text-id', 'テキストラベル'),
+    ),
+  ),
+)
+```
+
+引数は Modal インスタンスまたは [APIModalInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APIModalInteractionResponseCallbackData) です。
 
 ## .followup()
 
@@ -156,65 +185,13 @@ FileData = { blob: Blob, name: 'file.name' }
 
 command, component, modal
 
-## .resModal()
+## .ephemeral()
 
-command, component
+command, component, modal
 
-```ts "resModal"
-const app = new DiscordHono().command('ping', c =>
-  c.resModal(
-    new Modal('unique-id', 'タイトル').row(
-      new TextInput('text-id', 'テキストラベル'),
-    ),
-  ),
-)
+```ts
+const app = new DiscordHono()
+app.command('ping', c => c.ephemeral().res('Pong!!'))
 ```
-
-引数は Modal インスタンスまたは [APIModalInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APIModalInteractionResponseCallbackData) です。
-
-## .resUpdate()
-
-component
-
-```ts "resUpdate"
-const app = new DiscordHono().component('button', c =>
-  c.resUpdate('text or data'),
-)
-```
-
-送信済みのメッセージを上書きします。
-
-引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。
-
-## .resUpdateDefer()
-
-component
-
-```ts "resUpdateDefer"
-const app = new DiscordHono().component('button', c =>
-  c.resUpdateDefer(async c => await c.followup('Followup テキスト')),
-)
-```
-
-メッセージの上書きを遅延させます。
-
-## .resRepost()
-
-component
-
-```ts "resRepost"
-const app = new DiscordHono().component('button', c =>
-  c.resRepost('再投稿テキスト'),
-)
-```
-
-インタラクション元の投稿を削除して、新しいメッセージを送信します。
-
-引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。  
-引数が空の場合、メッセージの削除のみ行います。
-
-## .\*\*\*Ephemeral()
-
-.resEphemeral() .resRepostEphemeral()
 
 インタラクションを実行したユーザーにのみ見えるメッセージを送信します。

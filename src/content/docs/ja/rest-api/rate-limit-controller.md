@@ -1,5 +1,5 @@
 ---
-title: ApiRateLimitController
+title: RateLimitController
 sidebar:
   order: 3
   badge:
@@ -7,10 +7,10 @@ sidebar:
 ---
 
 ```ts "controller"
-import { ApiRateLimitController, postMessage } from 'discord-hono'
+import { RateLimitController, postMessage } from 'discord-hono'
 
 const manyPosts = async () => {
-  const controller = new ApiRateLimitController()
+  const controller = new RateLimitController()
   for (let i = 0; i < 1000; i++) {
     await controller.wait()
     controller.res = await postMessage(

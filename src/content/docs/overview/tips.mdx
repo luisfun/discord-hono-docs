@@ -62,13 +62,13 @@ Deno.serve(app.fetch)
 import { env } from 'fastly:env'
 import { DiscordHono } from 'discord-hono'
 
-const app = new DiscordHono()
-  .discordKey(() => ({
+const app = new DiscordHono({
+  discordEnv: () => ({
     APPLICATION_ID: env('DISCORD_APPLICATION_ID'),
     PUBLIC_KEY: env('DISCORD_PUBLIC_KEY'),
     TOKEN: env('DISCORD_TOKEN'),
-  }))
-  .command('ping', c => c.res('Pong!!'))
+  }),
+}).command('ping', c => c.res('Pong!!'))
 
 addEventListener('fetch', event =>
   event.respondWith(app.fetch(event.request, undefined, event)),

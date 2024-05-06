@@ -6,11 +6,10 @@ sidebar:
 
 ```ts "register"
 // register.ts
-import dotenv from 'dotenv'
-import process from 'node:process'
+import { config } from 'dotenv'
+import { env } from 'node:process'
 import { Command, Option, register } from 'discord-hono'
-
-dotenv.config({ path: '.dev.vars' })
+config({ path: '.dev.vars' })
 
 const commands = [
   new Command('ping', 'pong を返答'),
@@ -19,11 +18,11 @@ const commands = [
   ),
 ]
 
-await register(
+register(
   commands,
-  process.env.DISCORD_APPLICATION_ID,
-  process.env.DISCORD_TOKEN,
-  //process.env.DISCORD_TEST_GUILD_ID,
+  env.DISCORD_APPLICATION_ID,
+  env.DISCORD_TOKEN,
+  //env.DISCORD_TEST_GUILD_ID,
 )
 ```
 
