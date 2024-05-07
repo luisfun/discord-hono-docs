@@ -70,10 +70,16 @@ const app = new DiscordHono()
 ```ts "cron" "0 0 * * *"
 const app = new DiscordHono()
   .cron('0 0 * * *', async c =>
-    postMessage(c.env.DISCORD_TOKEN, 'CHANNEL_ID', '毎日投稿'),
+    rest(c.env.DISCORD_TOKEN)
+      .channels('CHANNEL_ID')
+      .messages()
+      .post('毎日投稿'),
   )
   .cron('', async c =>
-    postMessage(c.env.DISCORD_TOKEN, 'CHANNEL_ID', '他のCronトリガーの投稿'),
+    rest(c.env.DISCORD_TOKEN)
+      .channels('CHANNEL_ID')
+      .messages()
+      .post('他のCronトリガーの投稿'),
   )
 ```
 

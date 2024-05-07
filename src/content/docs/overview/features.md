@@ -22,13 +22,13 @@ Lower priority, but gradually addressing:
 
 ## Server-based Bot vs Serverless Bot
 
-||Server-based Bot|Serverless Bot|
-|---|---|---|
-|Capabilities|Everything|Responding to commands<br>Anything that can be done with REST API|
-|Limitations|-|Cannot maintain constant connection|
-|Scaling|Requires various adjustments|Auto-scale|
-|Cost|Free: With downtime<br>Large-scale: Can be expensive|Free: No downtime<br>Large-scale: Can be low-cost|
-|Libraries|Discord.js<br>Discord.py<br>Discordeno etc...|DiscordHono<br>...? (Don't know others)|
+|              | Server-based Bot                                     | Serverless Bot                                                    |
+| ------------ | ---------------------------------------------------- | ----------------------------------------------------------------- |
+| Capabilities | Everything                                           | Responding to commands<br>Anything that can be done with REST API |
+| Limitations  | -                                                    | Cannot maintain constant connection                               |
+| Scaling      | Requires various adjustments                         | Auto-scale                                                        |
+| Cost         | Free: With downtime<br>Large-scale: Can be expensive | Free: No downtime<br>Large-scale: Can be low-cost                 |
+| Libraries    | Discord.js<br>Discord.py<br>Discordeno etc...        | DiscordHono<br>...? (Don't know others)                           |
 
 ### Capabilities and Limitations
 

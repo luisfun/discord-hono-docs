@@ -70,10 +70,16 @@ The second argument of the matched `.modal()` is executed.
 ```ts "cron" "0 0 * * *"
 const app = new DiscordHono()
   .cron('0 0 * * *', async c =>
-    postMessage(c.env.DISCORD_TOKEN, 'CHANNEL_ID', 'Daily Post'),
+    rest(c.env.DISCORD_TOKEN)
+      .channels('CHANNEL_ID')
+      .messages()
+      .post('Daily Post'),
   )
   .cron('', async c =>
-    postMessage(c.env.DISCORD_TOKEN, 'CHANNEL_ID', 'Other Cron Triggers Post'),
+    rest(c.env.DISCORD_TOKEN)
+      .channels('CHANNEL_ID')
+      .messages()
+      .post('Other Cron Triggers Post'),
   )
 ```
 
