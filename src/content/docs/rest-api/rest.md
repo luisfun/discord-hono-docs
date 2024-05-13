@@ -39,3 +39,20 @@ await rest('token')
 // METHOD: /CATEGORY/{CATEGORY_ID}/SUB/{SUB_ID}
 rest('token').CATEGORY('CATEGORY_ID').SUB('SUB_ID').METHOD('data or null')
 ```
+
+## List of REST API and corresponding methods
+
+|||||||
+|---|---|---|---|---|---|
+|.channels()|.get()||||[📑](https://discord.com/developers/docs/resources/channel#get-channel)|
+|^|.delete()||||[📑](https://discord.com/developers/docs/resources/channel#deleteclose-channel)|
+|^|.messages()|.get()|||[📑](https://discord.com/developers/docs/resources/channel#get-channel-messages) [📑](https://discord.com/developers/docs/resources/channel#get-channel-message)|
+|^|^|.post()|||[📑](https://discord.com/developers/docs/resources/channel#create-message)|
+|^|^|.patch()|||[📑](https://discord.com/developers/docs/resources/channel#edit-message)|
+|^|^|.delete()|||[📑](https://discord.com/developers/docs/resources/channel#delete-message)|
+|^|^|.crosspost()|.post()||[📑](https://discord.com/developers/docs/resources/channel#crosspost-message)|
+|^|^|.reactions()|.get()||[📑](https://discord.com/developers/docs/resources/channel#get-reactions)|
+|^|^|^|.delete()||[📑](https://discord.com/developers/docs/resources/channel#delete-all-reactions) [📑](https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji)|
+|^|^|^|.me()|.put()|[📑](https://discord.com/developers/docs/resources/channel#create-reaction)|
+|^|^|^|^|.delete()|[📑](https://discord.com/developers/docs/resources/channel#delete-own-reaction)|
+|^|^|^|.user()|.delete()|[📑](https://discord.com/developers/docs/resources/channel#delete-user-reaction)|
