@@ -28,7 +28,7 @@ Lower priority, but gradually addressing:
 | Limitations  | -                                                    | Cannot maintain constant connection                               |
 | Scaling      | Requires various adjustments                         | Auto-scale                                                        |
 | Cost         | Free: With downtime<br>Large-scale: Can be expensive | Free: No downtime<br>Large-scale: Can be low-cost                 |
-| Libraries    | Discord.js<br>Discord.py<br>Discordeno etc...        | DiscordHono<br>...? (Don't know others)                           |
+| Libraries    | Discord.js<br>Discord.py<br>Discordeno etc...        | DiscordHono<br>...? (I don't know anything else)                  |
 
 ### Capabilities and Limitations
 

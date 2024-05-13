@@ -42,6 +42,7 @@ rest('token').CATEGORY('CATEGORY_ID').SUB('SUB_ID').METHOD('data or null')
 
 ## REST API と対応するメソッド一覧
 
+<!-- prettier-ignore -->
 |||||||
 |---|---|---|---|---|---|
 |.channels()|.get()||||[📑](https://discord.com/developers/docs/resources/channel#get-channel)|
