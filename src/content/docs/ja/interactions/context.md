@@ -29,6 +29,10 @@ command, component, modal
 
 インタラクションのリクエストそのままです。
 
+## get: key
+
+ハンドラーのトリガーとなった文字列です。
+
 ## get: interaction
 
 command, component, modal

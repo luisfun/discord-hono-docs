@@ -28,6 +28,9 @@ const app = new DiscordHono()
 The first argument of `Command()` must match the first argument of `.command()`.  
 The second argument of the matched `.command()` is executed.
 
+The first argument can be a regex or `''`.  
+`''` matches all remaining unmatched parts and can be used as a fallback.
+
 ## .component()
 
 ```ts /component(?!s)/ "button-1" "button-2"
@@ -48,6 +51,9 @@ const app = new DiscordHono()
 The first argument of the component element `Button()` must match the first argument of `.component()`.  
 The second argument of the matched `.component()` is executed.
 
+The first argument can be a regex or `''`.  
+`''` matches all remaining unmatched parts and can be used as a fallback.
+
 ## .modal()
 
 ```ts /modal(?!')/ "modal-1"
@@ -64,6 +70,9 @@ const app = new DiscordHono()
 
 The first argument of `Modal()` must match the first argument of `.modal()`.  
 The second argument of the matched `.modal()` is executed.
+
+The first argument can be a regex or `''`.  
+`''` matches all remaining unmatched parts and can be used as a fallback.
 
 ## .cron()
 
@@ -95,8 +104,8 @@ crons = [ "0 * * * *", "0 0 * * *" ]
 The first argument of `.cron()` must match the toml file crons.  
 The second argument of the matched `.cron()` is executed.
 
-If `''` is specified, it matches all remaining crons.  
-If you do not need to separate processing by crons, you can specify only `''`.
+The first argument can be a regex or `''`.  
+`''` matches all remaining unmatched parts and can be used as a fallback.
 
 ## .fetch()
 

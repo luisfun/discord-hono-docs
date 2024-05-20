@@ -29,6 +29,10 @@ command, component, modal
 
 Interaction Request are included as is.
 
+## get: key
+
+Handler triggered string.
+
 ## get: interaction
 
 command, component, modal
