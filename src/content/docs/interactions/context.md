@@ -19,6 +19,15 @@ Context can be received as the second argument of `app.command()`, `app.componen
 Please refer to [here](https://hono.dev/api/context).  
 We try to make it as similar to Hono as possible.
 
+```ts "var"
+const app = new DiscordHono()
+  .command('ping', c => c.res(c.var.OPTION_NAME))
+  .modal('modal', c => c.res(c.var.TEXTINPUT_CUSTOM_ID))
+```
+
+`c.var` contains the value of the command option.  
+In the case of a modal, `c.var` contains the string of custom_id.
+
 ## .waitUntil()
 
 `c.waitUntil` = `c.executionCtx.waitUntil`
@@ -72,19 +81,6 @@ const app = new DiscordHono().command('slash', c => {
 The first argument of `SubGroup` is in `c.sub.group`.  
 The first argument of `SubCommand` is in `c.sub.command`.  
 `c.sub.string = (c.sub.group ? c.sub.group + ' ' : '') + c.sub.command`
-
-## get: values
-
-command modal
-
-```ts "values"
-const app = new DiscordHono()
-  .command('ping', c => c.res(c.values.OPTION_NAME))
-  .modal('modal', c => c.res(c.values.TEXTINPUT_CUSTOM_ID))
-```
-
-It contains the value of the command option.  
-In the case of a modal, it contains the string of the custom_id.
 
 ## get: cronEvent
 

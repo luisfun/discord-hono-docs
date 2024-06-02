@@ -19,6 +19,15 @@ const app = new DiscordHono()
 [こちら](https://hono.dev/api/context)を参照してください。  
 できるだけ Hono と同じになるようにしています。
 
+```ts "var"
+const app = new DiscordHono()
+  .command('ping', c => c.res(c.var.OPTION_NAME))
+  .modal('modal', c => c.res(c.var.TEXTINPUT_CUSTOM_ID))
+```
+
+`c.var` にはコマンドオプションの値が含まれます。  
+モーダルの場合、custom_id の string が含まれます。
+
 ## .waitUntil()
 
 `c.waitUntil` = `c.executionCtx.waitUntil`
@@ -72,19 +81,6 @@ const app = new DiscordHono().command('slash', c => {
 `SubGroup` の第一引数が `c.sub.group` に入っています。  
 `SubCommand` の第一引数が `c.sub.command` に入っています。  
 `c.sub.string = (c.sub.group ? c.sub.group + ' ' : '') + c.sub.command`
-
-## get: values
-
-command modal
-
-```ts "values"
-const app = new DiscordHono()
-  .command('ping', c => c.res(c.values.OPTION_NAME))
-  .modal('modal', c => c.res(c.values.TEXTINPUT_CUSTOM_ID))
-```
-
-コマンドオプションのデータが入っています。
-モーダルの場合、custom_id の string が入っています。
 
 ## get: cronEvent
 
