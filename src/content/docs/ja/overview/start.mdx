@@ -16,7 +16,6 @@ import { FileTree } from '@astrojs/starlight/components'
    cd YOUER_PROJECT
    npm i discord-hono
    npm i -D discord-api-types # TypeScript を使うとき
-   npm i -D dotenv # 'npm run register' を使うとき
    ```
 
    リンク先のファイルをコピーする。
@@ -26,9 +25,9 @@ import { FileTree } from '@astrojs/starlight/components'
    - src
      - [index.ts](https://github.com/luisfun/discord-hono-example/blob/main/src/index.ts)
      - [register.ts](https://github.com/luisfun/discord-hono-example/blob/main/src/register.ts)
-   - .dev.vars
+   - [.env.example](https://github.com/luisfun/discord-hono-example/blob/main/.env.example) ファイル名を .env に変更
    - package.json
-   - [tsconfig.json](https://github.com/luisfun/discord-hono-example/blob/main/tsconfig.json) When using TypeScript
+   - [tsconfig.json](https://github.com/luisfun/discord-hono-example/blob/main/tsconfig.json) TypeScript を使うとき
    - ...
    </FileTree>
 
@@ -45,15 +44,7 @@ import { FileTree } from '@astrojs/starlight/components'
 2. Discord bot をセットアップ - [Discord ドキュメント](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#creating-an-app-on-discord)
 
    [ダッシュボード](https://discord.com/developers/applications) で新しいアプリを作成する。  
-   `APPLICATION ID`、`PUBLIC KEY`、`TOKEN` をコピーして、`.dev.vars` ファイルへ貼り付ける。
-
-   ```
-   // .dev.vars
-   DISCORD_APPLICATION_ID: "..."
-   DISCORD_PUBLIC_KEY: "..."
-   DISCORD_TOKEN: "..."
-   DISCORD_TEST_GUILD_ID: "..."
-   ```
+   `APPLICATION ID`、`PUBLIC KEY`、`TOKEN` をコピーして、`.env` ファイルへ貼り付ける。
 
    シークレットを保存する。
 
