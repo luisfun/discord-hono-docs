@@ -19,14 +19,20 @@ const app = new DiscordHono()
 [こちら](https://hono.dev/api/context)を参照してください。  
 できるだけ Hono と同じになるようにしています。
 
+### .var について
+
 ```ts "var"
 const app = new DiscordHono()
   .command('ping', c => c.res(c.var.OPTION_NAME))
-  .modal('modal', c => c.res(c.var.TEXTINPUT_CUSTOM_ID))
+  .component('button', c => c.res(c.var.custom_id))
+  .modal('modal', c => c.res(c.var.custom_id + c.var.TEXTINPUT_CUSTOM_ID))
 ```
 
-`c.var` にはコマンドオプションの値が含まれます。  
-モーダルの場合、custom_id の string が含まれます。
+デフォルトで次の値が含まれています。
+
+- `c.var.OPTION_NAME` コマンドオプションの値 (command)
+- `c.var.custom_id` custom_id の値 (component, modal)
+- `c.var.TEXTINPUT_CUSTOM_ID` テキストインプットの値 (modal)
 
 ## .waitUntil()
 

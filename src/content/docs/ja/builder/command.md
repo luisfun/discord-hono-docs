@@ -64,28 +64,28 @@ const commands = [
 ## Options
 
 ```ts
-import {
-  Command,
-  Option,
-  NumberOption,
-  BooleanOption,
-  UserOption,
-  ChannelOption,
-  RoleOption,
-  MentionableOption,
-  AttachmentOption,
-} from 'discord-hono'
+import { Command, Option } from 'discord-hono'
+
+type OptionType =
+  | 'String'
+  | 'Integer'
+  | 'Number'
+  | 'Boolean'
+  | 'User'
+  | 'Channel'
+  | 'Role'
+  | 'Mentionable'
+  | 'Attachment'
+
+const optionType: OptionType = 'Channel' // デフォルト: 'String'
 
 const commands = [
-  new Command('ping', 'pong を返答').options(
-    new Option('name', 'description'),
-    new Option('text', 'テキストを返答'),
+  new Command('hello', 'world を返答').options(
+    new Option('text', 'テキスト入力'), // String オプション
+    new Option('channel', 'チャンネル選択', optionType), // Channel オプション
   ),
 ]
 ```
-
-[こちら](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type)の Type ごとのオプションを用意しています。  
-ただの Option は String option です。
 
 ### Method
 

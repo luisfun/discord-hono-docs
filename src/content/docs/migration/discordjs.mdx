@@ -1,0 +1,52 @@
+---
+title: Discord.js
+sidebar:
+  order: 2
+  badge:
+    text: β
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+## Builder
+
+Discord.js builders can generate raw objects by doing `.toJSON()`.  
+Discord Hono accepts raw objects, so use it.
+
+<Aside type="caution">I have not yet been able to verify these codes.</Aside>
+
+### Command Builder
+
+```ts ".toJSON()"
+import { SlashCommandBuilder } from '@discordjs/builders'
+import { register } from 'discord-hono'
+
+const commands = [
+  new SlashCommandBuilder()
+    .setName('ping')
+    .setDescription('Check if this interaction is responsive')
+    // Register options, etc.
+    .toJSON()
+]
+
+register(commands, ...)
+```
+
+### Embed Builder
+
+```ts ".toJSON()"
+import { EmbedBuilder } from '@discordjs/builders'
+import { DiscordHono } from 'discord-hono'
+
+const app = new DiscordHono().command('embed', c =>
+  c.res({
+    embeds: [
+      new EmbedBuilder()
+        .setTitle('Title')
+        .setDescription('Description')
+        // Add images, etc.
+        .toJSON(),
+    ],
+  }),
+)
+```

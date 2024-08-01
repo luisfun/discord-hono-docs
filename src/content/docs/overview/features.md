@@ -8,18 +8,6 @@ sidebar:
 - **Lightweight** - We make them as light as possible. Discord Hono has zero dependencies.
 - **TypeScript** - TypeScript support.
 
-## Development Direction
-
-Priority items to address:
-
-- Run on Cloudflare Workers
-- Receiving and responding to Discord Interactions
-
-Lower priority, but gradually addressing:
-
-- Run in environments other than Cloudflare
-- Requests and responses to REST API
-
 ## Server-based Bot vs Serverless Bot
 
 |              | Server-based Bot                                     | Serverless Bot                                                    |
@@ -68,3 +56,15 @@ Even for free use, most services do not have downtime.
 https://github.com/IanMitchell/interaction-kit?tab=readme-ov-file#http
 
 https://github.com/discordeno/discordeno/tree/main/packages/rest#discordeno-rest
+
+## Development Direction
+
+Priority items to address:
+
+- Run on Cloudflare Workers
+- Receiving and responding to Discord Interactions
+
+Lower priority, but gradually addressing:
+
+- Run in environments other than Cloudflare
+- Requests and responses to REST API

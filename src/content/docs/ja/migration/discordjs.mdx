@@ -1,0 +1,52 @@
+---
+title: Discord.js
+sidebar:
+  order: 2
+  badge:
+    text: β
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+## ビルダー
+
+Discord.js の各ビルダーは `.toJSON()` をすることで、生のオブジェクトを生成できます。  
+Discord Hono では、生のオブジェクトを受け入れているため、これを利用してください。
+
+<Aside type="caution">これらのコードはまだ検証できていません。</Aside>
+
+### コマンドビルダー
+
+```ts ".toJSON()"
+import { SlashCommandBuilder } from '@discordjs/builders'
+import { register } from 'discord-hono'
+
+const commands = [
+  new SlashCommandBuilder()
+    .setName('ping')
+    .setDescription('Check if this interaction is responsive')
+    // オプションなどの登録
+    .toJSON()
+]
+
+register(commands, ...)
+```
+
+### Embed ビルダー
+
+```ts ".toJSON()"
+import { EmbedBuilder } from '@discordjs/builders'
+import { DiscordHono } from 'discord-hono'
+
+const app = new DiscordHono().command('embed', c =>
+  c.res({
+    embeds: [
+      new EmbedBuilder()
+        .setTitle('タイトル')
+        .setDescription('内容')
+        // 画像などの追加
+        .toJSON(),
+    ],
+  }),
+)
+```

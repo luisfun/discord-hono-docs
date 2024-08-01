@@ -1,7 +1,7 @@
 ---
 title: Embed
 sidebar:
-  order: 3
+  order: 4
 ---
 
 ```ts "Embed"

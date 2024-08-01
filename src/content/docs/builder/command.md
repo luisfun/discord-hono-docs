@@ -64,28 +64,28 @@ Please refer to the [Official Docs](https://discord.com/developers/docs/interact
 ## Options
 
 ```ts
-import {
-  Command,
-  Option,
-  NumberOption,
-  BooleanOption,
-  UserOption,
-  ChannelOption,
-  RoleOption,
-  MentionableOption,
-  AttachmentOption,
-} from 'discord-hono'
+import { Command, Option } from 'discord-hono'
+
+type OptionType =
+  | 'String'
+  | 'Integer'
+  | 'Number'
+  | 'Boolean'
+  | 'User'
+  | 'Channel'
+  | 'Role'
+  | 'Mentionable'
+  | 'Attachment'
+
+const optionType: OptionType = 'Channel' // default: 'String'
 
 const commands = [
-  new Command('ping', 'response pong').options(
-    new Option('name', 'description'),
-    new Option('text', 'response text'),
+  new Command('hello', 'response world').options(
+    new Option('text', 'text input'), // String option
+    new Option('channel', 'channel select', optionType), // Channel option
   ),
 ]
 ```
-
-Each option is available for each type [here](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type).  
-Option is String option.
 
 ### Method
 

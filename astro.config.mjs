@@ -38,6 +38,12 @@ export default defineConfig({
           label: 'REST API',
           autogenerate: { directory: 'rest-api' },
         },
+        {
+          label: 'Migration Guide',
+          collapsed: true,
+          translations: { ja: '移行ガイド' },
+          autogenerate: { directory: 'migration' },
+        },
       ],
     }),
   ],

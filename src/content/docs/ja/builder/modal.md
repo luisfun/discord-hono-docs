@@ -1,7 +1,7 @@
 ---
 title: Modal
 sidebar:
-  order: 4
+  order: 3
 ---
 
 ```ts "Modal" "TextInput"

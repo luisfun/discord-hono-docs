@@ -19,14 +19,20 @@ Context can be received as the second argument of `app.command()`, `app.componen
 Please refer to [here](https://hono.dev/api/context).  
 We try to make it as similar to Hono as possible.
 
+### Regarding .var
+
 ```ts "var"
 const app = new DiscordHono()
   .command('ping', c => c.res(c.var.OPTION_NAME))
-  .modal('modal', c => c.res(c.var.TEXTINPUT_CUSTOM_ID))
+  .component('button', c => c.res(c.var.custom_id))
+  .modal('modal', c => c.res(c.var.custom_id + c.var.TEXTINPUT_CUSTOM_ID))
 ```
 
-`c.var` contains the value of the command option.  
-In the case of a modal, `c.var` contains the string of custom_id.
+The following values are included by default.
+
+- `c.var.OPTION_NAME` command option value (command)
+- `c.var.custom_id` value of custom_id (component, modal)
+- `c.var.TEXTINPUT_CUSTOM_ID` value of text input (modal)
 
 ## .waitUntil()
 

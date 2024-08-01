@@ -33,22 +33,32 @@ const components = new Components()
 
 `.row()` has the same feature as [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows).
 
-## Button
+## Button elements
 
 ```ts "Button"
 import { Components, Button } from 'discord-hono'
 
-type Style = 'Primary' | 'Secondary' | 'Success' | 'Danger'
+type ButtonStyle =
+  | 'Primary'
+  | 'Secondary'
+  | 'Success'
+  | 'Danger'
+  | 'Link'
+  | 'SKU'
+
+const buttonStyle: ButtonStyle = 'Secondary' // defaul: 'Primary'
 
 const components = new Components().row(
-  new Button('button', 'Button', 'Secondary'),
-  new Button('unique-id', 'label', 'Primary' as Style),
+  new Button('unique-id', 'label'),
+  new Button('button', 'Button', buttonStyle),
+  new Button('https://example.com', 'Link Button', 'Link'),
 )
 ```
 
 `unique-id` is used to identify `app.component()`.  
 Also, do not use `;` for `unique-id`.  
-The third argument specifies the style of the button. The default is `Primary`.
+The third argument specifies the style of the button. The default is `Primary`.  
+If the third argument is `Link`, `unique-id` is a URL.
 
 ### Method
 
@@ -67,38 +77,17 @@ Please refer to the [Official Docs](https://discord.com/developers/docs/interact
 There are some notes that differ from the official one.  
 `.custom_id()` are limited to a total of 99 characters with `unique-id`.
 
-## LinkButton
-
-```ts "LinkButton"
-import { Components, LinkButton } from 'discord-hono'
-
-const components = new Components().row(
-  new LinkButton('https://github.com', 'Github'),
-  new LinkButton('url', 'label'),
-)
-```
-
-The link button should contain a URL instead of a unique-id. Also, style cannot be specified.
-
-Method is basically the same as for a Button.
-
 ## Select elements
 
 ```ts
-import {
-  Components,
-  Select,
-  UserSelect,
-  RoleSelect,
-  MentionableSelect,
-  ChannelSelect,
-} from 'discord-hono'
+import { Components, Select } from 'discord-hono'
 
-const components = new Components().row(new ChannelSelect('unique-id'))
+type SelectType = 'String' | 'User' | 'Role' | 'Mentionable' | 'Channel'
+
+const selectType: SelectType = 'Channel' // defaul: 'String'
+
+const components = new Components().row(new Select('unique-id', selectType))
 ```
-
-See [here](https://discord.com/developers/docs/interactions/message-components#component-object-component-types) for Component Types.  
-`Select` is String Select.
 
 `unique-id` is used to identify `app.component()`.  
 Also, do not use `;` for `unique-id`.
@@ -107,7 +96,7 @@ Also, do not use `;` for `unique-id`.
 
 ```ts
 const components = new Components().row(
-  new ChannelSelect('unique-id')
+  new Select('unique-id', 'Channel')
     .custom_id()
     .placeholder()
     .min_values()
@@ -120,7 +109,7 @@ const components = new Components().row(
 
 Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/message-components#select-menu-object).
 
-Depending on the type of option, some fields (methods) cannot be used.
+Depending on the type, some fields (methods) cannot be used.
 
 There are some notes that differ from the official one.  
 `.custom_id()` are limited to a total of 99 characters with `unique-id`.

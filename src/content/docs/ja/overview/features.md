@@ -8,18 +8,6 @@ sidebar:
 - **軽量** - できるだけ軽くしています。Discord Hono の依存関係は 0 です。
 - **TypeScript** - TypeScript をサポートしています。
 
-## 開発の方向性
-
-優先的に対応する内容
-
-- Cloudflare Workers での動作
-- Discord Interactions の受信と応答
-
-優先度は低いが、少しずつ対応する内容
-
-- Cloudflare 以外の環境での動作
-- REST API へのリクエストとレスポンス
-
 ## サーバー型Bot と サーバーレスBot
 
 |              | サーバー型Bot                                      | サーバーレスBot                                      |
@@ -68,3 +56,15 @@ sidebar:
 https://github.com/IanMitchell/interaction-kit?tab=readme-ov-file#http
 
 https://github.com/discordeno/discordeno/tree/main/packages/rest#discordeno-rest
+
+## 開発の方向性
+
+優先的に対応する内容
+
+- Cloudflare Workers での動作
+- Discord Interactions の受信と応答
+
+優先度は低いが、少しずつ対応する内容
+
+- Cloudflare 以外の環境での動作
+- REST API へのリクエストとレスポンス

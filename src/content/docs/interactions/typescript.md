@@ -23,6 +23,21 @@ app.command('hello', async c => {
 export default app
 ```
 
+## .var Types
+
+```ts
+type Env = {
+  Variables: {
+    OPTION_NAME?: string
+    TEXTINPUT_CUSTOM_ID?: string
+  }
+}
+
+const app = new DiscordHono<Env>()
+  .command('ping', c => c.res(c.var.OPTION_NAME))
+  .modal('modal', c => c.res(c.var.TEXTINPUT_CUSTOM_ID))
+```
+
 ## Init Options
 
 ```ts "InitOptions"
@@ -41,7 +56,7 @@ const options: InitOptions<Env> = {
 const app = new DiscordHono<Env>(options)
 ```
 
-## Context types
+## Context Types
 
 ```ts "Env" "CommandContext" "ComponentContext" "ModalContext" "CronContext"
 import type {
