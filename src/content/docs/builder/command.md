@@ -32,6 +32,7 @@ const commands = [
     )
     .default_member_permissions()
     .dm_permission()
+    .default_permission()
     .nsfw()
     .integration_types()
     .contexts()
@@ -99,10 +100,13 @@ const commands = [
       .choices(
         { name: 'choice 1', value: 'string 1' },
         { name: 'choice 2', value: 'string 2' },
-      )
-      .min_length()
-      .max_length()
-      .autocomplete(),
+      ) // STRING, INTEGER, NUMBER
+      .channel_types() // CHANNEL
+      .min_value() // INTEGER, NUMBER
+      .max_value() // INTEGER, NUMBER
+      .min_length() // STRING
+      .max_length() // STRING
+      .autocomplete(), // STRING, INTEGER, NUMBER
   ),
 ]
 ```

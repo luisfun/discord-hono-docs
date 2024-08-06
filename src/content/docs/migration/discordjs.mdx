@@ -13,6 +13,8 @@ import { Aside } from '@astrojs/starlight/components'
 Discord.js builders can generate raw objects by doing `.toJSON()`.  
 Discord Hono accepts raw objects, so use it.
 
+The Command Builder and Embed Builder are supported by default without `.toJSON()`.
+
 <Aside type="caution">I have not yet been able to verify these codes.</Aside>
 
 ### Command Builder
@@ -25,8 +27,6 @@ const commands = [
   new SlashCommandBuilder()
     .setName('ping')
     .setDescription('Check if this interaction is responsive')
-    // Register options, etc.
-    .toJSON()
 ]
 
 register(commands, ...)
@@ -41,11 +41,7 @@ import { DiscordHono } from 'discord-hono'
 const app = new DiscordHono().command('embed', c =>
   c.res({
     embeds: [
-      new EmbedBuilder()
-        .setTitle('Title')
-        .setDescription('Description')
-        // Add images, etc.
-        .toJSON(),
+      new EmbedBuilder().setTitle('Title').setDescription('Description'),
     ],
   }),
 )

@@ -96,14 +96,15 @@ const components = new Components().row(new Select('unique-id', selectType))
 
 ```ts
 const components = new Components().row(
-  new Select('unique-id', 'Channel')
+  new Select('unique-id')
     .custom_id()
+    .options() // required: String
+    .channel_types() // Channel
     .placeholder()
+    .default_values() // User, Role, Mentionable, Channel
     .min_values()
     .max_values()
-    .disabled()
-    .channel_types()
-    .default_values(),
+    .disabled(),
 )
 ```
 
