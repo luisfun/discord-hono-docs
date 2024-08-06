@@ -22,6 +22,7 @@ method の第一引数は[公式ドキュメント](https://discord.com/develope
 
 ## 対応状況
 
-|                                                                   |     |
-| ----------------------------------------------------------------- | --- |
-| [Messages](https://discord.com/developers/docs/resources/message) | ✅  |
+|                                                                          |     |
+| ------------------------------------------------------------------------ | --- |
+| [Application](https://discord.com/developers/docs/resources/application) | ✅  |
+| [Messages](https://discord.com/developers/docs/resources/message)        | ✅  |

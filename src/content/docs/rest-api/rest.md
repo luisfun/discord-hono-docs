@@ -22,6 +22,7 @@ The third and subsequent arguments are necessary data.
 
 ## Support
 
-|                                                                   |     |
-| ----------------------------------------------------------------- | --- |
-| [Messages](https://discord.com/developers/docs/resources/message) | ✅  |
+|                                                                          |     |
+| ------------------------------------------------------------------------ | --- |
+| [Application](https://discord.com/developers/docs/resources/application) | ✅  |
+| [Messages](https://discord.com/developers/docs/resources/message)        | ✅  |
