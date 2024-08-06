@@ -38,13 +38,7 @@ const components = new Components()
 ```ts "Button"
 import { Components, Button } from 'discord-hono'
 
-type Style =
-  | 'Primary'
-  | 'Secondary'
-  | 'Success'
-  | 'Danger'
-  | 'Link'
-  | 'SKU'
+type Style = 'Primary' | 'Secondary' | 'Success' | 'Danger' | 'Link' | 'SKU'
 
 const style: Style = 'Secondary' // デフォルト: 'Primary'
 
