@@ -38,7 +38,7 @@ const components = new Components()
 ```ts "Button"
 import { Components, Button } from 'discord-hono'
 
-type ButtonStyle =
+type Style =
   | 'Primary'
   | 'Secondary'
   | 'Success'
@@ -46,11 +46,11 @@ type ButtonStyle =
   | 'Link'
   | 'SKU'
 
-const buttonStyle: ButtonStyle = 'Secondary' // デフォルト: 'Primary'
+const style: Style = 'Secondary' // デフォルト: 'Primary'
 
 const components = new Components().row(
   new Button('unique-id', 'label'),
-  new Button('button', 'ボタン', buttonStyle),
+  new Button('button', 'ボタン', style),
   new Button('https://example.com', 'リンク', 'Link'),
 )
 ```
@@ -79,12 +79,12 @@ const components = new Components().row(
 
 ## Select 要素
 
-```ts
+```ts "Select"
 import { Components, Select } from 'discord-hono'
 
-type SelectType = 'String' | 'User' | 'Role' | 'Mentionable' | 'Channel'
+type Type = 'String' | 'User' | 'Role' | 'Mentionable' | 'Channel'
 
-const selectType: SelectType = 'Channel' // デフォルト: 'String'
+const selectType: Type = 'Channel' // デフォルト: 'String'
 
 const components = new Components().row(new Select('unique-id', selectType))
 ```

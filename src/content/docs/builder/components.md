@@ -11,8 +11,8 @@ const app = new DiscordHono().command('component', c =>
   c.res({
     content: 'components',
     components: new Components().row(
-      new Button('button-1', 'Button'),
-      new Button('button-2', 'Second'),
+      new Button('button-1', 'button'),
+      new Button('button-2', 'second'),
     ),
   }),
 )
@@ -38,7 +38,7 @@ const components = new Components()
 ```ts "Button"
 import { Components, Button } from 'discord-hono'
 
-type ButtonStyle =
+type Style =
   | 'Primary'
   | 'Secondary'
   | 'Success'
@@ -46,12 +46,12 @@ type ButtonStyle =
   | 'Link'
   | 'SKU'
 
-const buttonStyle: ButtonStyle = 'Secondary' // defaul: 'Primary'
+const style: Style = 'Secondary' // defaul: 'Primary'
 
 const components = new Components().row(
   new Button('unique-id', 'label'),
-  new Button('button', 'Button', buttonStyle),
-  new Button('https://example.com', 'Link Button', 'Link'),
+  new Button('button', 'button', style),
+  new Button('https://example.com', 'Link button', 'Link'),
 )
 ```
 
@@ -79,12 +79,12 @@ There are some notes that differ from the official one.
 
 ## Select elements
 
-```ts
+```ts "Select"
 import { Components, Select } from 'discord-hono'
 
-type SelectType = 'String' | 'User' | 'Role' | 'Mentionable' | 'Channel'
+type Type = 'String' | 'User' | 'Role' | 'Mentionable' | 'Channel'
 
-const selectType: SelectType = 'Channel' // defaul: 'String'
+const selectType: Type = 'Channel' // defaul: 'String'
 
 const components = new Components().row(new Select('unique-id', selectType))
 ```
