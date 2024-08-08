@@ -78,17 +78,23 @@ The first argument can be a regex or `''`.
 
 ```ts "cron" "0 0 * * *"
 const app = new DiscordHono()
-  .cron('0 0 * * *', async c =>
-    rest(c.env.DISCORD_TOKEN)
-      .channels('CHANNEL_ID')
-      .messages()
-      .post('Daily Post'),
+  .cron(
+    '0 0 * * *',
+    async c =>
+      await Rest(c.env.DISCORD_TOKEN).post(
+        '/channels/{channel.id}/messages',
+        ['CHANNEL_ID'],
+        { content: 'Daily Post' },
+      ),
   )
-  .cron('', async c =>
-    rest(c.env.DISCORD_TOKEN)
-      .channels('CHANNEL_ID')
-      .messages()
-      .post('Other Cron Triggers Post'),
+  .cron(
+    '',
+    async c =>
+      await Rest(c.env.DISCORD_TOKEN).post(
+        '/channels/{channel.id}/messages',
+        ['CHANNEL_ID'],
+        { content: 'Other Cron Triggers Post' },
+      ),
   )
 ```
 
