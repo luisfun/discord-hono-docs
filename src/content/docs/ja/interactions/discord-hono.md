@@ -65,7 +65,7 @@ const commands = [
 const app = new DiscordHono().autocomplete(
   'hello',
   c =>
-    c.res(
+    c.resAutocomplete(
       new Autocomplete(c.focused?.value).choices(
         { name: 'world', value: 'world!!!' },
         { name: 'hi', value: 'hi!' },

@@ -100,7 +100,7 @@ const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
 
 ## .res()
 
-command, component, autocomplete, modal
+command, component, modal
 
 ```ts "res"
 const app = new DiscordHono()
@@ -109,8 +109,6 @@ const app = new DiscordHono()
 ```
 
 引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。
-
-autocomplete の `.res()` は [choices](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-autocomplete) です。
 
 ## .resDefer()
 
@@ -150,6 +148,24 @@ const app = new DiscordHono().component('button', c =>
 ```
 
 メッセージの上書きを遅延させます。
+
+## .resAutocomplete()
+
+```ts "resAutocomplete"
+const app = new DiscordHono().autocomplete(
+  'hello',
+  c =>
+    c.resAutocomplete(
+      new Autocomplete(c.focused?.value).choices(
+        { name: 'world', value: 'world!!!' },
+        { name: 'hi', value: 'hi!' },
+      ),
+    ),
+  c => c.res(c.var.option),
+)
+```
+
+引数は Autocomplete インスタンスまたは [APICommandAutocompleteInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APICommandAutocompleteInteractionResponseCallbackData) です。
 
 ## .resModal()
 

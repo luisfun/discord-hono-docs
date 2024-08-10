@@ -100,7 +100,7 @@ It has the event value of the [scheduled()](https://developers.cloudflare.com/wo
 
 ## .res()
 
-command, component, autocomplete, modal
+command, component, modal
 
 ```ts "res"
 const app = new DiscordHono()
@@ -109,8 +109,6 @@ const app = new DiscordHono()
 ```
 
 The argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).
-
-`.res()` in autocomplete is [choices](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-autocomplete).
 
 ## .resDefer()
 
@@ -150,6 +148,24 @@ const app = new DiscordHono().component('button', c =>
 ```
 
 Delay overwriting messages.
+
+## .resAutocomplete()
+
+```ts "resAutocomplete"
+const app = new DiscordHono().autocomplete(
+  'hello',
+  c =>
+    c.resAutocomplete(
+      new Autocomplete(c.focused?.value).choices(
+        { name: 'world', value: 'world!!!' },
+        { name: 'hi', value: 'hi!' },
+      ),
+    ),
+  c => c.res(c.var.option),
+)
+```
+
+The argument is a Autocomplete instance or [APICommandAutocompleteInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APICommandAutocompleteInteractionResponseCallbackData).
 
 ## .resModal()
 

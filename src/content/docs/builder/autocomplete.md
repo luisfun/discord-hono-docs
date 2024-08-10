@@ -4,8 +4,8 @@ sidebar:
   order: 3
 ---
 
-```ts "Autocomplete"
-return c.res(
+```ts /(?<!res)Autocomplete/
+return c.resAutocomplete(
   new Autocomplete(c.focused?.value).choices(
     { name: 'world', value: 'world!!!' },
     { name: 'hi', value: 'hi!' },
