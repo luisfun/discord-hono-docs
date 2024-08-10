@@ -64,13 +64,13 @@ const commands = [
 ]
 const app = new DiscordHono().autocomplete(
   'hello',
-  c => {
-    console.log(c.focused?.name)
-    return c.res(
-      { name: 'world', value: 'world!!!' },
-      { name: 'hi', value: 'hi!' },
-    )
-  },
+  c =>
+    c.res(
+      new Autocomplete(c.focused?.value).choices(
+        { name: 'world', value: 'world!!!' },
+        { name: 'hi', value: 'hi!' },
+      ),
+    ),
   c => c.res(c.var.option),
 )
 ```
