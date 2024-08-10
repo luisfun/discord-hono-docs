@@ -30,7 +30,7 @@ const app = new DiscordHono()
 
 デフォルトで次の値が含まれています。
 
-- `c.var.OPTION_NAME` コマンドオプションの値 (command)
+- `c.var.OPTION_NAME` コマンドオプションの値 (command, autocomplete)
 - `c.var.custom_id` custom_id の値 (component, modal)
 - `c.var.TEXTINPUT_CUSTOM_ID` テキストインプットの値 (modal)
 
@@ -40,7 +40,7 @@ const app = new DiscordHono()
 
 ## get: req
 
-command, component, modal
+command, component, autocomplete, modal
 
 インタラクションのリクエストそのままです。
 
@@ -50,7 +50,7 @@ command, component, modal
 
 ## get: interaction
 
-command, component, modal
+command, component, autocomplete, modal
 
 `c.interaction` = `JSON.parse(await c.req.text())`
 
@@ -58,7 +58,7 @@ command, component, modal
 
 ## get: sub
 
-command
+command, autocomplete
 
 ```ts "sub.string" "sub.group" "sub.command"
 const commands = [
@@ -100,7 +100,7 @@ const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
 
 ## .res()
 
-command, component, modal
+command, component, autocomplete, modal
 
 ```ts "res"
 const app = new DiscordHono()
@@ -109,6 +109,8 @@ const app = new DiscordHono()
 ```
 
 引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。
+
+autocomplete の `.res()` は [choices](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-autocomplete) です。
 
 ## .resDefer()
 

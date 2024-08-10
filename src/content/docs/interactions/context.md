@@ -30,7 +30,7 @@ const app = new DiscordHono()
 
 The following values are included by default.
 
-- `c.var.OPTION_NAME` command option value (command)
+- `c.var.OPTION_NAME` command option value (command, autocomplete)
 - `c.var.custom_id` value of custom_id (component, modal)
 - `c.var.TEXTINPUT_CUSTOM_ID` value of text input (modal)
 
@@ -40,7 +40,7 @@ The following values are included by default.
 
 ## get: req
 
-command, component, modal
+command, component, autocomplete, modal
 
 Interaction Request are included as is.
 
@@ -50,7 +50,7 @@ Handler triggered string.
 
 ## get: interaction
 
-command, component, modal
+command, component, autocomplete, modal
 
 `c.interaction` = `JSON.parse(await c.req.text())`
 
@@ -58,7 +58,7 @@ Please refer to the [Official Docs](https://discord.com/developers/docs/interact
 
 ## get: sub
 
-command
+command, autocomplete
 
 ```ts "sub.string" "sub.group" "sub.command"
 const commands = [
@@ -100,7 +100,7 @@ It has the event value of the [scheduled()](https://developers.cloudflare.com/wo
 
 ## .res()
 
-command, component, modal
+command, component, autocomplete, modal
 
 ```ts "res"
 const app = new DiscordHono()
@@ -109,6 +109,8 @@ const app = new DiscordHono()
 ```
 
 The argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).
+
+`.res()` in autocomplete is [choices](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-autocomplete).
 
 ## .resDefer()
 

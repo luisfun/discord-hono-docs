@@ -54,6 +54,33 @@ const app = new DiscordHono()
 第1引数には、正規表現や `''` を指定することもできます。  
 `''` はマッチしなかった残りの全てにマッチし、フォールバックとして利用できます。
 
+## .autocomplete()
+
+```ts /autocomplete(?!')/ "hello"
+const commands = [
+  new Command('hello', 'command').options(
+    new Option('reply', 'selector').autocomplete().required(),
+  ),
+]
+const app = new DiscordHono().autocomplete(
+  'hello',
+  c => {
+    console.log(c.focused?.name)
+    return c.res(
+      { name: 'world', value: 'world!!!' },
+      { name: 'hi', value: 'hi!' },
+    )
+  },
+  c => c.res(c.var.option),
+)
+```
+
+コマンドの `Option()` に `.autocomplete()` を付与してください。  
+`Command()` の第1引数と `.autocomplete()` の第1引数を一致させてください。  
+一致した `.autocomplete()` の第2引数が選択肢生成用のハンドラ、第3引数が実行用のハンドラです。
+
+`.autocomplete()` の第3引数は `.command()` の第2引数と同じです。
+
 ## .modal()
 
 ```ts /modal(?!')/ "modal-1"

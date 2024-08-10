@@ -54,6 +54,33 @@ The second argument of the matched `.component()` is executed.
 The first argument can be a regex or `''`.  
 `''` matches all remaining unmatched parts and can be used as a fallback.
 
+## .autocomplete()
+
+```ts /autocomplete(?!')/ "hello"
+const commands = [
+  new Command('hello', 'command').options(
+    new Option('reply', 'selector').autocomplete().required(),
+  ),
+]
+const app = new DiscordHono().autocomplete(
+  'hello',
+  c => {
+    console.log(c.focused?.name)
+    return c.res(
+      { name: 'world', value: 'world!!!' },
+      { name: 'hi', value: 'hi!' },
+    )
+  },
+  c => c.res(c.var.option),
+)
+```
+
+Add `.autocomplete()` to `Option()` of the command.  
+The first argument of `Command()` must match the first argument of `.autocomplete()`.  
+The second argument of the matched `.autocomplete()` is the handler for choice generation, and the third argument is the handler for execution.
+
+The third argument of `.autocomplete()` is the same as the second argument of `.command()`.
+
 ## .modal()
 
 ```ts /modal(?!')/ "modal-1"
