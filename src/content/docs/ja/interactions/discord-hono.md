@@ -59,7 +59,7 @@ const app = new DiscordHono()
 ```ts /autocomplete(?!')/ "hello"
 const commands = [
   new Command('hello', 'command').options(
-    new Option('reply', 'selector').autocomplete().required(),
+    new Option('option', 'selector').autocomplete().required(),
   ),
 ]
 const app = new DiscordHono().autocomplete(

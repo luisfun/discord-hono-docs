@@ -59,7 +59,7 @@ The first argument can be a regex or `''`.
 ```ts /autocomplete(?!')/ "hello"
 const commands = [
   new Command('hello', 'command').options(
-    new Option('reply', 'selector').autocomplete().required(),
+    new Option('option', 'selector').autocomplete().required(),
   ),
 ]
 const app = new DiscordHono().autocomplete(

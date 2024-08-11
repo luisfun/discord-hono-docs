@@ -58,14 +58,22 @@ const app = new DiscordHono<Env>(options)
 
 ## Context Types
 
-```ts "Env" "CommandContext" "ComponentContext" "ModalContext" "CronContext"
+```ts "Env" "CommandContext" "ComponentContext" "ModalContext" "CronContext" "AutocompleteContext"
 import type {
   CommandContext,
   ComponentContext,
+  AutocompleteContext,
   ModalContext,
   CronContext,
 } from 'discord-hono'
-import { DiscordHono } from 'discord-hono'
+import {
+  DiscordHono,
+  Components,
+  Button,
+  Modal,
+  TextInput,
+  Autocomplete,
+} from 'discord-hono'
 
 type Env = {
   Bindings: {
@@ -97,6 +105,18 @@ const modalHandler = async (c: ModalContext<Env>) => {
   return c.res('モーダルが送信された')
 }
 
+const autocompleteHandler = async (c: AutocompleteContext<Env>) => {
+  const db = c.env.DB
+  /* 何かしらの処理 */
+  return c.resAutocomplete(new Autocomplete().choices())
+}
+
+const autocompleteCommandHandler = async (c: CommandContext<Env>) => {
+  const db = c.env.DB
+  /* 何かしらの処理 */
+  return c.res('オートコンプリートコマンド')
+}
+
 const cronHandler = async (c: CronContext<Env>) => {
   const db = c.env.DB
   /* 何かしらの処理 */
@@ -106,6 +126,7 @@ const app = new DiscordHono<Env>()
   .command('hey', commandHandler)
   .component('button', componentHandler)
   .modal('modal', modalHandler)
+  .autocomplete('autocomplete', autocompleteHandler, autocompleteCommandHandler)
   .cron('', cronHandler)
 export default app
 ```
