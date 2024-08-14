@@ -88,6 +88,22 @@ The first argument of `SubGroup` is in `c.sub.group`.
 The first argument of `SubCommand` is in `c.sub.command`.  
 `c.sub.string = (c.sub.group ? c.sub.group + ' ' : '') + c.sub.command`
 
+## get: focused
+
+autocomplete
+
+```ts "focused"
+const app = new DiscordHono().autocomplete('hello', c => {
+  console.log(c.focused.name) // option name
+  console.log(c.focused?.value) // option value
+  return c.resAutocomplete(...)
+})
+```
+
+The optional object in focus.
+
+[Official Docs](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-interaction-data-option-structure)
+
 ## get: cronEvent
 
 cron

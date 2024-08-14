@@ -88,6 +88,22 @@ const app = new DiscordHono().command('slash', c => {
 `SubCommand` の第一引数が `c.sub.command` に入っています。  
 `c.sub.string = (c.sub.group ? c.sub.group + ' ' : '') + c.sub.command`
 
+## get: focused
+
+autocomplete
+
+```ts "focused"
+const app = new DiscordHono().autocomplete('hello', c => {
+  console.log(c.focused.name) // オプション名
+  console.log(c.focused?.value) // オプションの値
+  return c.resAutocomplete(...)
+})
+```
+
+フォーカスされているオプションのオブジェクト。
+
+[公式ドキュメント](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-interaction-data-option-structure)
+
 ## get: cronEvent
 
 cron
