@@ -155,6 +155,13 @@ crons = [ "0 * * * *", "0 0 * * *" ]
 
 Cloudflare の環境であれば、使う必要はありません。
 
+[`discord-interactions`](https://github.com/discord/discord-interactions-js)
+
+```ts
+import { verifyKey } from 'discord-interactions'
+const app = new DiscordHono({ verify: verifyKey })
+```
+
 [`discord-verify`](https://github.com/ianmitchell/interaction-kit/tree/main/packages/discord-verify)
 
 ```ts
@@ -163,14 +170,6 @@ const app = new DiscordHono({
   verify: (...args) =>
     verify(...args, crypto.webcrypto.subtle, PlatformAlgorithm.OldNode),
 })
-```
-
-[`discord-interactions`](https://github.com/discord/discord-interactions-js)  
-非推奨：`discord-verify` が上手く動かないとき
-
-```ts
-import { verifyKey } from 'discord-interactions'
-const app = new DiscordHono({ verify: verifyKey })
 ```
 
 ### discordEnv

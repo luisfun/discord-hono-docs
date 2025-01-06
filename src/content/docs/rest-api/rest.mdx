@@ -6,8 +6,28 @@ sidebar:
     text: β
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+<Tabs>
+<TabItem label="Variables">
+
 ```ts
-// create-message.ts
+import { Rest, _channels_$_messages } from 'discord-hono'
+
+await new Rest(token).post(_channels_$_messages, [channel_id], {
+  content: 'this is rest',
+})
+//await new Rest(token).method(_path, ['Variables in Path'], data)
+```
+
+The first argument of the method is defined [here](https://github.com/luisfun/discord-hono/blob/main/src/rest-api/rest-path.ts).  
+The second argument is an array of variables enclosed in `{}` in the Path.  
+The third and subsequent arguments are necessary data.
+
+</TabItem>
+<TabItem label="Docs Path">
+
+```ts
 import { Rest } from 'discord-hono'
 
 await new Rest(token).post('/channels/{channel.id}/messages', [channel_id], {
@@ -20,9 +40,15 @@ For the first argument of method, copy the Path from the [official documentation
 The second argument is an array of variables enclosed in `{}` in the Path.  
 The third and subsequent arguments are necessary data.
 
+</TabItem>
+</Tabs>
+
 ## Support
 
 |                                                                          |     |
 | ------------------------------------------------------------------------ | --- |
 | [Application](https://discord.com/developers/docs/resources/application) | ✅  |
 | [Messages](https://discord.com/developers/docs/resources/message)        | ✅  |
+
+## Similar libraries
+[@discordjs/rest](https://discord.js.org/docs/packages/rest/main)

@@ -167,6 +167,8 @@ const app = new DiscordHono().component('button', c =>
 
 ## .resAutocomplete()
 
+autocomplete
+
 ```ts "resAutocomplete"
 const app = new DiscordHono().autocomplete(
   'hello',

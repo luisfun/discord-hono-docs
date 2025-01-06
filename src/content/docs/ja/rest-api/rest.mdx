@@ -6,8 +6,28 @@ sidebar:
     text: β
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+<Tabs>
+<TabItem label="変数">
+
 ```ts
-// create-message.ts
+import { Rest, _channels_$_messages } from 'discord-hono'
+
+await new Rest(token).post(_channels_$_messages, [channel_id], {
+  content: 'this is rest',
+})
+//await new Rest(token).method(_path, ['Path内の変数'], data)
+```
+
+method の第一引数は[こちら](https://github.com/luisfun/discord-hono/blob/main/src/rest-api/rest-path.ts)に定義しています。  
+第二引数は Path 内の `{}` で囲まれた変数部分を配列で入力してください。  
+第三引数以降は、必要なデータです。
+
+</TabItem>
+<TabItem label="ドキュメントPath">
+
+```ts
 import { Rest } from 'discord-hono'
 
 await new Rest(token).post('/channels/{channel.id}/messages', [channel_id], {
@@ -20,9 +40,15 @@ method の第一引数は[公式ドキュメント](https://discord.com/develope
 第二引数は Path 内の `{}` で囲まれた変数部分を配列で入力してください。  
 第三引数以降は、必要なデータです。
 
+</TabItem>
+</Tabs>
+
 ## 対応状況
 
 |                                                                          |     |
 | ------------------------------------------------------------------------ | --- |
 | [Application](https://discord.com/developers/docs/resources/application) | ✅  |
 | [Messages](https://discord.com/developers/docs/resources/message)        | ✅  |
+
+## 類似ライブラリ
+[@discordjs/rest](https://discord.js.org/docs/packages/rest/main)

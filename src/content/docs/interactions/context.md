@@ -167,6 +167,8 @@ Delay overwriting messages.
 
 ## .resAutocomplete()
 
+autocomplete
+
 ```ts "resAutocomplete"
 const app = new DiscordHono().autocomplete(
   'hello',

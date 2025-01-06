@@ -155,6 +155,13 @@ If you use `export default app`, `.scheduled()` is included.
 
 If it's a Cloudflare environment, there's no need to use it.
 
+[`discord-interactions`](https://github.com/discord/discord-interactions-js)
+
+```ts
+import { verifyKey } from 'discord-interactions'
+const app = new DiscordHono({ verify: verifyKey })
+```
+
 [`discord-verify`](https://github.com/ianmitchell/interaction-kit/tree/main/packages/discord-verify)
 
 ```ts
@@ -163,14 +170,6 @@ const app = new DiscordHono({
   verify: (...args) =>
     verify(...args, crypto.webcrypto.subtle, PlatformAlgorithm.OldNode),
 })
-```
-
-[`discord-interactions`](https://github.com/discord/discord-interactions-js)  
-Deprecated: When `discord-verify` doesn't work well
-
-```ts
-import { verifyKey } from 'discord-interactions'
-const app = new DiscordHono({ verify: verifyKey })
 ```
 
 ### discordEnv
