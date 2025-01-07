@@ -36,7 +36,8 @@ const commands = [
     .nsfw()
     .integration_types()
     .contexts()
-    .version(),
+    .version()
+    .handler(),
 ]
 ```
 
