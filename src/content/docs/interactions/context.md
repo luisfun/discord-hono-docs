@@ -94,7 +94,7 @@ autocomplete
 
 ```ts "focused"
 const app = new DiscordHono().autocomplete('hello', c => {
-  console.log(c.focused.name) // option name
+  console.log(c.focused?.name) // option name
   console.log(c.focused?.value) // option value
   return c.resAutocomplete(...)
 })

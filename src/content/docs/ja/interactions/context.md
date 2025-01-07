@@ -94,7 +94,7 @@ autocomplete
 
 ```ts "focused"
 const app = new DiscordHono().autocomplete('hello', c => {
-  console.log(c.focused.name) // オプション名
+  console.log(c.focused?.name) // オプション名
   console.log(c.focused?.value) // オプションの値
   return c.resAutocomplete(...)
 })

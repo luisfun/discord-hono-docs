@@ -71,6 +71,14 @@ Please refer to the [Official Docs](https://discord.com/developers/docs/interact
 There are some notes that differ from the official one.  
 `.custom_id()` are limited to a total of 99 characters with `unique-id`.
 
+### Simple emoji setup
+
+```ts
+import { Components, Button } from 'discord-hono'
+
+const components = new Components().row(new Button('button', ['✅', 'button']))
+```
+
 ## Select elements
 
 ```ts "Select"

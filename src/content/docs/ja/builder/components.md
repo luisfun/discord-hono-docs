@@ -71,6 +71,14 @@ const components = new Components().row(
 公式ドキュメントと異なる注意点があります。  
 `.custom_id()` は `unique-id` を含めて99文字までです。
 
+### 簡単なemojiの設定
+
+```ts
+import { Components, Button } from 'discord-hono'
+
+const components = new Components().row(new Button('button', ['✅', 'ボタン']))
+```
+
 ## Select 要素
 
 ```ts "Select"

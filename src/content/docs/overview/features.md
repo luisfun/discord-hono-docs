@@ -4,9 +4,9 @@ sidebar:
   order: 2
 ---
 
-- **Easy Build** - Verify included. Code for each command is easier to write.
-- **Lightweight** - We make them as light as possible. Discord Hono has zero dependencies.
-- **TypeScript** - TypeScript support.
+- **Intuitive API** - Influenced by Hono, offering a familiar and easy-to-use interface
+- **Lightweight** - Zero dependencies, optimized for performance
+- **Type-Safe** - Native support for TypeScript
 
 ## Server-based Bot vs Serverless Bot
 
