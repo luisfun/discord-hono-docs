@@ -21,9 +21,9 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: 'Overview',
-          translations: { ja: '概要' },
-          autogenerate: { directory: 'overview' },
+          label: 'Guides',
+          translations: { ja: 'ガイド' },
+          autogenerate: { directory: 'guides' },
         },
         {
           label: 'Interactions',
@@ -39,7 +39,7 @@ export default defineConfig({
           autogenerate: { directory: 'rest-api' },
         },
         {
-          label: 'Migration Guide',
+          label: 'Migration Guides',
           collapsed: true,
           translations: { ja: '移行ガイド' },
           autogenerate: { directory: 'migration' },
