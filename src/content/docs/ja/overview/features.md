@@ -1,5 +1,5 @@
 ---
-title: 機能
+title: 特徴
 sidebar:
   order: 2
 ---
