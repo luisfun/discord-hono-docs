@@ -44,10 +44,6 @@ command, component, autocomplete, modal
 
 Interaction Request are included as is.
 
-## get: key
-
-Handler triggered string.
-
 ## get: interaction
 
 command, component, autocomplete, modal
@@ -55,6 +51,10 @@ command, component, autocomplete, modal
 `c.interaction` = `JSON.parse(await c.req.text())`
 
 Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object).
+
+## get: key
+
+Handler triggered string.
 
 ## get: sub
 
@@ -113,6 +113,11 @@ const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
 ```
 
 It has the event value of the [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) first argument.
+
+## .rest()
+
+`c.rest` = `new Rest(c.env.DISCORD_TOKEN)`  
+[Rest](/rest-api/rest/)
 
 ## .res()
 

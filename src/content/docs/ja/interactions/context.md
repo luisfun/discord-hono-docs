@@ -44,10 +44,6 @@ command, component, autocomplete, modal
 
 インタラクションのリクエストそのままです。
 
-## get: key
-
-ハンドラーのトリガーとなった文字列です。
-
 ## get: interaction
 
 command, component, autocomplete, modal
@@ -55,6 +51,10 @@ command, component, autocomplete, modal
 `c.interaction` = `JSON.parse(await c.req.text())`
 
 [公式ドキュメント](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object)を参照してください。
+
+## get: key
+
+ハンドラーのトリガーとなった文字列です。
 
 ## get: sub
 
@@ -113,6 +113,11 @@ const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
 ```
 
 [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) の第一引数の event オブジェクトです。
+
+## .rest()
+
+`c.rest` = `new Rest(c.env.DISCORD_TOKEN)`  
+[Rest](/ja/rest-api/rest/)
 
 ## .res()
 
