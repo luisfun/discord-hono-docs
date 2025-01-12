@@ -39,6 +39,12 @@ export default defineConfig({
           autogenerate: { directory: 'rest-api' },
         },
         {
+          label: 'Examples',
+          collapsed: true,
+          translations: { ja: 'コード例' },
+          autogenerate: { directory: 'examples' },
+        },
+        {
           label: 'Migration Guides',
           collapsed: true,
           translations: { ja: '移行ガイド' },
