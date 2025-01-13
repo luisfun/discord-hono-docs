@@ -129,7 +129,9 @@ const app = new DiscordHono()
   .command('hello', c => c.res({ content: 'World!!' }))
 ```
 
-引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。
+第1引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。  
+第2引数は FileData または FileData[] です。  
+FileData = { blob: Blob, name: 'file.name' }
 
 ## .resDefer()
 
@@ -156,7 +158,9 @@ const app = new DiscordHono().component('button', c =>
 
 送信済みのメッセージを上書きします。
 
-引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。
+第1引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。  
+第2引数は FileData または FileData[] です。  
+FileData = { blob: Blob, name: 'file.name' }
 
 ## .resDeferUpdate()
 

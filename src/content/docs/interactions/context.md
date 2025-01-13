@@ -129,7 +129,9 @@ const app = new DiscordHono()
   .command('hello', c => c.res({ content: 'World!!' }))
 ```
 
-The argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).
+The first argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).  
+The second argument is FileData or FileData[].  
+FileData = { blob: Blob, name: 'file.name' }
 
 ## .resDefer()
 
@@ -156,7 +158,9 @@ const app = new DiscordHono().component('button', c =>
 
 Overwrites a message that has already been sent.
 
-The argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).
+The first argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).  
+The second argument is FileData or FileData[].  
+FileData = { blob: Blob, name: 'file.name' }
 
 ## .resDeferUpdate()
 
