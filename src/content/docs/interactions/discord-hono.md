@@ -28,8 +28,7 @@ const app = new DiscordHono()
 The first argument of `Command()` must match the first argument of `.command()`.  
 The second argument of the matched `.command()` is executed.
 
-The first argument can be a regex or `''`.  
-`''` matches all remaining unmatched parts and can be used as a fallback.
+Specifying `''` as the first argument functions as a catch-all pattern.
 
 ## .component()
 
@@ -51,8 +50,7 @@ const app = new DiscordHono()
 The first argument of the component element `Button()` must match the first argument of `.component()`.  
 The second argument of the matched `.component()` is executed.
 
-The first argument can be a regex or `''`.  
-`''` matches all remaining unmatched parts and can be used as a fallback.
+Specifying `''` as the first argument functions as a catch-all pattern.
 
 ## .autocomplete()
 
@@ -98,8 +96,7 @@ const app = new DiscordHono()
 The first argument of `Modal()` must match the first argument of `.modal()`.  
 The second argument of the matched `.modal()` is executed.
 
-The first argument can be a regex or `''`.  
-`''` matches all remaining unmatched parts and can be used as a fallback.
+Specifying `''` as the first argument functions as a catch-all pattern.
 
 ## .cron()
 
@@ -137,8 +134,7 @@ crons = [ "0 * * * *", "0 0 * * *" ]
 The first argument of `.cron()` must match the toml file crons.  
 The second argument of the matched `.cron()` is executed.
 
-The first argument can be a regex or `''`.  
-`''` matches all remaining unmatched parts and can be used as a fallback.
+Specifying `''` as the first argument functions as a catch-all pattern.
 
 ## .fetch()
 
@@ -185,4 +181,12 @@ const app = new DiscordHono({
     TOKEN: env.DISCORD_TOKEN,
   }),
 })
+```
+
+### HandlerMap (β)
+
+Used when you want to employ regular expressions as the first argument of methods like `.command()` or `.component()`.
+
+```ts
+const app = new DiscordHono<Env, RegExp>({HandlerMap: RegExpMap})
 ```
