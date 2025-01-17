@@ -188,5 +188,5 @@ const app = new DiscordHono({
 Used when you want to employ regular expressions as the first argument of methods like `.command()` or `.component()`.
 
 ```ts
-const app = new DiscordHono<Env, RegExp>({HandlerMap: RegExpMap})
+const app = new DiscordHono<Env, RegExp>({ HandlerMap: RegExpMap })
 ```
