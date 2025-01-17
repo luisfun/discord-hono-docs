@@ -8,16 +8,30 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components'
 
+There are 4 ways to use Discord's REST API:
+
+1. `c.rest`
+2. `new Rest(c.env.DISCORD_TOKEN)`
+3. External REST API (such as [@discordjs/rest](https://discord.js.org/docs/packages/rest/main))
+4. Implement your own using `fetch()`
+
+1 and 2 behave the same way.  
+Since REST API is essentially separable, any implementation method is acceptable.
+
+## About c.rest
+
+If you're using `new Rest()`, please replace it accordingly.
+
 <Tabs>
 <TabItem label="Variables">
 
 ```ts
-import { Rest, _channels_$_messages } from 'discord-hono'
+import { _channels_$_messages } from 'discord-hono'
 
-await new Rest(token).post(_channels_$_messages, [channel_id], {
+await c.rest.post(_channels_$_messages, [channel_id], {
   content: 'this is rest',
 })
-//await new Rest(token).method(_path, ['Variables in Path'], data)
+//await c.rest.method(_path, ['Variables in Path'], data)
 ```
 
 The first argument of the method is defined [here](https://github.com/luisfun/discord-hono/blob/main/src/rest-api/rest-path.ts).  
@@ -28,12 +42,10 @@ The third and subsequent arguments are necessary data.
 <TabItem label="Docs Path">
 
 ```ts
-import { Rest } from 'discord-hono'
-
-await new Rest(token).post('/channels/{channel.id}/messages', [channel_id], {
+await c.rest.post('/channels/{channel.id}/messages', [channel_id], {
   content: 'this is rest',
 })
-//await new Rest(token).method('Path of official docs', ['Variables in Path'], data)
+//await c.rest.method('Path of official docs', ['Variables in Path'], data)
 ```
 
 For the first argument of method, copy the Path from the [official documentation](https://discord.com/developers/docs/resources/message#create-message) as is.  
@@ -45,12 +57,9 @@ The third and subsequent arguments are necessary data.
 
 ## Support
 
-|                                                                                               |     |
-| --------------------------------------------------------------------------------------------- | --- |
-| [Application Commands](https://discord.com/developers/docs/interactions/application-commands) | ✅  |
-| [Application](https://discord.com/developers/docs/resources/application)                      | ✅  |
-| [Messages](https://discord.com/developers/docs/resources/message)                             | ✅  |
-
-## Similar libraries
-
-[@discordjs/rest](https://discord.js.org/docs/packages/rest/main)
+|                                                                                                       |     |
+| ----------------------------------------------------------------------------------------------------- | --- |
+| [Receiving and Responding](https://discord.com/developers/docs/interactions/receiving-and-responding) | ⌛  |
+| [Application Commands](https://discord.com/developers/docs/interactions/application-commands)         | ✅  |
+| [Application](https://discord.com/developers/docs/resources/application)                              | ⌛  |
+| [Messages](https://discord.com/developers/docs/resources/message)                                     | ✅  |

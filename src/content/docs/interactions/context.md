@@ -117,7 +117,7 @@ It has the event value of the [scheduled()](https://developers.cloudflare.com/wo
 ## .rest()
 
 `c.rest` = `new Rest(c.env.DISCORD_TOKEN)`  
-[Rest](/rest-api/rest/)
+[Rest](/interactions/rest/)
 
 ## .res()
 

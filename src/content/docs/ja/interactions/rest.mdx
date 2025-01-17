@@ -8,16 +8,30 @@ sidebar:
 
 import { Tabs, TabItem } from '@astrojs/starlight/components'
 
+Discord の REST API を利用する方法は4つあります。
+
+1. `c.rest`
+2. `new Rest(c.env.DISCORD_TOKEN)`
+3. 外部のREST API ([@discordjs/rest](https://discord.js.org/docs/packages/rest/main)等)
+4. 自分で `fetch()`
+
+1.と2.は同じ動作をします。  
+REST API は基本的に分離可能なため、どの実装方法でも問題ありません。
+
+## c.rest について
+
+`new Rest()` を利用する場合は置き換えてください。
+
 <Tabs>
 <TabItem label="変数">
 
 ```ts
-import { Rest, _channels_$_messages } from 'discord-hono'
+import { _channels_$_messages } from 'discord-hono'
 
-await new Rest(token).post(_channels_$_messages, [channel_id], {
+await c.rest.post(_channels_$_messages, [channel_id], {
   content: 'this is rest',
 })
-//await new Rest(token).method(_path, ['Path内の変数'], data)
+//await c.rest.method(_path, ['Path内の変数'], data)
 ```
 
 method の第一引数は[こちら](https://github.com/luisfun/discord-hono/blob/main/src/rest-api/rest-path.ts)に定義しています。  
@@ -28,12 +42,10 @@ method の第一引数は[こちら](https://github.com/luisfun/discord-hono/blo
 <TabItem label="ドキュメントPath">
 
 ```ts
-import { Rest } from 'discord-hono'
-
-await new Rest(token).post('/channels/{channel.id}/messages', [channel_id], {
+await c.rest.post('/channels/{channel.id}/messages', [channel_id], {
   content: 'this is rest',
 })
-//await new Rest(token).method('公式ドキュメントのPath', ['Path内の変数'], data)
+//await c.rest.method('公式ドキュメントのPath', ['Path内の変数'], data)
 ```
 
 method の第一引数は[公式ドキュメント](https://discord.com/developers/docs/resources/message#create-message)の Path をそのままコピーしてください。  
@@ -45,12 +57,9 @@ method の第一引数は[公式ドキュメント](https://discord.com/develope
 
 ## 対応状況
 
-|                                                                                               |     |
-| --------------------------------------------------------------------------------------------- | --- |
-| [Application Commands](https://discord.com/developers/docs/interactions/application-commands) | ✅  |
-| [Application](https://discord.com/developers/docs/resources/application)                      | ✅  |
-| [Messages](https://discord.com/developers/docs/resources/message)                             | ✅  |
-
-## 類似ライブラリ
-
-[@discordjs/rest](https://discord.js.org/docs/packages/rest/main)
+|                                                                                                       |     |
+| ----------------------------------------------------------------------------------------------------- | --- |
+| [Receiving and Responding](https://discord.com/developers/docs/interactions/receiving-and-responding) | ⌛  |
+| [Application Commands](https://discord.com/developers/docs/interactions/application-commands)         | ✅  |
+| [Application](https://discord.com/developers/docs/resources/application)                              | ⌛  |
+| [Messages](https://discord.com/developers/docs/resources/message)                                     | ✅  |

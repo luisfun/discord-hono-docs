@@ -117,7 +117,7 @@ const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
 ## .rest()
 
 `c.rest` = `new Rest(c.env.DISCORD_TOKEN)`  
-[Rest](/ja/rest-api/rest/)
+[Rest](/ja/interactions/rest/)
 
 ## .res()
 
