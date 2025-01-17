@@ -30,13 +30,15 @@ export default defineConfig({
           autogenerate: { directory: 'interactions' },
         },
         {
-          label: 'Builder',
+          label: 'Builders',
           translations: { ja: 'ビルダー' },
-          autogenerate: { directory: 'builder' },
+          autogenerate: { directory: 'builders' },
         },
         {
-          label: 'REST API',
-          autogenerate: { directory: 'rest-api' },
+          label: 'Helpers',
+          collapsed: true,
+          translations: { ja: 'ヘルパー関数' },
+          autogenerate: { directory: 'helpers' },
         },
         {
           label: 'Examples',
@@ -48,7 +50,7 @@ export default defineConfig({
           label: 'Migration Guides',
           collapsed: true,
           translations: { ja: '移行ガイド' },
-          autogenerate: { directory: 'migration' },
+          autogenerate: { directory: 'migration-guides' },
         },
       ],
     }),

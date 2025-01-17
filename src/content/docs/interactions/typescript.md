@@ -1,7 +1,5 @@
 ---
 title: TypeScript
-sidebar:
-  order: 3
 ---
 
 ```ts "Env"

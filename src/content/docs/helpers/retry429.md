@@ -1,7 +1,6 @@
 ---
 title: retry429
 sidebar:
-  order: 3
   badge:
     text: β
 ---
