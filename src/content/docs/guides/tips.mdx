@@ -10,8 +10,10 @@ import { Aside } from '@astrojs/starlight/components'
 
 Error when `register.js` cannot be executed, regardless of the success or failure of command registration.
 
-Please consider the following modifications. (Either one or a combination)
+Please consider the following modifications (Either one or a combination):
 
+- Node.js
+  - Upgrade to v23.6.0 or higher [Reference](https://nodejs.org/en/blog/release/v23.6.0)
 - package.json
   - `"type": "module",`
 - tsconfig.json
@@ -23,7 +25,17 @@ Please consider the following modifications. (Either one or a combination)
 - esbuild etc.
   - Use a bundling tool to compile `register.js` into a single file
 
-This error means that you need to take into account that the code `index.ts` to be deployed and the code `register.ts` to be registered are executed in different environments.
+<Aside>
+We believe this error occurs because the deployed code `index.ts` and the registration code `register.ts` are executed in different TypeScript compiler environments.
+</Aside>
+
+If you still can't resolve the issue:
+
+- Give up on file splitting
+  - Don't split `register.ts` into `commands.ts` etc.
+- Create a URL endpoint for command registration
+  - Use Hono or similar to create routing and a registration URL
+  - As a precaution, apply [basic authentication](https://hono.dev/docs/middleware/builtin/basic-auth) or similar
 
 ## Tips for various environments (β)
 
