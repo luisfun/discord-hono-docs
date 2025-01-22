@@ -49,7 +49,7 @@ With Serverless Bots, you don't have to worry about scaling.
   - Large-scale: Can be low-cost
 
 Since Serverless Bots are not always running, they can be low-cost.  
-Even for free use, most services do not have downtime.
+Even for free use, most services do not have downtime. (More precisely, it's fast enough that the downtime is negligible)
 
 ### References
 

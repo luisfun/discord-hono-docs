@@ -6,7 +6,7 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components'
 
-## Error: npm run register
+## Error: `npm run register`
 
 Error when `register.js` cannot be executed, regardless of the success or failure of command registration.
 
@@ -38,6 +38,31 @@ If you still can't resolve the issue:
 - Create a URL endpoint for command registration
   - Use Hono or similar to create routing and a registration URL
   - As a precaution, apply [basic authentication](https://hono.dev/docs/middleware/builtin/basic-auth) or similar
+
+## Error: `wrangler dev`
+
+An error that occurs when accessing the URL endpoint for command registration in the development environment.
+
+Try the following fixes:
+
+- Rename the `.env` file to `.dev.vars`
+- Add `.dev.vars` to `.gitignore` (if not already present)
+
+<Aside>
+  This error occurs because `wrangler dev` cannot read the `.env` file,
+  resulting in environment variables not being found.
+</Aside>
+
+## Validation error when registering URL
+
+Error when registering a URL in the INTERACTIONS ENDPOINT URL of the Discord dashboard.
+
+Try the following fix:
+
+- Change the `_` (underscore) in the URL you're registering to `-` (hyphen)
+  - `aaa_bbb.user.workers.dev` -> `aaa-bbb.user.workers.dev`
+
+[Reference (ja)](https://qiita.com/y_q/items/9971183bcdd57535bbb4)
 
 ## Tips for various environments (β)
 

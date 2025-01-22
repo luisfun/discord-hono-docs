@@ -6,7 +6,7 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components'
 
-## npm run register でエラー
+## `npm run register` でエラー
 
 コマンド登録の成否とは関係なく、 `register.js` を実行できない場合のエラー。
 
@@ -37,6 +37,31 @@ import { Aside } from '@astrojs/starlight/components'
 - コマンド登録用のURLエンドポイントを生やす
   - Hono 等を使いルーティングし、登録用URLを作成する
   - 念のため、[ベーシック認証](https://hono.dev/docs/middleware/builtin/basic-auth)等をかける
+
+## `wrangler dev` でエラー
+
+開発環境で、コマンド登録用のURLエンドポイントにアクセスしたときに発生するエラー。
+
+次の修正をしてみてください。
+
+- `.env` ファイルを `.dev.vars` ファイルにリネーム
+- `.gitignore` に `.dev.vars` を追加（なければ）
+
+<Aside>
+  このエラーは、 `wrangler dev` が `.env`
+  ファイルを読み込めず、環境変数が見つからないため発生するエラーです。
+</Aside>
+
+## URL 登録時の Validation error
+
+Discord ダッシュボードの INTERACTIONS ENDPOINT URL に URL を登録する際のエラー。
+
+次の修正をしてみてください。
+
+- 登録する URL の `_` （アンダーバー）を `-` （ハイフン）に変更
+  - `aaa_bbb.user.workers.dev` -> `aaa-bbb.user.workers.dev`
+
+[参考](https://qiita.com/y_q/items/9971183bcdd57535bbb4)
 
 ## いくつかの環境による tips (β)
 
