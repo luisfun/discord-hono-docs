@@ -18,6 +18,7 @@ export default defineConfig({
       },
       social: {
         github: 'https://github.com/luisfun/discord-hono',
+        discord: 'https://discord.gg/KFAgHFwBsr',
       },
       sidebar: [
         {
