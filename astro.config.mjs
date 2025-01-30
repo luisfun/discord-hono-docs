@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight'
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://discord-hono.luis.fun/',
   integrations: [
     starlight({
       title: 'Discord Hono',
@@ -16,6 +17,16 @@ export default defineConfig({
           label: '日本語',
         },
       },
+      head: [
+        {
+          tag: 'meta',
+          attrs: {
+            property: 'og:image',
+            content:
+              'https://discord-hono.luis.fun/_astro/fire_3d.oPI0DGIl_Zh3mnl.webp',
+          },
+        },
+      ],
       social: {
         github: 'https://github.com/luisfun/discord-hono',
         discord: 'https://discord.gg/KFAgHFwBsr',

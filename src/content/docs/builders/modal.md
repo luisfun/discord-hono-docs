@@ -1,5 +1,6 @@
 ---
 title: Modal
+description: Guide on using modals in DiscordHono, including the creation of modals with text inputs, customization options like styles, and methods for validation and placeholders.
 sidebar:
   order: 4
 ---

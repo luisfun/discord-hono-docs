@@ -1,5 +1,6 @@
 ---
 title: DiscordHono
+description: A detailed guide on using DiscordHono for creating Discord bots, including commands, components, autocomplete, modals, cron jobs, and custom configurations.
 sidebar:
   order: 1
 ---

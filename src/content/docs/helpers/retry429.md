@@ -1,5 +1,6 @@
 ---
 title: retry429
+description: Guide on handling rate-limiting with retry429 in DiscordHono.
 sidebar:
   badge:
     text: β

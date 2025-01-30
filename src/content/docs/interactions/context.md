@@ -1,5 +1,6 @@
 ---
 title: Context
+description: Comprehensive guide on using context, interaction data, and response handling in DiscordHono, covering commands, components, modals, and cron jobs with various response methods.
 sidebar:
   order: 2
 ---

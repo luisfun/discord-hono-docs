@@ -1,5 +1,6 @@
 ---
 title: Pagination
+description: Example of implementing pagination in DiscordHono with buttons for navigating between pages, including handling command and component context for dynamic page content.
 ---
 
 ```ts

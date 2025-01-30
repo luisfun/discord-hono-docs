@@ -1,5 +1,6 @@
 ---
 title: Example Repositories
+description: Example repositories to help you better understand discord hono.
 sidebar:
   order: 1
 ---
