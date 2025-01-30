@@ -26,6 +26,13 @@ export default defineConfig({
               'https://media.discordapp.net/attachments/1334435768298504232/1334553904956047390/fire_3d.webp?ex=679cf3ad&is=679ba22d&hm=986ac3516f33f41dc9708f7b1895ef0ae43cd51effc4c090ac344de5a81b8fb6&=&format=webp',
           },
         },
+        {
+          tag: 'meta',
+          attrs: {
+            property: 'og:article:author',
+            content: 'Discord Hono',
+          },
+        },
       ],
       social: {
         github: 'https://github.com/luisfun/discord-hono',
