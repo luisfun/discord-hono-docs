@@ -23,7 +23,7 @@ export default defineConfig({
           attrs: {
             property: 'og:image',
             content:
-              'https://cdn.discordapp.com/attachments/1331897779169263710/1334551787331522600/fire_3d_-_Copy.webp?ex=679cf1b4&is=679ba034&hm=0e7035c0b1141a6547df1985dee6641ef1c5cc9cd5dd939c85ade2440df79f8c&',
+              'https://media.discordapp.net/attachments/1334435768298504232/1334553904956047390/fire_3d.webp?ex=679cf3ad&is=679ba22d&hm=986ac3516f33f41dc9708f7b1895ef0ae43cd51effc4c090ac344de5a81b8fb6&=&format=webp',
           },
         },
       ],
