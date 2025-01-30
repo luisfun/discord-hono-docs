@@ -23,7 +23,7 @@ export default defineConfig({
           attrs: {
             property: 'og:image',
             content:
-              'https://discord-hono.luis.fun/_astro/fire_3d.oPI0DGIl_Zh3mnl.webp',
+              'https://cdn.discordapp.com/attachments/1334435768298504232/1334516218044092489/fire_3d_-_Copy.webp?ex=679cd094&is=679b7f14&hm=5ecdf34e51cd93714e863654309a3c7bdec67f5500b3e35944d2aad5f84aa5e3&',
           },
         },
       ],
