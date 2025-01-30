@@ -23,14 +23,7 @@ export default defineConfig({
           attrs: {
             property: 'og:image',
             content:
-              'https://media.discordapp.net/attachments/1334435768298504232/1334553904956047390/fire_3d.webp?ex=679cf3ad&is=679ba22d&hm=986ac3516f33f41dc9708f7b1895ef0ae43cd51effc4c090ac344de5a81b8fb6&=&format=webp',
-          },
-        },
-        {
-          tag: 'meta',
-          attrs: {
-            property: 'og:article:author',
-            content: 'Discord Hono',
+              'https://cdn.discordapp.com/attachments/1331897779169263710/1334561142407958608/image.png?ex=679cfa6b&is=679ba8eb&hm=af8af4c2488fde53259e7f554d8ffc70ac5189cfc81a7c597af2bb6ac2325e19&',
           },
         },
       ],
