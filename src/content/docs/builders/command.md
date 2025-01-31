@@ -1,5 +1,6 @@
 ---
 title: Command
+description: Detailed guide on using the `Command` class in DiscordHono, including subcommands, options, and advanced configurations like localization, permissions, and autocomplete.
 sidebar:
   order: 1
 ---

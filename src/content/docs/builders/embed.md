@@ -1,5 +1,6 @@
 ---
 title: Embed
+description: Guide on creating and customizing embedded messages in DiscordHono, including setting fields like title, description, image, video, and more.
 sidebar:
   order: 5
 ---

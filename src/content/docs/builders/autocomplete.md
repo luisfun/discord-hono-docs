@@ -1,5 +1,6 @@
 ---
 title: Autocomplete
+description: Guide on implementing autocomplete functionality in DiscordHono, including initialization and choice filtering based on user input.
 sidebar:
   order: 3
 ---

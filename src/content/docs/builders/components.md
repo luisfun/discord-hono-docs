@@ -1,5 +1,6 @@
 ---
 title: Components
+description: Comprehensive guide on using components in DiscordHono, including buttons, select elements, and customizations like styles, emojis, and select options.
 sidebar:
   order: 2
 ---

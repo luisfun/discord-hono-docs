@@ -1,5 +1,6 @@
 ---
 title: createFactory
+description: Guide on using createFactory for file separation in DiscordHono, with examples of structuring commands, components, and pagination logic across multiple files.
 sidebar:
   badge:
     text: β

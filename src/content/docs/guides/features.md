@@ -1,5 +1,6 @@
 ---
 title: Features
+description: Overview of key features, comparisons between server-based and serverless Discord bots, and considerations for scaling, cost, and capabilities.
 sidebar:
   order: 2
 ---

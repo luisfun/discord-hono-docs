@@ -1,5 +1,6 @@
 ---
 title: TypeScript
+description: Guide on using TypeScript with DiscordHono, including environment types, context handling for commands, components, modals, autocomplete, and cron jobs.
 ---
 
 ```ts "Env"

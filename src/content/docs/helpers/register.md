@@ -1,5 +1,6 @@
 ---
 title: register
+description: A guide to registering commands in DiscordHono, including how to register them globally or to a specific guild.
 sidebar:
   order: 1
 ---
