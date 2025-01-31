@@ -22,8 +22,15 @@ export default defineConfig({
           tag: 'meta',
           attrs: {
             property: 'og:image',
-            content:
-              'https://cdn.discordapp.com/attachments/1331897779169263710/1334561142407958608/image.png?ex=679cfa6b&is=679ba8eb&hm=af8af4c2488fde53259e7f554d8ffc70ac5189cfc81a7c597af2bb6ac2325e19&',
+            content: 'https://discord-hono.luis.fun/fire_3d.webp',
+            //'https://cdn.discordapp.com/attachments/1331897779169263710/1334561142407958608/image.png?ex=679cfa6b&is=679ba8eb&hm=af8af4c2488fde53259e7f554d8ffc70ac5189cfc81a7c597af2bb6ac2325e19&',
+          },
+        },
+        {
+          tag: 'meta',
+          attrs: {
+            name: 'twitter:card',
+            content: 'summary',
           },
         },
       ],
