@@ -1,5 +1,7 @@
 ---
 title: retry429
+description: Discord Hono における retry429 を使用したレート制限の処理に関するガイド。
+
 sidebar:
   badge:
     text: β

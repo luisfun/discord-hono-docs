@@ -1,5 +1,6 @@
 ---
 title: DiscordHono
+description: Discord Hono を使用して Discord ボットを作成するための詳細なガイドです。コマンド、コンポーネント、オートコンプリート、モーダル、 cron ジョブ、カスタム設定などが含まれています。
 sidebar:
   order: 1
 ---

@@ -1,5 +1,6 @@
 ---
 title: 実例リポジトリ
+description: Discord Hono をよりよく理解するためのサンプルリポジトリ。
 sidebar:
   order: 1
 ---

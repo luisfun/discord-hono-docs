@@ -1,5 +1,6 @@
 ---
 title: TypeScript
+description: TypeScript と Discord Hono の使用に関するガイドです。環境の型、コマンド用のコンテキスト処理、コンポーネント、モーダル、オートコンプリート、 cron ジョブについて説明しています。
 ---
 
 ```ts "Env"

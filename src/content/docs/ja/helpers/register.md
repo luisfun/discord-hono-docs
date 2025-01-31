@@ -1,5 +1,6 @@
 ---
 title: register
+description: Discord Hono でコマンドを登録する方法のガイドです。グローバルに登録する方法や特定のギルドに登録する方法が含まれています。
 sidebar:
   order: 1
 ---

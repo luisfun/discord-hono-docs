@@ -1,5 +1,6 @@
 ---
 title: Embed
+description: Discord Hono における埋め込みメッセージの作成とカスタマイズに関するガイドです。タイトル、説明、画像、動画などのフィールドの設定方法を含みます。
 sidebar:
   order: 5
 ---

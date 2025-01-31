@@ -1,5 +1,6 @@
 ---
 title: Components
+description: Discord Hono でのコンポーネントの使用に関する包括的なガイド。ボタン、セレクト要素、およびスタイル、絵文字、セレクトオプションなどのカスタマイズを含みます。
 sidebar:
   order: 2
 ---

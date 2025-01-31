@@ -1,5 +1,6 @@
 ---
 title: 特徴
+description: 主要機能の概要、サーバー型とサーバーレスの Discord Bot における、スケーリング・コスト・機能に関する比較・考慮事項。
 sidebar:
   order: 2
 ---

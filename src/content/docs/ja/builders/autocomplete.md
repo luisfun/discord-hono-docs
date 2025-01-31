@@ -1,5 +1,6 @@
 ---
 title: Autocomplete
+description: Discord Hono でオートコンプリート機能を実装するためのガイド。初期化とユーザー入力に基づく選択肢のフィルタリングを含みます。
 sidebar:
   order: 3
 ---

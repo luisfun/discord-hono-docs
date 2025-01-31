@@ -1,5 +1,6 @@
 ---
 title: Command
+description: Discord Hono における `Command` クラスの使用に関する詳細なガイドです。サブコマンド、オプション、そしてローカライゼーション、権限、オートコンプリートなどの高度な設定を含みます。
 sidebar:
   order: 1
 ---
