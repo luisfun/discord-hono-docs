@@ -16,9 +16,6 @@ export type Env = {
   Bindings: {
     DB: any
   }
-  Variables: {
-    text?: string
-  }
 }
 
 export const factory = createFactory<Env>()
@@ -75,7 +72,9 @@ export const command_hello = factory.command(
 import { Command, Option, Components, Button } from 'discord-hono'
 import { factory } from '../init.js'
 
-export const command_help = factory.command(
+type Var = { text?: string }
+
+export const command_help = factory.command<Var>(
   new Command('help', 'response help').options(new Option('text', 'with text')),
   c =>
     c.res({
@@ -102,7 +101,7 @@ export const component_delete = factory.component(
 import {
   Button,
   Command,
-  CommandContext,
+  type CommandContext,
   type ComponentContext,
   Components,
   Embed,
@@ -110,17 +109,13 @@ import {
 } from 'discord-hono'
 import { type Env, factory } from '../init.js'
 
-const pageContent = (c: CommandContext<Env> | ComponentContext<Env>) => {
-  ///// Parse /////
-  let page = 1
-  let content = ''
-  if (c instanceof CommandContext) {
-    content = c.var.content ?? ''
-  } else {
-    const arr: [number, string] = JSON.parse(c.var.custom_id ?? '')
-    page = arr[0]
-    content = arr[1]
-  }
+type Var = { content: string }
+
+const pageContent = (
+  c: CommandContext<Env> | ComponentContext<Env, 'Button'>,
+  page: number,
+  content: string,
+) => {
   ///// Process /////
   const db = c.env.DB
   ///// Response Build /////
@@ -145,16 +140,17 @@ const pageContent = (c: CommandContext<Env> | ComponentContext<Env>) => {
   return { embeds: [embed], components }
 }
 
-export const command_page = factory.command(
+export const command_page = factory.command<Var>(
   new Command('page', 'pagination').options(
     new Option('content', 'page content').required(),
   ),
-  c => c.res(pageContent(c)),
+  c => c.res(pageContent(c, 1, c.var.content)),
 )
 
-export const component_page = factory.component(new Button('page', ''), c =>
-  c.resUpdate(pageContent(c)),
-)
+export const component_page = factory.component(new Button('page', ''), c => {
+  const arr: [number, string] = JSON.parse(c.var.custom_id ?? '')
+  return c.resUpdate(pageContent(c, ...arr))
+})
 ```
 
 `.toJSON()` をしない場合、同じ component 要素となり、エラーが発生します。

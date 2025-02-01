@@ -13,17 +13,11 @@ type Env = {
   }
 }
 
-const pageContent = (c: CommandContext<Env> | ComponentContext<Env>) => {
-  ///// Parse /////
-  let page = 1
-  let content = ''
-  if (c instanceof CommandContext) {
-    content = c.var.content ?? ''
-  } else {
-    const arr: [number, string] = JSON.parse(c.var.custom_id ?? '')
-    page = arr[0]
-    content = arr[1]
-  }
+const pageContent = (
+  c: CommandContext<Env> | ComponentContext<Env, 'Button'>,
+  page: number,
+  content: string,
+) => {
   ///// Process /////
   const db = c.env.DB
   ///// Response Build /////
@@ -43,8 +37,11 @@ const pageContent = (c: CommandContext<Env> | ComponentContext<Env>) => {
 }
 
 const app = new DiscordHono<Env>()
-  .command('page', c => c.res(pageContent(c)))
-  .component('page', c => c.resUpdate(pageContent(c)))
+  .command('page', c => c.res(pageContent(c, 1, c.var.content)))
+  .component('page', c => {
+    const arr: [number, string] = JSON.parse(c.var.custom_id ?? '')
+    return c.resUpdate(pageContent(c, ...arr))
+  })
 
 export default app
 ```
