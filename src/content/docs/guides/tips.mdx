@@ -40,6 +40,16 @@ If you still can't resolve the issue:
   - Use Hono or similar to create routing and a registration URL
   - As a precaution, apply [basic authentication](https://hono.dev/docs/middleware/builtin/basic-auth) or similar
 
+## Developing with `npm run dev`
+
+While production deployment is done on platforms like Cloudflare Workers, if you want to develop locally, please refer to [this guide](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#running-locally).
+
+As a library developer, we do not recommend using `npm run dev` (unless you have a specific reason to do so).  
+Instead, consider one of the following alternatives:
+
+- Create a separate Bot account for development
+- Register development-only commands for your production Bot that are only available on development servers
+
 ## Error: `wrangler dev`
 
 An error that occurs when accessing the URL endpoint for command registration in the development environment.

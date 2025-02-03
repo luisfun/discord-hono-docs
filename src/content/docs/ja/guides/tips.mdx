@@ -39,6 +39,16 @@ import { Aside } from '@astrojs/starlight/components'
   - Hono 等を使いルーティングし、登録用URLを作成する
   - 念のため、[ベーシック認証](https://hono.dev/docs/middleware/builtin/basic-auth)等をかける
 
+## `npm run dev` で開発したい時
+
+本番は、 Cloudflare Workers などのプラットフォームにデプロイするが、開発をローカルで行いたい場合、[こちら](https://discord.com/developers/docs/tutorials/hosting-on-cloudflare-workers#running-locally)を参考にしてください。
+
+ライブラリの開発者としては、 `npm run dev` はおすすめしていません。（明確な意図があれば問題ありません）  
+代わりに次のいずれかを検討してください。
+
+- 開発用の Bot アカウントを作成する
+- 本番用 Bot に、開発サーバーだけ利用可能な、開発用コマンドを登録する
+
 ## `wrangler dev` でエラー
 
 開発環境で、コマンド登録用のURLエンドポイントにアクセスしたときに発生するエラー。
