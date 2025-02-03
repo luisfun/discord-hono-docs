@@ -13,8 +13,6 @@ Error when `register.js` cannot be executed, regardless of the success or failur
 
 Please consider the following modifications (Either one or a combination):
 
-- Node.js
-  - Upgrade to v23.6.0 or higher [Reference](https://nodejs.org/en/blog/release/v23.6.0)
 - package.json
   - `"type": "module",`
 - tsconfig.json
@@ -23,8 +21,8 @@ Please consider the following modifications (Either one or a combination):
 - register.ts
   - Add `.js` when importing from other files  
     `import { commands } from './commands.js'`
-- esbuild etc.
-  - Use a bundling tool to compile `register.js` into a single file
+- Environment Update
+  - Use [Node v23.6.0](https://nodejs.org/en/blog/release/v23.6.0) or Bun
 
 <Aside>
   We believe this error occurs because the deployed code `index.ts` and the

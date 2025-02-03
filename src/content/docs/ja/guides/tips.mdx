@@ -13,8 +13,6 @@ import { Aside } from '@astrojs/starlight/components'
 
 次の修正を検討してみてください。(いずれか、または複合)
 
-- Node.js
-  - v23.6.0 以上にアップグレードする [参考](https://nodejs.org/en/blog/release/v23.6.0)
 - package.json
   - `"type": "module",`
 - tsconfig.json
@@ -23,8 +21,8 @@ import { Aside } from '@astrojs/starlight/components'
 - register.ts
   - 他のファイルからインポートするときに `.js` を付ける  
     `import { commands } from './commands.js'`
-- esbuild など
-  - バンドルツールを利用して、 `register.js` を単一ファイルにする
+- 環境のアップデート
+  - [Node v23.6.0](https://nodejs.org/en/blog/release/v23.6.0) または Bun を利用する
 
 <Aside>
   このエラーは、デプロイするコード `index.ts` と登録するコード `register.ts`
