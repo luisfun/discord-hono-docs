@@ -183,11 +183,3 @@ const app = new DiscordHono({
   }),
 })
 ```
-
-### HandlerMap (β)
-
-`.command()` や `.component()` などの第1引数に正規表現を使用したい場合に利用します。
-
-```ts
-const app = new DiscordHono<Env, RegExp>({ HandlerMap: RegExpMap })
-```
