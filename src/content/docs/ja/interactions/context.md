@@ -115,7 +115,7 @@ const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
 
 [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) の第一引数の event オブジェクトです。
 
-## .rest()
+## get: rest
 
 `c.rest` = `new Rest(c.env.DISCORD_TOKEN)`  
 [Rest](/ja/interactions/rest/)

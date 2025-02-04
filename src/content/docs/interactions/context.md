@@ -115,7 +115,7 @@ const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
 
 It has the event value of the [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) first argument.
 
-## .rest()
+## get: rest
 
 `c.rest` = `new Rest(c.env.DISCORD_TOKEN)`  
 [Rest](/interactions/rest/)
