@@ -3,6 +3,13 @@ title: 正規表現ルーティング
 description: Discord Hono で正規表現で Key をルーティングする実例。
 ---
 
+import { Aside } from '@astrojs/starlight/components'
+
+<Aside>
+  `.component()` や `.modal()` の場合は、代わりに `custom_id`
+  を利用してください。 [参考](/ja/examples/pagination/)
+</Aside>
+
 ```ts
 // index.ts
 import type { ComponentHandler, ModalHandler } from 'discord-hono'
