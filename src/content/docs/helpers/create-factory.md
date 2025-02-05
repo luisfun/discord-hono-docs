@@ -23,22 +23,18 @@ export const factory = createFactory<Env>()
 
 ```ts "factory"
 // src/index.ts
-import * as interactions from './interactions'
+import * as handlers from './handlers'
 import { factory } from './init'
 
-const app = factory.discord()
-
-factory.loader(app, Object.values(interactions))
-
-export default app
+export default factory.discord().loader(Object.values(handlers))
 ```
 
 ```ts
 // src/register.ts
 import { register } from 'discord-hono'
-import * as interactions from './interactions/index.js'
+import * as handlers from './handlers/index.js'
 
-const commands = Object.values(interactions)
+const commands = Object.values(handlers)
   .filter(e => 'command' in e)
   .map(e => e.command)
 
@@ -51,13 +47,13 @@ register(
 ```
 
 ```ts
-// src/interactions/index.ts
+// src/handlers/index.ts
 export * from './hello-world.js'
 export * from './help.js'
 ```
 
 ```ts "factory"
-// src/interactions/hello-world.ts
+// src/handlers/hello-world.ts
 import { Command } from 'discord-hono'
 import { factory } from '../init.js'
 
@@ -68,7 +64,7 @@ export const command_hello = factory.command(
 ```
 
 ```ts "factory"
-// src/interactions/help.ts
+// src/handlers/help.ts
 import { Command, Option, Components, Button } from 'discord-hono'
 import { factory } from '../init.js'
 
@@ -97,7 +93,7 @@ export const component_delete = factory.component(
 Please convert to an object using `.toJSON()` after overwriting.
 
 ```ts "component_page.component" ".toJSON()"
-// src/interactions/pagination.ts
+// src/handlers/pagination.ts
 import {
   Button,
   Command,
