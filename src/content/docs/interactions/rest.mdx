@@ -1,5 +1,5 @@
 ---
-title: Rest
+title: REST API
 description: Overview of using Discord's REST API with DiscordHono, including integration with `c.rest`, other libraries, and custom implementations for API interactions.
 sidebar:
   order: 3
@@ -7,12 +7,12 @@ sidebar:
     text: β
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components'
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components'
 
 There are 4 ways to use Discord's REST API:
 
 1. `c.rest`
-2. `new Rest(c.env.DISCORD_TOKEN)`
+2. `createRest(c.env.DISCORD_TOKEN)`
 3. Other libraries (such as [@discordjs/rest](https://discord.js.org/docs/packages/rest/main))
 4. Implement your own using `fetch()`
 
@@ -21,7 +21,7 @@ Since REST API is essentially separable, any implementation method is acceptable
 
 ## About c.rest
 
-If you're using `new Rest()`, please replace it accordingly.
+If you're using `createRest()`, please replace it accordingly.
 
 <Tabs>
 <TabItem label="Variables">
@@ -29,38 +29,64 @@ If you're using `new Rest()`, please replace it accordingly.
 ```ts
 import { _channels_$_messages } from 'discord-hono'
 
-await c.rest.post(_channels_$_messages, [channel_id], {
+await c.rest('POST', _channels_$_messages, [channel_id], {
   content: 'this is rest',
 })
-//await c.rest.method(_path, ['Variables in Path'], data)
 ```
 
-The first argument of the method is defined [here](https://github.com/luisfun/discord-hono/blob/main/src/rest/rest-path.ts).  
-The second argument is an array of variables enclosed in `{}` in the Path.  
-The third and subsequent arguments are necessary data.
+The first argument is the Method from the [official documentation](https://discord.com/developers/docs/resources/message#create-message).  
+The second argument is defined [here](https://github.com/luisfun/discord-hono/blob/main/src/rest/rest-path.ts).  
+For the third argument, enter the variable parts enclosed in `{}` within the Path as an array.  
+The fourth argument and subsequent arguments are the required data.
 
 </TabItem>
 <TabItem label="Docs Path">
 
 ```ts
-await c.rest.post('/channels/{channel.id}/messages', [channel_id], {
+await c.rest('POST', '/channels/{channel.id}/messages', [channel_id], {
   content: 'this is rest',
 })
-//await c.rest.method('Path of official docs', ['Variables in Path'], data)
 ```
 
-For the first argument of method, copy the Path from the [official documentation](https://discord.com/developers/docs/resources/message#create-message) as is.  
-The second argument is an array of variables enclosed in `{}` in the Path.  
-The third and subsequent arguments are necessary data.
+The first argument is the Method from the [official documentation](https://discord.com/developers/docs/resources/message#create-message).
+The second argument is the Path from the [official documentation](https://discord.com/developers/docs/resources/message#create-message). Copy it as is.
+For the third argument, input the variable parts enclosed in `{}` within the Path as an array.
+The fourth argument and subsequent arguments are the necessary data.
 
 </TabItem>
 </Tabs>
 
 ## Support
 
-|                                                                                                       |     |
-| ----------------------------------------------------------------------------------------------------- | --- |
-| [Receiving and Responding](https://discord.com/developers/docs/interactions/receiving-and-responding) | ⌛  |
-| [Application Commands](https://discord.com/developers/docs/interactions/application-commands)         | ✅  |
-| [Application](https://discord.com/developers/docs/resources/application)                              | ⌛  |
-| [Messages](https://discord.com/developers/docs/resources/message)                                     | ✅  |
+|                                                                                                                            |     |
+| -------------------------------------------------------------------------------------------------------------------------- | --- |
+| [Receiving and Responding](https://discord.com/developers/docs/interactions/receiving-and-responding)                      | ✅  |
+| [Application Commands](https://discord.com/developers/docs/interactions/application-commands)                              | ✅  |
+| [Application](https://discord.com/developers/docs/resources/application)                                                   | ✅  |
+| [Application Role Connection Metadata](https://discord.com/developers/docs/resources/application-role-connection-metadata) | ✅  |
+| [Audit Log](https://discord.com/developers/docs/resources/audit-log)                                                       | ✅  |
+| [Auto Moderation](https://discord.com/developers/docs/resources/auto-moderation)                                           | ✅  |
+| [Channel](https://discord.com/developers/docs/resources/channel)                                                           | ✅  |
+| [Emoji](https://discord.com/developers/docs/resources/emoji)                                                               | ✅  |
+| [Entitlement](https://discord.com/developers/docs/resources/entitlement)                                                   | ✅  |
+| [Guild](https://discord.com/developers/docs/resources/guild)                                                               | ✅  |
+| [Guild Scheduled Event](https://discord.com/developers/docs/resources/guild-scheduled-event)                               | ✅  |
+| [Guild Template](https://discord.com/developers/docs/resources/guild-template)                                             | ✅  |
+| [Invite](https://discord.com/developers/docs/resources/invite)                                                             | ✅  |
+| [Messages](https://discord.com/developers/docs/resources/message)                                                          | ✅  |
+| [Poll](https://discord.com/developers/docs/resources/poll)                                                                 | ✅  |
+| [SKU](https://discord.com/developers/docs/resources/sku)                                                                   | ✅  |
+| [Soundboard](https://discord.com/developers/docs/resources/soundboard)                                                     | ✅  |
+| [Stage Instance](https://discord.com/developers/docs/resources/stage-instance)                                             | ✅  |
+| [Sticker](https://discord.com/developers/docs/resources/sticker)                                                           | ⌛  |
+| [Subscription](https://discord.com/developers/docs/resources/subscription)                                                 | ✅  |
+| [User](https://discord.com/developers/docs/resources/user)                                                                 | ✅  |
+| [Voice](https://discord.com/developers/docs/resources/voice)                                                               | ✅  |
+| [Webhook](https://discord.com/developers/docs/resources/webhook)                                                           | ✅  |
+
+<Aside>
+  Sometimes the REST types might be incorrect. Please report any issues you
+  find, for example, through
+  [issue](https://github.com/luisfun/discord-hono/issues). Your help would be
+  greatly appreciated.
+</Aside>
