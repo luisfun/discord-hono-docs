@@ -209,6 +209,16 @@ const app = new DiscordHono().command('ping', c =>
 
 The argument is a Modal instance or [APIModalInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APIModalInteractionResponseCallbackData).
 
+## .resActivity()
+
+command, component, modal
+
+```ts
+const app = new DiscordHono().command('activity', c => c.resActivity())
+```
+
+Launch the Activity. (Only available for apps with Activities enabled)
+
 ## .followup()
 
 command, component, modal
@@ -235,7 +245,7 @@ FileData = { blob: Blob, name: 'file.name' }
 
 command, component, modal
 
-## .ephemeral()
+## .ephemeral() .suppressEmbeds() .suppressNotifications()
 
 command, component, modal
 
@@ -244,4 +254,4 @@ const app = new DiscordHono()
 app.command('ping', c => c.ephemeral().res('Pong!!'))
 ```
 
-Send a message that is only visible to the user who performed the interaction.
+Adds the message flags from [here](https://discord.com/developers/docs/resources/message#message-object-message-flags).

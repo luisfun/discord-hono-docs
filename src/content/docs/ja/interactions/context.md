@@ -211,6 +211,16 @@ const app = new DiscordHono().command('ping', c =>
 
 引数は Modal インスタンスまたは [APIModalInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APIModalInteractionResponseCallbackData) です。
 
+## .resActivity()
+
+command, component, modal
+
+```ts
+const app = new DiscordHono().command('activity', c => c.resActivity())
+```
+
+アクティビティを起動します。（アクティビティが有効になっているアプリでのみ使用可能）
+
 ## .followup()
 
 command, component, modal
@@ -237,7 +247,7 @@ FileData = { blob: Blob, name: 'file.name' }
 
 command, component, modal
 
-## .ephemeral()
+## .ephemeral() .suppressEmbeds() .suppressNotifications()
 
 command, component, modal
 
@@ -246,4 +256,4 @@ const app = new DiscordHono()
 app.command('ping', c => c.ephemeral().res('Pong!!'))
 ```
 
-インタラクションを実行したユーザーにのみ見えるメッセージを送信します。
+[こちら](https://discord.com/developers/docs/resources/message#message-object-message-flags)のメッセージフラグを追加します。
