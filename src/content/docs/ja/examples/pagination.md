@@ -5,7 +5,14 @@ description: Discord Hono でページネーションを実装する例で、ペ
 
 ```ts
 // index.ts
-import { type CommandContext, type ComponentContext, Button, Components, DiscordHono, Embed } from 'discord-hono'
+import {
+  type CommandContext,
+  type ComponentContext,
+  Button,
+  Components,
+  DiscordHono,
+  Embed,
+} from 'discord-hono'
 
 type Env = {
   Variables: {

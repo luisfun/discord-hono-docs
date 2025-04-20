@@ -5,7 +5,14 @@ description: Example of implementing pagination in DiscordHono with buttons for 
 
 ```ts
 // index.ts
-import { type CommandContext, type ComponentContext, Button, Components, DiscordHono, Embed } from 'discord-hono'
+import {
+  type CommandContext,
+  type ComponentContext,
+  Button,
+  Components,
+  DiscordHono,
+  Embed,
+} from 'discord-hono'
 
 type Env = {
   Variables: {
