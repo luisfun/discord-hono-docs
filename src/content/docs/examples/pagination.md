@@ -5,7 +5,7 @@ description: Example of implementing pagination in DiscordHono with buttons for 
 
 ```ts
 // index.ts
-import { Button, Components, DiscordHono, Embed } from 'discord-hono'
+import { type CommandContext, type ComponentContext, Button, Components, DiscordHono, Embed } from 'discord-hono'
 
 type Env = {
   Variables: {
@@ -14,7 +14,7 @@ type Env = {
 }
 
 const pageContent = (
-  c: CommandContext<Env> | ComponentContext<Env, 'Button'>,
+  c: CommandContext<Env> | ComponentContext<Env, Button>,
   page: number,
   content: string,
 ) => {

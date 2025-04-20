@@ -239,7 +239,7 @@ const app = new DiscordHono().command('ping', c =>
 
 `.followup()` は Defer の後のメッセージの更新に利用します。
 
-第1引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。  
+第1引数は string または [RESTPatchAPIInteractionOriginalResponseJSONBody](https://discord-api-types.dev/api/discord-api-types-v10#RESTPatchAPIWebhookWithTokenMessageJSONBody) です。  
 第2引数は FileData または FileData[] です。  
 FileData = { blob: Blob, name: 'file.name' }
 

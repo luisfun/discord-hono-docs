@@ -237,7 +237,7 @@ const app = new DiscordHono().command('ping', c =>
 
 `.followup()` is used to update messages after Defer.
 
-The first argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).  
+The first argument is a string or [RESTPatchAPIInteractionOriginalResponseJSONBody](https://discord-api-types.dev/api/discord-api-types-v10#RESTPatchAPIWebhookWithTokenMessageJSONBody).  
 The second argument is FileData or FileData[].  
 FileData = { blob: Blob, name: 'file.name' }
 
