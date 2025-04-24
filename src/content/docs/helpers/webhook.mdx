@@ -1,0 +1,23 @@
+---
+title: webhook
+description: Guide to using the webhook function in Discord Hono.
+sidebar:
+  badge:
+    text: β
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+`webhook` is a wrapper function for sending messages to [Discord Webhooks](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
+
+```ts "retry429"
+import { webhook } from 'discord-hono'
+
+await webhook('https://discord.com/api/webhooks/123/abc', 'Message')
+```
+
+<Aside>
+  The `webhook` function can be used independently of a Discord Bot. It's useful
+  when you want to send logs or notifications from your application to a Discord
+  channel, even in projects where you haven't implemented a Discord Bot.
+</Aside>

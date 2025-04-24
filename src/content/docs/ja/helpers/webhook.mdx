@@ -1,0 +1,23 @@
+---
+title: webhook
+description: Discord Hono における webhook 関数の使用ガイド。
+sidebar:
+  badge:
+    text: β
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+`webhook` は [Discord Webhooks](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) にメッセージを送信するためのラッパー関数です。
+
+```ts "retry429"
+import { webhook } from 'discord-hono'
+
+await webhook('https://discord.com/api/webhooks/123/abc', 'メッセージ')
+```
+
+<Aside>
+  `webhook` 関数は Discord Bot とは独立して使用できます。 Discord Bot
+  を実装していないプロジェクトでも、アプリケーションのログや通知を Discord
+  チャンネルに送信したい場合に便利です。
+</Aside>
