@@ -117,3 +117,47 @@ const components = new Components().row(
 
 公式ドキュメントと異なる注意点があります。  
 `.custom_id()` は `unique-id` を含めて99文字までです。
+
+## Components V2 (β)
+
+Components V2 を利用する際、 `c.flags('IS_COMPONENTS_V2')` を必ず指定してください。
+
+### Layout
+
+### Content
+
+example
+
+```ts
+export const command_components_v2 = factory.command(
+  new Command('components_v2', 'response components_v2'),
+  async c => {
+    const image = await fetch('https://luis.fun/images/hono.webp')
+    const blob = new Blob([await image.arrayBuffer()])
+    return c.flags('EPHEMERAL', 'IS_COMPONENTS_V2').res(
+      {
+        components: [
+          new Content('text top'),
+          new Layout('Container').components(
+            new Layout('Action Row').components(component_delete.component),
+            new Layout('Separator'),
+            new Content('container - text'),
+            new Layout('Section')
+              .components(
+                new Content('container - section - text'),
+                new Content('container - section - text2'),
+              )
+              .accessory(new Content('image.webp', 'Thumbnail')),
+            new Content('container - text2'),
+          ),
+        ],
+      },
+      { blob, name: 'image.webp' },
+    )
+  },
+)
+export const component_delete = factory.component(
+  new Button('delete', ['🗑️', 'Delete'], 'Secondary'),
+  c => c.update().resDefer(c.followupDelete),
+)
+```

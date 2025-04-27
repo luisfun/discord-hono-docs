@@ -35,16 +35,6 @@ The following values are included by default.
 - `c.var.custom_id` value of custom_id (component, modal)
 - `c.var.TEXTINPUT_CUSTOM_ID` value of text input (modal)
 
-## .waitUntil()
-
-`c.waitUntil` = `c.executionCtx.waitUntil`
-
-## get: req
-
-command, component, autocomplete, modal
-
-Interaction Request are included as is.
-
 ## get: interaction
 
 command, component, autocomplete, modal
@@ -147,34 +137,6 @@ const app = new DiscordHono().command('ping', c =>
 If you don’t respond to a Discord interaction within 3 seconds, an error will occur.  
 When performing time-consuming tasks, it’s a good idea to use `.resDefer()` and include the subsequent processing as an argument.
 
-## .resUpdate()
-
-component
-
-```ts "resUpdate"
-const app = new DiscordHono().component('button', c =>
-  c.resUpdate('text or data'),
-)
-```
-
-Overwrites a message that has already been sent.
-
-The first argument is a string or [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData).  
-The second argument is FileData or FileData[].  
-FileData = { blob: Blob, name: 'file.name' }
-
-## .resDeferUpdate()
-
-component
-
-```ts "resDeferUpdate"
-const app = new DiscordHono().component('button', c =>
-  c.resDeferUpdate(async c => await c.followup('Followup Text')),
-)
-```
-
-Delay overwriting messages.
-
 ## .resAutocomplete()
 
 autocomplete
@@ -219,6 +181,18 @@ const app = new DiscordHono().command('activity', c => c.resActivity())
 
 Launch the Activity. (Only available for apps with Activities enabled)
 
+## .update()
+
+component
+
+Changes `c.res()` and `c.resDefer()` to overwrite mode for sent messages.
+
+```ts "update"
+const app = new DiscordHono().component('button', c =>
+  c.update().res('Update Text'),
+)
+```
+
 ## .followup()
 
 command, component, modal
@@ -245,13 +219,19 @@ FileData = { blob: Blob, name: 'file.name' }
 
 command, component, modal
 
-## .ephemeral() .suppressEmbeds() .suppressNotifications()
+```ts "followupDelete"
+c.update().resDefer(c.followupDelete)
+```
+
+## .flags()
 
 command, component, modal
 
-```ts
+```ts "flags"
 const app = new DiscordHono()
-app.command('ping', c => c.ephemeral().res('Pong!!'))
+app.command('ping', c =>
+  c.flags('EPHEMERAL', 'SUPPRESS_NOTIFICATIONS').res('Pong!!'),
+)
 ```
 
 Adds the message flags from [here](https://discord.com/developers/docs/resources/message#message-object-message-flags).

@@ -1,9 +1,6 @@
 ---
 title: createFactory
 description: Discord Hono における createFactory を使用したファイル分割のガイドです。複数のファイルにわたるコマンド、コンポーネント、ページネーションロジックの構造化例を含みます。
-sidebar:
-  badge:
-    text: β
 ---
 
 `createFactory` はコマンド毎のファイル分割を補助する関数です。

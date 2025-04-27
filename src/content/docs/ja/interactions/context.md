@@ -35,16 +35,6 @@ const app = new DiscordHono()
 - `c.var.custom_id` custom_id の値 (component, modal)
 - `c.var.TEXTINPUT_CUSTOM_ID` テキストインプットの値 (modal)
 
-## .waitUntil()
-
-`c.waitUntil` = `c.executionCtx.waitUntil`
-
-## get: req
-
-command, component, autocomplete, modal
-
-インタラクションのリクエストそのままです。
-
 ## get: interaction
 
 command, component, autocomplete, modal
@@ -147,34 +137,6 @@ const app = new DiscordHono().command('ping', c =>
 3秒以内に Discord のインタラクションに応答しないとエラーが発生します。  
 時間のかかる処理を行うときは、`.resDefer()` を使用して、その後の処理を引数に含めるといいでしょう。
 
-## .resUpdate()
-
-component
-
-```ts "resUpdate"
-const app = new DiscordHono().component('button', c =>
-  c.resUpdate('text or data'),
-)
-```
-
-送信済みのメッセージを上書きします。
-
-第1引数は string または [APIInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10#APIInteractionResponseCallbackData) です。  
-第2引数は FileData または FileData[] です。  
-FileData = { blob: Blob, name: 'file.name' }
-
-## .resDeferUpdate()
-
-component
-
-```ts "resDeferUpdate"
-const app = new DiscordHono().component('button', c =>
-  c.resDeferUpdate(async c => await c.followup('Followup テキスト')),
-)
-```
-
-メッセージの上書きを遅延させます。
-
 ## .resAutocomplete()
 
 autocomplete
@@ -221,6 +183,18 @@ const app = new DiscordHono().command('activity', c => c.resActivity())
 
 アクティビティを起動します。（アクティビティが有効になっているアプリでのみ使用可能）
 
+## .update()
+
+component
+
+`c.res()` と `c.resDefer()` を送信済みメッセージの上書きモードに変更します。
+
+```ts "update"
+const app = new DiscordHono().component('button', c =>
+  c.update().res('Update Text'),
+)
+```
+
 ## .followup()
 
 command, component, modal
@@ -247,13 +221,19 @@ FileData = { blob: Blob, name: 'file.name' }
 
 command, component, modal
 
-## .ephemeral() .suppressEmbeds() .suppressNotifications()
+```ts "followupDelete"
+c.update().resDefer(c.followupDelete)
+```
+
+## .flags()
 
 command, component, modal
 
-```ts
+```ts "flags"
 const app = new DiscordHono()
-app.command('ping', c => c.ephemeral().res('Pong!!'))
+app.command('ping', c =>
+  c.flags('EPHEMERAL', 'SUPPRESS_NOTIFICATIONS').res('Pong!!'),
+)
 ```
 
 [こちら](https://discord.com/developers/docs/resources/message#message-object-message-flags)のメッセージフラグを追加します。
