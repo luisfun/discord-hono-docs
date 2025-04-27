@@ -44,8 +44,8 @@ const app = new DiscordHono()
       ),
     }),
   )
-  .component('button-1', c => c.resUpdate('ボタン がクリックされた'))
-  .component('button-2', c => c.resUpdate('2つ目 がクリックされた'))
+  .component('button-1', c => c.update().res('ボタン がクリックされた'))
+  .component('button-2', c => c.update().res('2つ目 がクリックされた'))
 ```
 
 コンポーネント要素 `Button()` の第1引数と `.component()` の第1引数を一致させてください。  

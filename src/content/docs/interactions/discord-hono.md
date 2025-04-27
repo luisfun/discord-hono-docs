@@ -44,8 +44,8 @@ const app = new DiscordHono()
       ),
     }),
   )
-  .component('button-1', c => c.resUpdate('Button clicked'))
-  .component('button-2', c => c.resUpdate('Second clicked'))
+  .component('button-1', c => c.update().res('Button clicked'))
+  .component('button-2', c => c.update().res('Second clicked'))
 ```
 
 The first argument of the component element `Button()` must match the first argument of `.component()`.  
