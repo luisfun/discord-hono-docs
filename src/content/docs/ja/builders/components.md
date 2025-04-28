@@ -158,6 +158,6 @@ export const command_components_v2 = factory.command(
 )
 export const component_delete = factory.component(
   new Button('delete', ['🗑️', 'Delete'], 'Secondary'),
-  c => c.update().resDefer(c.followupDelete),
+  c => c.update().resDefer(c => c.followup()),
 )
 ```

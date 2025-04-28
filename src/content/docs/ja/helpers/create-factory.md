@@ -79,7 +79,7 @@ export const command_help = factory.command<Var>(
 
 export const component_delete = factory.component(
   new Button('delete', ['🗑️', 'Delete'], 'Secondary'),
-  c => c.resDeferUpdate(c.followupDelete),
+  c => c.update().resDefer(c => c.followup()),
 )
 ```
 
