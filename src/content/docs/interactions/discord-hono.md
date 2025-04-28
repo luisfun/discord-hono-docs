@@ -104,12 +104,12 @@ Specifying `''` as the first argument functions as a catch-all pattern.
 ```ts "cron" "0 0 * * *"
 const app = new DiscordHono()
   .cron('0 0 * * *', async c => {
-    await c.rest.post(_channels_$_messages, ['CHANNEL_ID'], {
+    await c.rest('POST', _channels_$_messages, ['CHANNEL_ID'], {
       content: 'Daily Post',
     })
   })
   .cron('', async c => {
-    await c.rest.post(_channels_$_messages, ['CHANNEL_ID'], {
+    await c.rest('POST', _channels_$_messages, ['CHANNEL_ID'], {
       content: 'Other Cron Triggers Post',
     })
   })

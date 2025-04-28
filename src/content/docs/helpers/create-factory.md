@@ -102,7 +102,7 @@ import { type Env, factory } from '../init.js'
 type Var = { content: string }
 
 const pageContent = (
-  c: CommandContext<Env> | ComponentContext<Env, 'Button'>,
+  c: CommandContext<Env> | ComponentContext<Env, Button>,
   page: number,
   content: string,
 ) => {
@@ -127,19 +127,19 @@ const pageContent = (
       .disabled(maxPage <= page)
       .toJSON(),
   )
-  return { embeds: [embed], components }
+  return c.res({ embeds: [embed], components })
 }
 
 export const command_page = factory.command<Var>(
   new Command('page', 'pagination').options(
     new Option('content', 'page content').required(),
   ),
-  c => c.res(pageContent(c, 1, c.var.content)),
+  c => pageContent(c, 1, c.var.content),
 )
 
 export const component_page = factory.component(new Button('page', ''), c => {
   const arr: [number, string] = JSON.parse(c.var.custom_id ?? '')
-  return c.resUpdate(pageContent(c, ...arr))
+  return pageContent(c.update(), ...arr)
 })
 ```
 

@@ -88,7 +88,7 @@ const commandHandler = async (c: CommandContext<Env>) => {
   })
 }
 
-const componentHandler = async (c: ComponentContext<Env>) => {
+const componentHandler = async (c: ComponentContext<Env, Button>) => {
   const db = c.env.DB
   /* Perform some operation */
   return c.resModal(

@@ -7,10 +7,10 @@ sidebar:
 ---
 
 ```ts "retry429"
-import { retry429, Rest, _channels_$_messages } from 'discord-hono'
+import { retry429, createRest, _channels_$_messages } from 'discord-hono'
 
 const manyPosts = async () => {
-  const rest = new Rest(token)
+  const rest = createRest(token)
   for (let i = 0; i < 1000; i++) {
     await retry429(
       () =>
