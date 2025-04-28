@@ -68,7 +68,7 @@ const app = new DiscordHono().command('slash', c => {
     case 'sub1':
       return c.res('sub1')
     case 'group sub2':
-      return c.res('g-sub2: ' + c.values.text)
+      return c.res('g-sub2: ' + c.var.text)
     default:
       return c.res(c.sub.group + '-' + c.sub.command)
   }
