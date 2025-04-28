@@ -215,12 +215,10 @@ The first argument is a string or [RESTPatchAPIInteractionOriginalResponseJSONBo
 The second argument is FileData or FileData[].  
 FileData = { blob: Blob, name: 'file.name' }
 
-## .followupDelete()
+Additionally, by leaving the arguments empty, you can delete the original message.
 
-command, component, modal
-
-```ts "followupDelete"
-c.update().resDefer(c.followupDelete)
+```ts
+return c.update().resDefer(c => c.followup())
 ```
 
 ## .flags()

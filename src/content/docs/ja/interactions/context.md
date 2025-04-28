@@ -217,12 +217,10 @@ const app = new DiscordHono().command('ping', c =>
 第2引数は FileData または FileData[] です。  
 FileData = { blob: Blob, name: 'file.name' }
 
-## .followupDelete()
+また、引数を空にすることで、元のメッセージを削除します。
 
-command, component, modal
-
-```ts "followupDelete"
-c.update().resDefer(c.followupDelete)
+```ts
+return c.update().resDefer(c => c.followup())
 ```
 
 ## .flags()
