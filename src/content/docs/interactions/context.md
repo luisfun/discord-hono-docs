@@ -37,8 +37,6 @@ The following values are included by default.
 
 ## get: interaction
 
-command, component, autocomplete, modal, cron
-
 `c.interaction` = `JSON.parse(await c.req.text())`
 
 Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object).

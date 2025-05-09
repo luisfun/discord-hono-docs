@@ -37,8 +37,6 @@ const app = new DiscordHono()
 
 ## get: interaction
 
-command, component, autocomplete, modal, cron
-
 `c.interaction` = `JSON.parse(await c.req.text())`
 
 [公式ドキュメント](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object)を参照してください。
