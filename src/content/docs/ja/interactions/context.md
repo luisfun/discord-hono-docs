@@ -37,11 +37,15 @@ const app = new DiscordHono()
 
 ## get: interaction
 
-command, component, autocomplete, modal
+command, component, autocomplete, modal, cron
 
 `c.interaction` = `JSON.parse(await c.req.text())`
 
 [公式ドキュメント](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object)を参照してください。
+
+### CronContext の場合
+
+[scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) の第一引数の controller オブジェクトです。
 
 ## get: key
 
@@ -94,16 +98,6 @@ const app = new DiscordHono().autocomplete('hello', c => {
 フォーカスされているオプションのオブジェクト。
 
 [公式ドキュメント](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-interaction-data-option-structure)
-
-## get: cronEvent
-
-cron
-
-```ts "cronEvent"
-const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
-```
-
-[scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) の第一引数の event オブジェクトです。
 
 ## get: rest
 

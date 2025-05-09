@@ -37,11 +37,15 @@ The following values are included by default.
 
 ## get: interaction
 
-command, component, autocomplete, modal
+command, component, autocomplete, modal, cron
 
 `c.interaction` = `JSON.parse(await c.req.text())`
 
 Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object).
+
+### In case of CronContext
+
+It has the controller value of the [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) first argument.
 
 ## get: key
 
@@ -94,16 +98,6 @@ const app = new DiscordHono().autocomplete('hello', c => {
 The optional object in focus.
 
 [Official Docs](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-application-command-interaction-data-option-structure)
-
-## get: cronEvent
-
-cron
-
-```ts "cronEvent"
-const app = new DiscordHono().cron('', c => console.log(c.cronEvent.cron))
-```
-
-It has the event value of the [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) first argument.
 
 ## get: rest
 
