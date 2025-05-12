@@ -177,7 +177,7 @@ const app = new DiscordHono().command('activity', c => c.resActivity())
 
 ## .update()
 
-component
+component, modal
 
 `c.res()` と `c.resDefer()` を送信済みメッセージの上書きモードに変更します。
 

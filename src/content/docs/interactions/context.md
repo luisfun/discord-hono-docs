@@ -156,7 +156,9 @@ command, component
 ```ts "resModal"
 const app = new DiscordHono().command('ping', c =>
   c.resModal(
-    new Modal('unique-id', 'Title').row(new TextInput('text-id', 'Label')),
+    new Modal('unique-id', 'Modal Title').row(
+      new TextInput('text-id', 'Label'),
+    ),
   ),
 )
 ```
@@ -175,7 +177,7 @@ Launch the Activity. (Only available for apps with Activities enabled)
 
 ## .update()
 
-component
+component, modal
 
 Changes `c.res()` and `c.resDefer()` to overwrite mode for sent messages.
 
