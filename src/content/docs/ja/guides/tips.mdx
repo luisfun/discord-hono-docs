@@ -72,6 +72,16 @@ Discord ダッシュボードの INTERACTIONS ENDPOINT URL に URL を登録す�
 
 [参考](https://qiita.com/y_q/items/9971183bcdd57535bbb4)
 
+## 絵文字(emoji)に関する注意点
+
+```ts "🔄"
+new Button('button-1', 'ボタン').emoji('🔄')
+```
+
+絵文字を設定し Discord へ送信したとき、何も応答しない事があります。  
+おそらく Discord 側で絵文字ユニコードの字形選択子を適切に認識できてないかもしれません。  
+[字形選択子を排除したと思われる絵文字一覧](https://ja.wikipedia.org/wiki/Unicode%E3%81%AEEmoji%E3%81%AE%E4%B8%80%E8%A6%A7)
+
 ## いくつかの環境による tips (β)
 
 <Aside type="caution">これらのコードはまだ検証できていません。</Aside>

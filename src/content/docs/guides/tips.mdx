@@ -73,6 +73,16 @@ Try the following fix:
 
 [Reference (ja)](https://qiita.com/y_q/items/9971183bcdd57535bbb4)
 
+## Notes on Emojis
+
+```ts "🔄"
+new Button('button-1', 'Button').emoji('🔄')
+```
+
+When setting an emoji and sending it to Discord, there may be no response.  
+This is likely because Discord may not properly recognize the emoji Unicode's variation selector.  
+[Emoji list that appears to exclude variation selectors](https://en.wikipedia.org/wiki/List_of_emojis)
+
 ## Tips for various environments (β)
 
 <Aside type="caution">I have not yet been able to verify these codes.</Aside>
