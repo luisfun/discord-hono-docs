@@ -3,6 +3,8 @@ title: createFactory
 description: Discord Hono における createFactory を使用したファイル分割のガイドです。複数のファイルにわたるコマンド、コンポーネント、ページネーションロジックの構造化例を含みます。
 ---
 
+[Example リポジトリ](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-use-factory)
+
 `createFactory` はコマンド毎のファイル分割を補助する関数です。
 
 ```ts "createFactory"

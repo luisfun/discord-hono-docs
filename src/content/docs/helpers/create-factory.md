@@ -3,6 +3,8 @@ title: createFactory
 description: Guide on using createFactory for file separation in DiscordHono, with examples of structuring commands, components, and pagination logic across multiple files.
 ---
 
+[Example Repository](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-use-factory)
+
 `createFactory` is a function that assists in file separation for each command.
 
 ```ts "createFactory"
