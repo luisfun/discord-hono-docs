@@ -5,6 +5,9 @@ sidebar:
   order: 1
 ---
 
-- [Simple Example](https://github.com/luisfun/discord-hono-example)
-- [Playing with AI](https://github.com/luisfun/discord-bot-cloudflare-ai) - Using Cloudflare AI
-- [Deliver website news](https://github.com/luisfun/discord-bot-hoyo-news) - Using Cloudflare D1, Browser Rendering, Cron
+- [Examples](https://github.com/luisfun/discord-hono-examples)
+  - [Hello, world](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-hello-world)
+  - [createFactory usage](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-use-factory): Recommended style
+  - [Anonymous posting (ja)](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-2ch): Using Cloudflare D1
+- [Github Topics](https://github.com/topics/discord-hono)
+- [Dependent Repositories](https://github.com/luisfun/discord-hono/network/dependents)
