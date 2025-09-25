@@ -19,7 +19,16 @@ REST API は基本的に分離可能なため、どの実装方法でも問題�
 
 ## c.rest について
 
-`createRest()` を利用する場合は置き換えてください。
+Discord Hono が提供する REST API クライアントは、型安全性を確保した軽量な fetch ラッパーです。  
+エッジ環境での最適化を重視しているため、レート制限の自動処理などの複雑な機能は意図的に省略しています。
+
+### 形式
+
+```ts
+await c.rest('METHOD', 'PATH', ['PATH_VAR', QUERY_OBJ], DATA_OBJ, FILE_OBJ)
+```
+
+### コード例
 
 <Tabs>
 <TabItem label="変数">
@@ -53,9 +62,6 @@ await c.rest('POST', '/channels/{channel.id}/messages', [channel_id], {
 
 </TabItem>
 </Tabs>
-
-Discord Hono が提供する REST API クライアントは、型安全性を確保した軽量な fetch ラッパーです。  
-エッジ環境での最適化を重視しているため、レート制限の自動処理などの複雑な機能は意図的に省略しています。
 
 ## 対応状況
 
