@@ -104,12 +104,12 @@ const app = new DiscordHono()
 ```ts "cron" "0 0 * * *"
 const app = new DiscordHono()
   .cron('0 0 * * *', async c => {
-    await c.rest('POST', _channels_$_messages, ['CHANNEL_ID'], {
+    await c.rest('POST', $channels$_$messages, ['CHANNEL_ID'], {
       content: '毎日投稿',
     })
   })
   .cron('', async c => {
-    await c.rest('POST', _channels_$_messages, ['CHANNEL_ID'], {
+    await c.rest('POST', $channels$_$messages, ['CHANNEL_ID'], {
       content: '他のCronトリガーの投稿',
     })
   })
