@@ -34,8 +34,16 @@ export default defineConfig({
         },
       ],
       social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/luisfun/discord-hono' },
-        { icon: 'discord', label: 'Discord', href: 'https://discord.gg/KFAgHFwBsr' },
+        {
+          icon: 'github',
+          label: 'GitHub',
+          href: 'https://github.com/luisfun/discord-hono',
+        },
+        {
+          icon: 'discord',
+          label: 'Discord',
+          href: 'https://discord.gg/KFAgHFwBsr',
+        },
       ],
 
       sidebar: [
