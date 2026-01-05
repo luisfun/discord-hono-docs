@@ -1,0 +1,51 @@
+---
+title: Integration in Hono App
+description: How to integrate discord-hono in an existing Hono App
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+<Tabs>
+
+  <TabItem label="DiscordHono">
+
+    ```ts
+    // index.ts
+    import { DiscordHono } from 'discord-hono';
+
+    // Create the DiscordHono instance and add interaction handlers
+    const discordApp = new DiscordHono();
+    discordApp.command('ping', c => c.res("Pong!"));
+    
+    const app = new Hono<{ Bindings: Env }>();
+    app.get("/", (c) => c.text("I like apples"));
+
+    // Mount it
+    app.mount("/interactions", discordApp.fetch);
+    
+    export default app;
+    ```
+
+  </TabItem>
+  <TabItem label="createFactory">
+
+    ```ts
+    // index.ts
+    import * as handlers from './handlers';
+    import { factory } from './init';
+
+    // Load all your handlers automatically
+    const discordApp = factory.discord().loader(Object.values(handlers));
+    
+    const app = new Hono<{ Bindings: Env }>();
+    app.get("/", (c) => c.text("I like apples"));
+    
+    app.mount("/interactions", discordApp.fetch);
+    
+    export default app;
+    ```
+
+  </TabItem>
+  
+
+</Tabs>
