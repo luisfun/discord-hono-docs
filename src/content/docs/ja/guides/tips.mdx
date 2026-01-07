@@ -88,21 +88,7 @@ new Button('button-1', 'ボタン').emoji('🔄')
 
 ### Hono
 
-```ts "hono.mount" "discord.fetch"
-const discord = new DiscordHono()
-discord.command('hello', c => c.res('Discord World'))
-
-const hono = new Hono()
-hono.get('/', c => c.text('Hono World'))
-hono.mount('/interaction', discord.fetch)
-```
-
-- ブラウザ
-  - `https://YOUER_DOMAIN.com` -> `Hono World` が表示される
-- Discord Bot
-  - `/hello` -> `Discord World` が返答される
-- Discord Interaction Endpoint
-  - `https://YOUER_DOMAIN.com/interaction` を登録
+[example: Mount on Hono](/ja/examples/mount-on-hono)
 
 ### Deno Deploy
 

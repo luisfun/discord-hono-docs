@@ -1,0 +1,59 @@
+---
+title: Mount on Hono
+description: How to mount discord-hono to an existing Hono App
+sidebar:
+  order: 2
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+<Tabs>
+
+  <TabItem label="DiscordHono">
+
+    ```ts "app.mount" "discordApp.fetch"
+    // index.ts
+    import { DiscordHono } from 'discord-hono';
+
+    // Create the DiscordHono instance and add interaction handlers
+    const discordApp = new DiscordHono();
+    discordApp.command('ping', c => c.res("Pong!"));
+
+    const app = new Hono<{ Bindings: Env }>();
+    app.get("/", (c) => c.text("I like apples"));
+
+    // Mount it
+    app.mount("/interactions", discordApp.fetch);
+
+    export default app;
+    ```
+
+  </TabItem>
+  <TabItem label="createFactory">
+
+    ```ts "app.mount" "discordApp.fetch"
+    // index.ts
+    import * as handlers from './handlers';
+    import { factory } from './init';
+
+    // Load all your handlers automatically
+    const discordApp = factory.discord().loader(Object.values(handlers));
+
+    const app = new Hono<{ Bindings: Env }>();
+    app.get("/", (c) => c.text("I like apples"));
+
+    app.mount("/interactions", discordApp.fetch);
+
+    export default app;
+    ```
+
+  </TabItem>
+
+</Tabs>
+
+- Browser
+  - `https://YOUER_DOMAIN.com` -> Display: `I like apples`
+- Discord Bot
+  - `/ping` -> Response: `Pong!`
+- Discord Interaction Endpoint
+  - Register URL: `https://YOUER_DOMAIN.com/interactions`

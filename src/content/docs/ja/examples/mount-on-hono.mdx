@@ -1,51 +1,59 @@
 ---
-title: Mount Hono
-description: How to mount discord-hono to an existing Hono App
+title: Hono に組み込む
+description: 既存の Hono アプリに discord-hono を組み込む方法
+sidebar:
+  order: 2
 ---
 
-import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components'
 
 <Tabs>
 
   <TabItem label="DiscordHono">
 
-    ```ts
+    ```ts "app.mount" "discordApp.fetch"
     // index.ts
     import { DiscordHono } from 'discord-hono';
 
-    // Create the DiscordHono instance and add interaction handlers
+    // DiscordHono インスタンスを作成し、インタラクションハンドラーを追加する
     const discordApp = new DiscordHono();
     discordApp.command('ping', c => c.res("Pong!"));
-    
+
     const app = new Hono<{ Bindings: Env }>();
     app.get("/", (c) => c.text("I like apples"));
 
-    // Mount it
+    // 組み込む
     app.mount("/interactions", discordApp.fetch);
-    
+
     export default app;
     ```
 
   </TabItem>
   <TabItem label="createFactory">
 
-    ```ts
+    ```ts "app.mount" "discordApp.fetch"
     // index.ts
     import * as handlers from './handlers';
     import { factory } from './init';
 
-    // Load all your handlers automatically
+    // すべてのハンドラーを自動的に読み込む
     const discordApp = factory.discord().loader(Object.values(handlers));
-    
+
     const app = new Hono<{ Bindings: Env }>();
     app.get("/", (c) => c.text("I like apples"));
-    
+
     app.mount("/interactions", discordApp.fetch);
-    
+
     export default app;
     ```
 
   </TabItem>
-  
 
 </Tabs>
+
+- ブラウザ
+  - `https://YOUER_DOMAIN.com` -> `I like apples` が表示される
+- Discord Bot
+  - `/ping` -> `Pong!` が返答される
+- Discord Interaction Endpoint
+  - `https://YOUER_DOMAIN.com/interactions` を登録

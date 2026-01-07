@@ -89,21 +89,7 @@ This is likely because Discord may not properly recognize the emoji Unicode's va
 
 ### Hono
 
-```ts "hono.mount" "discord.fetch"
-const discord = new DiscordHono()
-discord.command('hello', c => c.res('Discord World'))
-
-const hono = new Hono()
-hono.get('/', c => c.text('Hono World'))
-hono.mount('/interaction', discord.fetch)
-```
-
-- Browser
-  - `https://YOUER_DOMAIN.com` -> Display: `Hono World`
-- Discord Bot
-  - `/hello` -> Response: `Discord World`
-- Discord Interaction Endpoint
-  - Register URL: `https://YOUER_DOMAIN.com/interaction`
+[example: Mount on Hono](/examples/mount-on-hono)
 
 ### Deno Deploy
 
