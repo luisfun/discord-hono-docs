@@ -25,15 +25,67 @@ const app = new DiscordHono()
 ```ts "var"
 const app = new DiscordHono()
   .command('ping', c => c.res(c.var.OPTION_NAME))
-  .component('button', c => c.res(c.var.custom_id))
-  .modal('modal', c => c.res(c.var.custom_id + c.var.TEXTINPUT_CUSTOM_ID))
+  .modal('modal', c => c.res(c.var.TEXTINPUT_CUSTOM_ID))
 ```
 
 デフォルトで次の値が含まれています。
 
 - `c.var.OPTION_NAME` コマンドオプションの値 (command, autocomplete)
-- `c.var.custom_id` custom_id の値 (component, modal)
 - `c.var.TEXTINPUT_CUSTOM_ID` テキストインプットの値 (modal)
+
+## get: ref
+
+簡易参照用のプロパティです
+
+### c.ref.key
+
+各ハンドラのトリガーです
+
+`c.ref.key` = `c.interaction.data.name` (command, autocomplete)  
+`c.ref.key` = `c.interaction.data.custom_id` (component, modal)  
+`c.ref.key` = `c.interaction.cron` (cron)
+
+### c.ref.attachments ...etc
+
+Resolved の参照
+
+`c.ref.attachments` = `c.interaction.data.resolved.attachments`  
+`c.ref.xxx` = `c.interaction.data.resolved.xxx`
+
+### c.ref.target_id
+
+command
+
+メッセージやユーザートリガーのコマンドターゲットです
+
+`c.ref.target_id` = `c.interaction.data.target_id`
+
+主な使い方
+
+```ts
+c.ref.messages?.[c.ref.target_id]?.content // トリガーメッセージのコンテンツを取得
+```
+
+### c.ref.custom_value
+
+component, modal
+
+ライブラリ独自の受渡し可能な変数です
+
+```ts
+// コンポーネント定義
+new Button('button', 'ボタン').custom_value('value-string')
+// ハンドル内コード
+console.log(c.ref.custom_value) // value-string
+```
+
+### c.ref.values
+
+component
+
+セレクトコンポーネントの values
+
+`c.ref.values` = `c.interaction.data.values`
 
 ## get: interaction
 
@@ -44,10 +96,6 @@ const app = new DiscordHono()
 ### CronContext の場合
 
 [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) の第一引数の controller オブジェクトです。
-
-## get: key
-
-ハンドラーのトリガーとなった文字列です。
 
 ## get: sub
 

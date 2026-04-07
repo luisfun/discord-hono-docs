@@ -34,10 +34,10 @@ const pageContent = (
     .description(`${content}\nPage: ${page}`)
   const components = new Components().row(
     new Button('page', ['⬅️', 'Previous'])
-      .custom_id(JSON.stringify([page - 1, content]))
+      .custom_value(JSON.stringify([page - 1, content]))
       .disabled(page <= 1),
     new Button('page', ['➡️', 'Next'])
-      .custom_id(JSON.stringify([page + 1, content]))
+      .custom_value(JSON.stringify([page + 1, content]))
       .disabled(maxPage <= page),
   )
   return { embeds: [embed], components }
@@ -46,7 +46,7 @@ const pageContent = (
 const app = new DiscordHono<Env>()
   .command('page', c => c.res(pageContent(c, 1, c.var.content)))
   .component('page', c => {
-    const arr: [number, string] = JSON.parse(c.var.custom_id ?? '')
+    const arr: [number, string] = JSON.parse(c.ref.custom_value ?? '')
     return c.resUpdate(pageContent(c, ...arr))
   })
 

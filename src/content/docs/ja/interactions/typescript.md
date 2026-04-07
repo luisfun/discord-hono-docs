@@ -3,6 +3,8 @@ title: TypeScript
 description: TypeScript と Discord Hono の使用に関するガイドです。環境の型、コマンド用のコンテキスト処理、コンポーネント、モーダル、オートコンプリート、 cron ジョブについて説明しています。
 ---
 
+[createFactory](/ja/helpers/create-factory/) を使うと型定義を少なくできます。
+
 ```ts "Env"
 import { DiscordHono } from 'discord-hono'
 

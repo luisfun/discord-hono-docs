@@ -3,6 +3,8 @@ title: TypeScript
 description: Guide on using TypeScript with DiscordHono, including environment types, context handling for commands, components, modals, autocomplete, and cron jobs.
 ---
 
+[createFactory](/ja/helpers/create-factory/) can reduce the amount of type declarations.
+
 ```ts "Env"
 import { DiscordHono } from 'discord-hono'
 

@@ -60,8 +60,8 @@ const components = new Components().row(
 ```ts
 // prettier-ignore
 const components = new Components().row(
-  new Button('unique-id', 'label', 'Primary')
-    .custom_id()
+  new Button('custom_id or URL or sku_id', 'label', 'Primary')
+    .custom_value() // ライブラリ独自の受渡し変数
     .emoji()
     .disabled(),
 )
@@ -69,8 +69,7 @@ const components = new Components().row(
 
 [公式ドキュメント](https://discord.com/developers/docs/interactions/message-components#button-object)を参照してください。
 
-公式ドキュメントと異なる注意点があります。  
-`.custom_id()` は `unique-id` を含めて99文字までです。
+`.custom_value()` は `custom_id` を含めて99文字までです。
 
 ### 簡単なemojiの設定
 
@@ -99,8 +98,8 @@ const components = new Components().row(new Select('unique-id', selectType))
 
 ```ts
 const components = new Components().row(
-  new Select('unique-id')
-    .custom_id()
+  new Select('custom_id')
+    .custom_value() // ライブラリ独自の受渡し変数
     .options() // required: String
     .channel_types() // Channel
     .placeholder()
@@ -115,8 +114,7 @@ const components = new Components().row(
 
 タイプによって使用できないフィールド（メソッド）があります。
 
-公式ドキュメントと異なる注意点があります。  
-`.custom_id()` は `unique-id` を含めて99文字までです。
+`.custom_value()` は `custom_id` を含めて99文字までです。
 
 ## Components V2 (β)
 

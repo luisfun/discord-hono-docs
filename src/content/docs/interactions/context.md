@@ -25,15 +25,67 @@ We try to make it as similar to Hono as possible.
 ```ts "var"
 const app = new DiscordHono()
   .command('ping', c => c.res(c.var.OPTION_NAME))
-  .component('button', c => c.res(c.var.custom_id))
-  .modal('modal', c => c.res(c.var.custom_id + c.var.TEXTINPUT_CUSTOM_ID))
+  .modal('modal', c => c.res(c.var.TEXTINPUT_CUSTOM_ID))
 ```
 
 The following values are included by default.
 
 - `c.var.OPTION_NAME` command option value (command, autocomplete)
-- `c.var.custom_id` value of custom_id (component, modal)
 - `c.var.TEXTINPUT_CUSTOM_ID` value of text input (modal)
+
+## get: ref
+
+Convenience properties for quick references.
+
+### c.ref.key
+
+The trigger for each handler.
+
+`c.ref.key` = `c.interaction.data.name` (command, autocomplete)  
+`c.ref.key` = `c.interaction.data.custom_id` (component, modal)  
+`c.ref.key` = `c.interaction.cron` (cron)
+
+### c.ref.attachments ...etc
+
+References to resolved data
+
+`c.ref.attachments` = `c.interaction.data.resolved.attachments`  
+`c.ref.xxx` = `c.interaction.data.resolved.xxx`
+
+### c.ref.target_id
+
+command
+
+The command target for message- or user-triggered commands.
+
+`c.ref.target_id` = `c.interaction.data.target_id`
+
+Main usage
+
+```ts
+c.ref.messages?.[c.ref.target_id]?.content // Get the content of the trigger message
+```
+
+### c.ref.custom_value
+
+component, modal
+
+A library-specific transferable variable.
+
+```ts
+// Component definition
+new Button('button', 'Button').custom_value('value-string')
+// Inside handler code
+console.log(c.ref.custom_value) // value-string
+```
+
+### c.ref.values
+
+component
+
+Values of select components
+
+`c.ref.values` = `c.interaction.data.values`
 
 ## get: interaction
 
@@ -44,10 +96,6 @@ Please refer to the [Official Docs](https://discord.com/developers/docs/interact
 ### In case of CronContext
 
 It has the controller value of the [scheduled()](https://developers.cloudflare.com/workers/runtime-apis/handlers/scheduled/) first argument.
-
-## get: key
-
-Handler triggered string.
 
 ## get: sub
 

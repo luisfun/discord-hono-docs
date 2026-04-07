@@ -60,8 +60,8 @@ If the third argument is `Link`, `unique-id` is a URL.
 ```ts
 // prettier-ignore
 const components = new Components().row(
-  new Button('unique-id', 'label', 'Primary')
-    .custom_id()
+  new Button('custom_id or URL or sku_id', 'label', 'Primary')
+    .custom_value() // library-specific custom value
     .emoji()
     .disabled(),
 )
@@ -69,8 +69,7 @@ const components = new Components().row(
 
 Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/message-components#button-object).
 
-There are some notes that differ from the official one.  
-`.custom_id()` are limited to a total of 99 characters with `unique-id`.
+`.custom_value()` is limited to 99 characters including `custom_id`.
 
 ### Simple emoji setup
 
@@ -99,8 +98,8 @@ Also, do not use `;` for `unique-id`.
 
 ```ts
 const components = new Components().row(
-  new Select('unique-id')
-    .custom_id()
+  new Select('custom_id')
+    .custom_value() // library-specific custom value
     .options() // required: String
     .channel_types() // Channel
     .placeholder()
@@ -115,8 +114,7 @@ Please refer to the [Official Docs](https://discord.com/developers/docs/interact
 
 Depending on the type, some fields (methods) cannot be used.
 
-There are some notes that differ from the official one.  
-`.custom_id()` are limited to a total of 99 characters with `unique-id`.
+`.custom_value()` is limited to 99 characters including `custom_id`.
 
 ## Components V2 (β)
 
