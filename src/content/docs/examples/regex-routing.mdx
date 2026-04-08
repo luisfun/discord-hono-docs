@@ -38,7 +38,7 @@ app.component('', c => {
   map.set(/regex/, c => c.res('regex'))
   map.set('', c => c.res('error'))
 
-  return map.get(c.key)(c)
+  return map.get(c.ref.key)(c)
 })
 
 export default app
