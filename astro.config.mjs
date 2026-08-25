@@ -79,6 +79,18 @@ export default defineConfig({
           translations: { ja: '移行ガイド' },
           autogenerate: { directory: 'migration-guides' },
         },
+        {
+          label: 'Archived Docs',
+          collapsed: true,
+          translations: { ja: 'アーカイブ' },
+          items: [
+            {
+              label: 'v0.21.2',
+              link: 'https://f87abee9.discord-hono-docs.pages.dev/',
+              attrs: { target: '_blank' },
+            },
+          ],
+        },
       ],
     }),
   ],
