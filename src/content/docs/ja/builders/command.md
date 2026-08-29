@@ -1,118 +1,127 @@
 ---
-title: Command
-description: Discord Hono における `Command` クラスの使用に関する詳細なガイドです。サブコマンド、オプション、そしてローカライゼーション、権限、オートコンプリートなどの高度な設定を含みます。
+title: コマンド
+description: Discord Hono におけるコマンド作成関数の使用に関するガイドです。サブコマンド、オプション、そしてローカライゼーション、権限、オートコンプリートなどの高度な設定を含みます。
 sidebar:
   order: 1
 ---
 
-```ts "Command"
-import { Command } from 'discord-hono'
-
-const commands = [
-  new Command('name', 'description'),
-  new Command('ping', 'pong を返答'),
-]
-```
-
-`Command` の第1引数については、[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming)を確認してください。
-
-## Method
+## 一覧
 
 ```ts
-const commands = [
-  new Command('name', 'description')
-    .id()
-    .type(2) // 1,2,3 デフォルト 1 --- 1: CHAT_INPUT, 2: USER, 3: MESSAGE
-    .application_id()
-    .guild_id()
-    .name_localizations()
-    .description_localizations()
-    .options(
-      new Option('text', 'テキスト1つ目'),
-      new Option('second', 'テキスト2つ目'),
-    )
-    .default_member_permissions()
-    .dm_permission()
-    .default_permission()
-    .nsfw()
-    .integration_types()
-    .contexts()
-    .version()
-    .handler(),
-]
+import {
+  // コマンド
+  makeSlashCommand,
+  makeUserCommand,
+  makeMessageCommand,
+  makeEntryPointCommand,
+  // サブコマンド
+  makeSubCommand,
+  makeSubCommandGroup,
+  // オプション
+  makeStringOption,
+  makeIntegerOption,
+  makeBooleanOption,
+  makeUserOption,
+  makeChannelOption,
+  makeRoleOption,
+  makeMentionableOption,
+  makeNumberOption,
+  makeAttachmentOption,
+} from 'discord-hono'
 ```
 
-[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object)を参照してください。
-
-## Subcommands
+## コマンド
 
 ```ts
-import { Command, SubGroup, SubCommand } from 'discord-hono'
+import { makeSlashCommand } from 'discord-hono'
 
 const commands = [
-  new Command('slash', 'slash description').options(
-    new SubCommand('sub1', 'サブコマンド 1'),
-    new SubGroup('group', 'サブコマンドグループ description').options(
-      new SubCommand('sub2', 'サブコマンド 2'),
-      new SubCommand('sub3', 'サブコマンド 3'),
-    ),
-  ),
+  makeSlashCommand('name', 'description'),
+  makeSlashCommand('ping', 'pong を返答'),
 ]
 ```
 
-[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups)を参照してください。
+第1引数については、[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming)を確認してください。
 
-`SubCommand.options` には `Command.options` と同じものを設定できます。
+`makeUserCommand`, `makeMessageCommand`, `makeEntryPointCommand` についても同様に作成できます。  
+ただし、第二引数の 'description' は不要です。
 
-## Options
+### メソッド
 
 ```ts
-import { Command, Option } from 'discord-hono'
-
-type OptionType =
-  | 'String'
-  | 'Integer'
-  | 'Number'
-  | 'Boolean'
-  | 'User'
-  | 'Channel'
-  | 'Role'
-  | 'Mentionable'
-  | 'Attachment'
-
-const optionType: OptionType = 'Channel' // デフォルト: 'String'
-
-const commands = [
-  new Command('hello', 'world を返答').options(
-    new Option('text', 'テキスト入力'), // String オプション
-    new Option('channel', 'チャンネル選択', optionType), // Channel オプション
-  ),
-]
+makeSlashCommand('name', 'description').description('上書き').options([])
 ```
 
-### Method
+IDEが対応していれば、`.` を打つと候補となるメソッド一覧をみれます。
+
+メソッドの内容は[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object)を参照してください。
+
+## サブコマンド
 
 ```ts
+import {
+  makeSlashCommand,
+  makeSubCommand,
+  makeSubCommandGroup,
+} from 'discord-hono'
+
 const commands = [
-  new Command('ping', 'pong を返答').options(
-    new Option('name', 'description')
-      .name_localizations()
-      .description_localizations()
-      .required() // .required(true) = .required()
-      .choices(
-        { name: '選択肢1', value: 'string 1' },
-        { name: '選択肢2', value: 'string 2' },
-      ) // STRING, INTEGER, NUMBER
-      .channel_types() // CHANNEL
-      .min_value() // INTEGER, NUMBER
-      .max_value() // INTEGER, NUMBER
-      .min_length() // STRING
-      .max_length() // STRING
-      .autocomplete(), // STRING, INTEGER, NUMBER
-  ),
+  makeSlashCommand('slash', 'slash description').options([
+    makeSubCommand('sub1', 'サブコマンド 1'),
+    makeSubCommandGroup('group', 'サブコマンドグループ description').options([
+      makeSubCommand('sub2', 'サブコマンド 2'),
+      makeSubCommand('sub3', 'サブコマンド 3'),
+    ]),
+  ]),
 ]
 ```
 
-[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure)を参照してください。
+いくつかの制約については[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#subcommands-and-subcommand-groups)を参照してください。
 
-オプションによって使用できないフィールド（メソッド）があります。
+`makeSubCommand.options` には `makeSlashCommand.options` と同じものを設定できます。
+
+## オプション
+
+```ts
+import {
+  makeSlashCommand,
+  makeStringOption,
+  makeChannelOption,
+} from 'discord-hono'
+
+const commands = [
+  makeSlashCommand('hello', 'world を返答').options([
+    makeStringOption('text', 'テキスト入力').required(true),
+    makeChannelOption('channel', 'チャンネル選択').channel_types([0]),
+  ]),
+]
+```
+
+コマンドと同様に、`.` を打つと候補となるメソッド一覧をみれます。
+
+メソッドの内容は[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure)を参照してください。
+
+### 入力データの取得
+
+```ts
+import {
+  makeSlashCommand,
+  makeSubCommand,
+  makeStringOption,
+  makeChannelOption,
+} from 'discord-hono'
+import { factory } from '../init.js'
+
+export const command_slash = factory.command(
+  makeSlashCommand('slash', 'スラッシュコマンド').options([
+    makeSubCommand('sub', 'サブコマンド').options([
+      makeStringOption('string', '文字列オプション').required(true),
+      makeChannelOption('channel', 'チャンネルオプション').channel_types([0]),
+    ]),
+  ]),
+  c => {
+    const channel = c.ref.channels?.[c.var.channel ?? '']
+    return c.res(`- ${c.var.string}\n- ${channel?.name}\n- <#${channel?.id}>`)
+  },
+)
+```
