@@ -44,7 +44,7 @@ const commands = [
 第1引数については、[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-naming)を確認してください。
 
 `makeUserCommand`, `makeMessageCommand`, `makeEntryPointCommand` についても同様に作成できます。  
-ただし、第二引数の 'description' は不要です。
+ただし、第二引数の `description` は不要です。
 
 ### メソッド
 
