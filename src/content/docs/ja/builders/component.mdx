@@ -1,30 +1,84 @@
 ---
-title: Components
-description: Discord Hono でのコンポーネントの使用に関する包括的なガイド。ボタン、セレクト要素、およびスタイル、絵文字、セレクトオプションなどのカスタマイズを含みます。
+title: Component
+description: Discord Hono におけるコンポーネント作成関数の使用に関するガイドです。ボタン、セレクト要素、およびスタイル、絵文字、セレクトオプションなどのカスタマイズを含みます。
 sidebar:
   order: 2
 ---
 
-```ts "Components" "Button"
-import { DiscordHono, Components, Button } from 'discord-hono'
+import { Aside } from '@astrojs/starlight/components'
+
+## 一覧
+
+```ts
+import {
+  // Action Row
+  makeActionRow,
+  // Buttons
+  makeButton,
+  makeLinkButton,
+  makePremiumButton,
+  // Selects
+  makeStringSelect,
+  makeUserSelect,
+  makeRoleSelect,
+  makeMentionableSelect,
+  makeChannelSelect,
+  // Modal Inputs
+  makeTextInput,
+  makeFileUpload,
+  makeRadioGroup,
+  makeCheckboxGroup,
+  makeCheckbox,
+  // Layout, Content
+  makeSection,
+  makeTextDisplay,
+  makeThumbnail,
+  makeMediaGallery,
+  makeFile,
+  makeSeparator,
+  makeContainer,
+  makeLabel,
+  // Child Component
+  makeStringSelectOption,
+  makeMediaGalleryItem,
+  makeUnfurledMediaItem,
+  makeRadioGroupOption,
+  makeCheckboxGroupOption,
+} from 'discord-hono'
+```
+
+各コンポーネントの役割などは[公式ドキュメント](https://docs.discord.com/developers/components/reference#component-object)を参照してください。
+
+<Aside>Modal に関する内容は [Modal のページ](/ja/builders/modal/)を参照</Aside>
+
+## メッセージ Components
+
+```ts
+import { DiscordHono, makeActionRow, makeButton } from 'discord-hono'
 
 const app = new DiscordHono().command('component', c =>
   c.res({
-    content: 'components',
-    components: new Components().row(
-      new Button('button-1', 'ボタン'),
-      new Button('button-2', '2つ目'),
-    ),
+    content: 'コンポーネント',
+    components: [
+      makeActionRow([
+        makeButton('custom_id', 'label'),
+        makeButton('button', ['🔥', 'Hono']),
+      ]),
+    ],
   }),
 )
 ```
 
-## .row()
+`custom_id` は `app.component()` で識別するために使います。  
+また、`custom_id` に `;` は使用できません。
+
+### Action Row について
 
 ```ts "row"
-const components = new Components()
-  .row(new Button('button-1', '1'), new Button('button-2', '22'))
-  .row(new Button('button-3', '333'), new Button('button-4', '4444'))
+const components = [
+  makeActionRow([makeButton('id1', '1'), makeButton('id2', '22')]),
+  makeActionRow([makeButton('id3', '333'), makeButton('id4', '4444')]),
+]
 ```
 
 ```bash title="Discord Bot コンポーネントレスポンス"
@@ -32,52 +86,34 @@ const components = new Components()
 [333][4444]
 ```
 
-`.row()` は [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows) と同じ機能です。
-
-## Button 要素
-
-```ts "Button"
-import { Components, Button } from 'discord-hono'
-
-type Style = 'Primary' | 'Secondary' | 'Success' | 'Danger' | 'Link' | 'SKU'
-
-const style: Style = 'Secondary' // デフォルト: 'Primary'
-
-const components = new Components().row(
-  new Button('unique-id', 'label'),
-  new Button('button', 'ボタン', style),
-  new Button('https://example.com', 'リンク', 'Link'),
-)
-```
-
-`unique-id` は `app.component()` で識別するために使います。  
-また、`unique-id` に `;` は使用できません。  
-第3引数にはボタンのスタイルを指定します。デフォルトは `Primary` です。  
-第3引数が `Link` の場合、 `unique-id` はURLです。
-
-### Method
+## Buttons
 
 ```ts
-// prettier-ignore
-const components = new Components().row(
-  new Button('custom_id or URL or sku_id', 'label', 'Primary')
-    .custom_value() // ライブラリ独自の受渡し変数
-    .emoji()
-    .disabled(),
-)
+import {
+  makeActionRow,
+  makeButton,
+  makeLinkButton,
+  buttonStyle,
+} from 'discord-hono'
+
+const components = [
+  makeActionRow([
+    makeButton('button', ['✅', 'ボタン'])
+      .custom_value('value')
+      .style(buttonStyle.Secondary)
+      .disabled(true),
+    makeLinkButton('https://example.com', 'リンク'),
+  ]),
+]
 ```
 
-[公式ドキュメント](https://discord.com/developers/docs/interactions/message-components#button-object)を参照してください。
+IDEが対応していれば、`.` を打つと候補となるメソッド一覧をみれます。
 
-`.custom_value()` は `custom_id` を含めて99文字までです。
+メソッドの内容は[公式ドキュメント](https://docs.discord.com/developers/components/reference#button)を参照してください。
 
-### 簡単なemojiの設定
+`.custom_value()` はライブラリ独自の受渡し変数です。`custom_id` を含めて99文字までです。
 
-```ts
-import { Components, Button } from 'discord-hono'
-
-const components = new Components().row(new Button('button', ['✅', 'ボタン']))
-```
+/// ここから続き
 
 ## Select 要素
 

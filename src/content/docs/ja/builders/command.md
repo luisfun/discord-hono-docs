@@ -1,5 +1,5 @@
 ---
-title: コマンド
+title: Command
 description: Discord Hono におけるコマンド作成関数の使用に関するガイドです。サブコマンド、オプション、そしてローカライゼーション、権限、オートコンプリートなどの高度な設定を含みます。
 sidebar:
   order: 1
@@ -9,15 +9,15 @@ sidebar:
 
 ```ts
 import {
-  // コマンド
+  // Commands
   makeSlashCommand,
   makeUserCommand,
   makeMessageCommand,
   makeEntryPointCommand,
-  // サブコマンド
+  // Subcommands
   makeSubCommand,
   makeSubCommandGroup,
-  // オプション
+  // Options
   makeStringOption,
   makeIntegerOption,
   makeBooleanOption,
@@ -30,9 +30,9 @@ import {
 } from 'discord-hono'
 ```
 
-## コマンド
+## Commands
 
-```ts
+```ts "makeSlashCommand"
 import { makeSlashCommand } from 'discord-hono'
 
 const commands = [
@@ -48,7 +48,7 @@ const commands = [
 
 ### メソッド
 
-```ts
+```ts ".description" ".options"
 makeSlashCommand('name', 'description').description('上書き').options([])
 ```
 
@@ -56,9 +56,9 @@ IDEが対応していれば、`.` を打つと候補となるメソッド一覧�
 
 メソッドの内容は[公式ドキュメント](https://discord.com/developers/docs/interactions/application-commands#application-command-object)を参照してください。
 
-## サブコマンド
+## Subcommands
 
-```ts
+```ts "makeSubCommand" "makeSubCommandGroup"
 import {
   makeSlashCommand,
   makeSubCommand,
@@ -80,9 +80,9 @@ const commands = [
 
 `makeSubCommand.options` には `makeSlashCommand.options` と同じものを設定できます。
 
-## オプション
+## Options
 
-```ts
+```ts ".options" "makeStringOption" "makeChannelOption"
 import {
   makeSlashCommand,
   makeStringOption,
@@ -103,7 +103,7 @@ const commands = [
 
 ### 入力データの取得
 
-```ts
+```ts "c.var" "string_op" "channel_op"
 import {
   makeSlashCommand,
   makeSubCommand,
@@ -115,13 +115,13 @@ import { factory } from '../init.js'
 export const command_slash = factory.command(
   makeSlashCommand('slash', 'スラッシュコマンド').options([
     makeSubCommand('sub', 'サブコマンド').options([
-      makeStringOption('string', '文字列オプション').required(true),
-      makeChannelOption('channel', 'チャンネルオプション').channel_types([0]),
+      makeStringOption('string_op', '文字列オプション').required(true),
+      makeChannelOption('channel_op', 'チャンネルオプション').channel_types([0]),
     ]),
   ]),
   c => {
-    const channel = c.ref.channels?.[c.var.channel ?? '']
-    return c.res(`- ${c.var.string}\n- ${channel?.name}\n- <#${channel?.id}>`)
+    const channel = c.ref.channels?.[c.var.channel_op ?? '']
+    return c.res(`- ${c.var.string_op}\n- ${channel?.name}\n- <#${channel?.id}>`)
   },
 )
 ```

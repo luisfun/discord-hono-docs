@@ -32,7 +32,7 @@ import {
 
 ## Commands
 
-```ts
+```ts "makeSlashCommand"
 import { makeSlashCommand } from 'discord-hono'
 
 const commands = [
@@ -48,7 +48,7 @@ The second argument `description` is not required for these command types.
 
 ### Methods
 
-```ts
+```ts ".description" ".options"
 makeSlashCommand('name', 'description').description('Override').options([])
 ```
 
@@ -58,7 +58,7 @@ For full details, see the [official documentation](https://discord.com/developer
 
 ## Subcommands
 
-```ts
+```ts "makeSubCommand" "makeSubCommandGroup"
 import {
   makeSlashCommand,
   makeSubCommand,
@@ -82,7 +82,7 @@ For some restrictions and rules, see the [official documentation](https://discor
 
 ## Options
 
-```ts
+```ts ".options" "makeStringOption" "makeChannelOption"
 import {
   makeSlashCommand,
   makeStringOption,
@@ -103,7 +103,7 @@ For full details, see the [official documentation](https://discord.com/developer
 
 ### Reading input data
 
-```ts
+```ts "c.var" "string_op" "channel_op"
 import {
   makeSlashCommand,
   makeSubCommand,
@@ -115,13 +115,13 @@ import { factory } from '../init.js'
 export const command_slash = factory.command(
   makeSlashCommand('slash', 'Slash command').options([
     makeSubCommand('sub', 'Subcommand').options([
-      makeStringOption('string', 'String option').required(true),
-      makeChannelOption('channel', 'Channel option').channel_types([0]),
+      makeStringOption('string_op', 'String option').required(true),
+      makeChannelOption('channel_op', 'Channel option').channel_types([0]),
     ]),
   ]),
   c => {
-    const channel = c.ref.channels?.[c.var.channel ?? '']
-    return c.res(`- ${c.var.string}\n- ${channel?.name}\n- <#${channel?.id}>`)
+    const channel = c.ref.channels?.[c.var.channel_op ?? '']
+    return c.res(`- ${c.var.string_op}\n- ${channel?.name}\n- <#${channel?.id}>`)
   },
 )
 ```
