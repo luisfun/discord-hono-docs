@@ -185,17 +185,15 @@ autocomplete
 const app = new DiscordHono().autocomplete(
   'hello',
   c =>
-    c.resAutocomplete(
-      new Autocomplete(c.focused?.value).choices(
-        { name: 'world', value: 'world!!!' },
-        { name: 'hi', value: 'hi!' },
-      ),
-    ),
+    c.resAutocomplete([
+      { name: 'world', value: 'world!!!' },
+      { name: 'hi', value: 'hi!' },
+    ]),
   c => c.res(c.var.option),
 )
 ```
 
-The argument is a Autocomplete instance or [APICommandAutocompleteInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APICommandAutocompleteInteractionResponseCallbackData).
+The argument is [APICommandAutocompleteInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APICommandAutocompleteInteractionResponseCallbackData) or an array of [APIApplicationCommandOptionChoice](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APIApplicationCommandOptionChoice).
 
 ## .resModal()
 

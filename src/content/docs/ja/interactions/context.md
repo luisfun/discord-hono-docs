@@ -185,17 +185,15 @@ autocomplete
 const app = new DiscordHono().autocomplete(
   'hello',
   c =>
-    c.resAutocomplete(
-      new Autocomplete(c.focused?.value).choices(
-        { name: 'world', value: 'world!!!' },
-        { name: 'hi', value: 'hi!' },
-      ),
-    ),
+    c.resAutocomplete([
+      { name: 'world', value: 'world!!!' },
+      { name: 'hi', value: 'hi!' },
+    ]),
   c => c.res(c.var.option),
 )
 ```
 
-引数は Autocomplete インスタンスまたは [APICommandAutocompleteInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APICommandAutocompleteInteractionResponseCallbackData) です。
+引数は [APICommandAutocompleteInteractionResponseCallbackData](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APICommandAutocompleteInteractionResponseCallbackData) または [APIApplicationCommandOptionChoice](https://discord-api-types.dev/api/next/discord-api-types-v10/interface/APIApplicationCommandOptionChoice) の配列です。
 
 ## .resModal()
 
