@@ -8,7 +8,6 @@ sidebar:
 ```ts "makeModal"
 import {
   makeModal,
-  makeActionRow,
   makeTextInput,
   makeLabel,
   makeChannelSelect,
@@ -31,7 +30,6 @@ Please refer to the [Official Docs](https://docs.discord.com/developers/componen
 
 ```ts "makeModal" "c.resModal"
 import {
-  makeActionRow,
   makeChannelSelect,
   makeLabel,
   makeModal,
@@ -60,7 +58,7 @@ export const command_modal = factory.command(
 
 export const modal_modal = factory.modal(
   makeModal('modal', 'Modal Test', [
-    makeActionRow([makeTextInput('modal_text', 'Modal Text').required(true)]),
+    makeLabel('Text Input', makeTextInput('modal_text', 'Text').required(true)),
     makeLabel('Channel Select', makeChannelSelect('channel')),
   ]),
   c => {
