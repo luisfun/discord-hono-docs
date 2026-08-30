@@ -110,18 +110,22 @@ import {
   makeStringOption,
   makeChannelOption,
 } from 'discord-hono'
-import { factory } from '../init.js'
+import { factory } from '../init'
 
 export const command_slash = factory.command(
   makeSlashCommand('slash', 'スラッシュコマンド').options([
     makeSubCommand('sub', 'サブコマンド').options([
       makeStringOption('string_op', '文字列オプション').required(true),
-      makeChannelOption('channel_op', 'チャンネルオプション').channel_types([0]),
+      makeChannelOption('channel_op', 'チャンネルオプション').channel_types([
+        0,
+      ]),
     ]),
   ]),
   c => {
     const channel = c.ref.channels?.[c.var.channel_op ?? '']
-    return c.res(`- ${c.var.string_op}\n- ${channel?.name}\n- <#${channel?.id}>`)
+    return c.res(
+      `- ${c.var.string_op}\n- ${channel?.name}\n- <#${channel?.id}>`,
+    )
   },
 )
 ```

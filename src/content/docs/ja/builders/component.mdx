@@ -53,42 +53,29 @@ import {
 
 ## メッセージ Components
 
-```ts
+```ts "makeActionRow"
 import { DiscordHono, makeActionRow, makeButton } from 'discord-hono'
 
 const app = new DiscordHono().command('component', c =>
   c.res({
     content: 'コンポーネント',
     components: [
-      makeActionRow([
-        makeButton('custom_id', 'label'),
-        makeButton('button', ['🔥', 'Hono']),
-      ]),
+      makeActionRow([makeButton('id1', '1'), makeButton('id2', '22')]),
+      makeActionRow([makeButton('id3', '333'), makeButton('id4', '4444')]),
     ],
   }),
 )
 ```
 
-`custom_id` は `app.component()` で識別するために使います。  
-また、`custom_id` に `;` は使用できません。
-
-### Action Row について
-
-```ts "row"
-const components = [
-  makeActionRow([makeButton('id1', '1'), makeButton('id2', '22')]),
-  makeActionRow([makeButton('id3', '333'), makeButton('id4', '4444')]),
-]
-```
-
-```bash title="Discord Bot コンポーネントレスポンス"
+```bash title="Discord Bot レスポンス"
+コンポーネント
 [1][22]
 [333][4444]
 ```
 
 ## Buttons
 
-```ts
+```ts "makeButton" "makeLinkButton"
 import {
   makeActionRow,
   makeButton,
@@ -98,6 +85,7 @@ import {
 
 const components = [
   makeActionRow([
+    makeButton('custom_id', 'label'),
     makeButton('button', ['✅', 'ボタン'])
       .custom_value('value')
       .style(buttonStyle.Secondary)
@@ -107,91 +95,150 @@ const components = [
 ]
 ```
 
+`custom_id` は `app.component()` で識別するために使います。  
+また、`custom_id` に `;` は使用できません。
+
 IDEが対応していれば、`.` を打つと候補となるメソッド一覧をみれます。
 
 メソッドの内容は[公式ドキュメント](https://docs.discord.com/developers/components/reference#button)を参照してください。
 
+### .custom_value()
+
 `.custom_value()` はライブラリ独自の受渡し変数です。`custom_id` を含めて99文字までです。
 
-/// ここから続き
+```ts ".custom_value"
+import {
+  makeActionRow,
+  makeButton,
+  makeSlashCommand,
+  makeStringOption,
+} from 'discord-hono'
+import { factory } from '../init'
 
-## Select 要素
+export const command_command = factory.command(
+  makeSlashCommand('command', 'description').options([
+    makeStringOption('value', 'ボタンへ継承').required(true),
+  ]),
+  c =>
+    c.res({
+      content: 'ボタン',
+      components: [
+        makeActionRow([component_button.component.custom_value(c.var.value)]),
+      ],
+    }),
+)
 
-```ts "Select"
-import { Components, Select } from 'discord-hono'
+export const component_button = factory.component(
+  makeButton('button', ['✅', 'ボタン']),
+  c => c.update().res(`value: ${c.ref.custom_value}`),
+)
+```
 
-type Type = 'String' | 'User' | 'Role' | 'Mentionable' | 'Channel'
+`.custom_value()` を使うことで、ボタン側のハンドラーへ必要な変数の受渡しが可能です。
 
-const selectType: Type = 'Channel' // デフォルト: 'String'
+[ページネーション](/ja/examples/pagination/)がこの機能を使用しています。
 
-const components = new Components().row(new Select('unique-id', selectType))
+Select 要素なども同様に `.custom_value()` を使うことができます。
+
+## Selects
+
+```ts "makeStringSelect" "makeChannelSelect"
+import {
+  makeActionRow,
+  makeStringSelect,
+  makeChannelSelect,
+} from 'discord-hono'
+
+const components = [
+  makeActionRow([
+    makeStringSelect('custom_id', [
+      ['value', 'label'],
+      ['value2', ['👉', 'label2']],
+    ]),
+    makeChannelSelect('channel_custom_id').channel_types([0]),
+  ]),
+]
 ```
 
 `unique-id` は `app.component()` で識別するために使用されます。  
 また、`unique-id` に `;` は使用できません。
 
-### Method
+IDEが対応していれば、`.` を打つと候補となるメソッド一覧をみれます。
 
-```ts
-const components = new Components().row(
-  new Select('custom_id')
-    .custom_value() // ライブラリ独自の受渡し変数
-    .options() // required: String
-    .channel_types() // Channel
-    .placeholder()
-    .default_values() // User, Role, Mentionable, Channel
-    .min_values()
-    .max_values()
-    .disabled(),
+メソッドの内容は[公式ドキュメント](https://docs.discord.com/developers/components/reference#string-select)を参照してください。
+
+`.custom_value()` はライブラリ独自の受渡し変数です。`custom_id` を含めて99文字までです。
+
+### 入力データの取得
+
+```ts "c.ref.values"
+import { makeStringSelect } from 'discord-hono'
+import { factory } from '../init'
+
+export const component_select = factory.component(
+  makeStringSelect('select', [
+    ['value', 'label'],
+    ['value2', ['👉', 'label2']],
+  ]),
+  c => c.update().res(`value: ${c.ref.values?.[0]}`),
 )
 ```
 
-[公式ドキュメント](https://discord.com/developers/docs/interactions/message-components#select-menu-object)を参照してください。
-
-タイプによって使用できないフィールド（メソッド）があります。
-
-`.custom_value()` は `custom_id` を含めて99文字までです。
-
-## Components V2 (β)
+## Components V2
 
 Components V2 を利用する際、 `c.flags('IS_COMPONENTS_V2')` を必ず指定してください。
 
-### Layout
-
-### Content
-
-example
-
 ```ts
+import {
+  buttonStyle,
+  makeActionRow,
+  makeButton,
+  makeContainer,
+  makeMediaGallery,
+  makeSection,
+  makeSeparator,
+  makeSlashCommand,
+  makeTextDisplay,
+  makeThumbnail,
+} from 'discord-hono'
+import { factory } from '../init'
+
 export const command_components_v2 = factory.command(
-  new Command('components_v2', 'response components_v2'),
-  async c => {
-    const image = await fetch('https://luis.fun/images/hono.webp')
-    const blob = new Blob([await image.arrayBuffer()])
-    return c.flags('EPHEMERAL', 'IS_COMPONENTS_V2').res(
-      {
-        components: [
-          new Content('text top'),
-          new Layout('Container').components(
-            new Layout('Action Row').components(component_delete.component),
-            new Layout('Separator'),
-            new Content('container - text'),
-            new Layout('Section')
-              .components(
-                new Content('container - section - text'),
-                new Content('container - section - text2'),
-              )
-              .accessory(new Content('image.webp', 'Thumbnail')),
-            new Content('container - text2'),
-          ),
-        ],
-      },
-      { blob, name: 'image.webp' },
-    )
-  },
+  makeSlashCommand('components_v2', 'response components_v2'),
+  async c =>
+    c.flags('EPHEMERAL', 'IS_COMPONENTS_V2').resDefer(async () => {
+      const image = await fetch('https://luis.fun/images/hono.webp')
+      const blob = new Blob([await image.arrayBuffer()])
+      const res = await c
+        .followup(
+          {
+            components: [
+              makeTextDisplay('text top'),
+              makeContainer([
+                makeActionRow([component_delete.component]),
+                makeSeparator(),
+                makeTextDisplay('container - text'),
+                makeSection(
+                  [
+                    makeTextDisplay('container - section - text'),
+                    makeTextDisplay('container - section - text2'),
+                  ],
+                  makeThumbnail('attachment://image.webp'),
+                ),
+                makeTextDisplay('container - text2'),
+                makeMediaGallery(['attachment://image.webp']),
+              ]),
+            ],
+          },
+          { blob, name: 'image.webp' },
+        )
+        .then(r => r.json())
+      console.log(res)
+    }),
 )
+
 export const component_delete = factory.component(
-  new Button('delete', ['🗑️', 'Delete'], 'Secondary'),
+  makeButton('delete', ['🗑️', 'Delete']).style(buttonStyle.Secondary),
   c => c.update().resDefer(c => c.followup()),
 )
 ```
