@@ -5,33 +5,34 @@ sidebar:
   order: 5
 ---
 
-```ts "Embed"
-import { DiscordHono, Embed } from 'discord-hono'
+## 一覧
+
+```ts
+import {
+  // Main
+  makeEmbed,
+  // Child
+  makeEmbedFooter,
+  makeEmbedImage,
+  makeEmbedVideo,
+  makeEmbedProvider,
+  makeEmbedAuthor,
+  makeEmbedField,
+} from 'discord-hono'
+```
+
+## Embed
+
+```ts "makeEmbed"
+import { DiscordHono, makeEmbed } from 'discord-hono'
 
 const app = new DiscordHono().command('embed', c =>
   c.res({
-    embeds: [new Embed().title('タイトル').description('内容')],
+    embeds: [makeEmbed().title('タイトル').description('内容')],
   }),
 )
 ```
 
-## Method
+IDEが対応していれば、`.` を打つと候補となるメソッド一覧をみれます。
 
-```ts
-const embed = new Embed()
-  .title()
-  .type()
-  .description()
-  .url()
-  .timestamp()
-  .color()
-  .footer()
-  .image()
-  .thumbnail()
-  .video()
-  .provider()
-  .author()
-  .fields()
-```
-
-[公式ドキュメント](https://discord.com/developers/docs/resources/message#embed-object)を参照してください。
+メソッドの内容は[公式ドキュメント](https://docs.discord.com/developers/resources/message#embed-object)を参照してください。
