@@ -1,161 +1,246 @@
 ---
 title: Components
-description: Comprehensive guide on using components in DiscordHono, including buttons, select elements, and customizations like styles, emojis, and select options.
+description: Guide to using component-building functions in Discord Hono, including buttons, select elements, and customization such as styles, emoji, and select options.
 sidebar:
   order: 2
 ---
 
-```ts "Components" "Button"
-import { DiscordHono, Components, Button } from 'discord-hono'
+import { Aside } from '@astrojs/starlight/components'
+
+## Overview
+
+```ts
+import {
+  // Action Row
+  makeActionRow,
+  // Buttons
+  makeButton,
+  makeLinkButton,
+  makePremiumButton,
+  // Selects
+  makeStringSelect,
+  makeUserSelect,
+  makeRoleSelect,
+  makeMentionableSelect,
+  makeChannelSelect,
+  // Modal Inputs
+  makeTextInput,
+  makeFileUpload,
+  makeRadioGroup,
+  makeCheckboxGroup,
+  makeCheckbox,
+  // Layout, Content
+  makeSection,
+  makeTextDisplay,
+  makeThumbnail,
+  makeMediaGallery,
+  makeFile,
+  makeSeparator,
+  makeContainer,
+  makeLabel,
+  // Child Component
+  makeStringSelectOption,
+  makeMediaGalleryItem,
+  makeUnfurledMediaItem,
+  makeRadioGroupOption,
+  makeCheckboxGroupOption,
+} from 'discord-hono'
+```
+
+Please refer to the [Official Docs](https://docs.discord.com/developers/components/reference#component-object) for the roles of each component.
+
+<Aside>
+  For modal-related content, see the [Modal page](/builders/modal/).
+</Aside>
+
+## Message Components
+
+```ts "makeActionRow"
+import { DiscordHono, makeActionRow, makeButton } from 'discord-hono'
 
 const app = new DiscordHono().command('component', c =>
   c.res({
     content: 'components',
-    components: new Components().row(
-      new Button('button-1', 'button'),
-      new Button('button-2', 'second'),
-    ),
+    components: [
+      makeActionRow([makeButton('id1', '1'), makeButton('id2', '22')]),
+      makeActionRow([makeButton('id3', '333'), makeButton('id4', '4444')]),
+    ],
   }),
 )
 ```
 
-## .row()
-
-```ts "row"
-const components = new Components()
-  .row(new Button('button-1', '1'), new Button('button-2', '22'))
-  .row(new Button('button-3', '333'), new Button('button-4', '4444'))
-```
-
-```bash title="Discord Bot Components Response"
+```bash title="Discord Bot Response"
+components
 [1][22]
 [333][4444]
 ```
 
-`.row()` has the same feature as [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows).
+## Buttons
 
-## Button elements
+```ts "makeButton" "makeLinkButton"
+import {
+  makeActionRow,
+  makeButton,
+  makeLinkButton,
+  buttonStyle,
+} from 'discord-hono'
 
-```ts "Button"
-import { Components, Button } from 'discord-hono'
+const components = [
+  makeActionRow([
+    makeButton('custom_id', 'label'),
+    makeButton('button', ['✅', 'button'])
+      .custom_value('value')
+      .style(buttonStyle.Secondary)
+      .disabled(true),
+    makeLinkButton('https://example.com', 'link'),
+  ]),
+]
+```
 
-type Style = 'Primary' | 'Secondary' | 'Success' | 'Danger' | 'Link' | 'SKU'
+`custom_id` is used to identify `app.component()`.  
+Also, `custom_id` cannot include `;`.
 
-const style: Style = 'Secondary' // defaul: 'Primary'
+If your editor supports it, you can view the method list by typing `.`.
 
-const components = new Components().row(
-  new Button('unique-id', 'label'),
-  new Button('button', 'button', style),
-  new Button('https://example.com', 'Link button', 'Link'),
+For the details of each method, see the [Official Docs](https://docs.discord.com/developers/components/reference#button).
+
+### `.custom_value()`
+
+`.custom_value()` is a library-specific value passed to the button handler. It can be up to 99 characters including `custom_id`.
+
+```ts ".custom_value"
+import {
+  makeActionRow,
+  makeButton,
+  makeSlashCommand,
+  makeStringOption,
+} from 'discord-hono'
+import { factory } from '../init'
+
+export const command_command = factory.command(
+  makeSlashCommand('command', 'description').options([
+    makeStringOption('value', 'value passed to button').required(true),
+  ]),
+  c =>
+    c.res({
+      content: 'button',
+      components: [
+        makeActionRow([component_button.component.custom_value(c.var.value)]),
+      ],
+    }),
 )
+
+export const component_button = factory.component(
+  makeButton('button', ['✅', 'button']),
+  c => c.update().res(`value: ${c.ref.custom_value}`),
+)
+```
+
+By using `.custom_value()`, you can pass required values from the command to the button handler.
+
+The [pagination example](/examples/pagination/) uses this feature.
+
+The same pattern works for select menus and other components.
+
+## Selects
+
+```ts "makeStringSelect" "makeChannelSelect"
+import {
+  makeActionRow,
+  makeStringSelect,
+  makeChannelSelect,
+} from 'discord-hono'
+
+const components = [
+  makeActionRow([
+    makeStringSelect('custom_id', [
+      ['value', 'label'],
+      ['value2', ['👉', 'label2']],
+    ]),
+    makeChannelSelect('channel_custom_id').channel_types([0]),
+  ]),
+]
 ```
 
 `unique-id` is used to identify `app.component()`.  
-Also, do not use `;` for `unique-id`.  
-The third argument specifies the style of the button. The default is `Primary`.  
-If the third argument is `Link`, `unique-id` is a URL.
+Also, `unique-id` cannot include `;`.
 
-### Method
+If your editor supports it, you can view the method list by typing `.`.
 
-```ts
-// prettier-ignore
-const components = new Components().row(
-  new Button('custom_id or URL or sku_id', 'label', 'Primary')
-    .custom_value() // library-specific custom value
-    .emoji()
-    .disabled(),
+For the details of each method, see the [Official Docs](https://docs.discord.com/developers/components/reference#string-select).
+
+`.custom_value()` is a library-specific value passed to the component. It can be up to 99 characters including `custom_id`.
+
+### Getting input values
+
+```ts "c.ref.values"
+import { makeStringSelect } from 'discord-hono'
+import { factory } from '../init'
+
+export const component_select = factory.component(
+  makeStringSelect('select', [
+    ['value', 'label'],
+    ['value2', ['👉', 'label2']],
+  ]),
+  c => c.update().res(`value: ${c.ref.values?.[0]}`),
 )
 ```
 
-Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/message-components#button-object).
+## Components V2
 
-`.custom_value()` is limited to 99 characters including `custom_id`.
-
-### Simple emoji setup
+When using Components V2, make sure to specify `c.flags('IS_COMPONENTS_V2')`.
 
 ```ts
-import { Components, Button } from 'discord-hono'
+import {
+  buttonStyle,
+  makeActionRow,
+  makeButton,
+  makeContainer,
+  makeMediaGallery,
+  makeSection,
+  makeSeparator,
+  makeSlashCommand,
+  makeTextDisplay,
+  makeThumbnail,
+} from 'discord-hono'
+import { factory } from '../init'
 
-const components = new Components().row(new Button('button', ['✅', 'button']))
-```
-
-## Select elements
-
-```ts "Select"
-import { Components, Select } from 'discord-hono'
-
-type Type = 'String' | 'User' | 'Role' | 'Mentionable' | 'Channel'
-
-const selectType: Type = 'Channel' // defaul: 'String'
-
-const components = new Components().row(new Select('unique-id', selectType))
-```
-
-`unique-id` is used to identify `app.component()`.  
-Also, do not use `;` for `unique-id`.
-
-### Method
-
-```ts
-const components = new Components().row(
-  new Select('custom_id')
-    .custom_value() // library-specific custom value
-    .options() // required: String
-    .channel_types() // Channel
-    .placeholder()
-    .default_values() // User, Role, Mentionable, Channel
-    .min_values()
-    .max_values()
-    .disabled(),
-)
-```
-
-Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/message-components#select-menu-object).
-
-Depending on the type, some fields (methods) cannot be used.
-
-`.custom_value()` is limited to 99 characters including `custom_id`.
-
-## Components V2 (β)
-
-When using Components V2, you must specify `c.flags('IS_COMPONENTS_V2')`.
-
-### Layout
-
-### Content
-
-example
-
-```ts
 export const command_components_v2 = factory.command(
-  new Command('components_v2', 'response components_v2'),
-  async c => {
-    const image = await fetch('https://luis.fun/images/hono.webp')
-    const blob = new Blob([await image.arrayBuffer()])
-    return c.flags('EPHEMERAL', 'IS_COMPONENTS_V2').res(
-      {
-        components: [
-          new Content('text top'),
-          new Layout('Container').components(
-            new Layout('Action Row').components(component_delete.component),
-            new Layout('Separator'),
-            new Content('container - text'),
-            new Layout('Section')
-              .components(
-                new Content('container - section - text'),
-                new Content('container - section - text2'),
-              )
-              .accessory(new Content('image.webp', 'Thumbnail')),
-            new Content('container - text2'),
-          ),
-        ],
-      },
-      { blob, name: 'image.webp' },
-    )
-  },
+  makeSlashCommand('components_v2', 'response components_v2'),
+  async c =>
+    c.flags('EPHEMERAL', 'IS_COMPONENTS_V2').resDefer(async () => {
+      const image = await fetch('https://luis.fun/images/hono.webp')
+      const blob = new Blob([await image.arrayBuffer()])
+      const res = await c
+        .followup(
+          {
+            components: [
+              makeTextDisplay('text top'),
+              makeContainer([
+                makeActionRow([component_delete.component]),
+                makeSeparator(),
+                makeTextDisplay('container - text'),
+                makeSection(
+                  [
+                    makeTextDisplay('container - section - text'),
+                    makeTextDisplay('container - section - text2'),
+                  ],
+                  makeThumbnail('attachment://image.webp'),
+                ),
+                makeTextDisplay('container - text2'),
+                makeMediaGallery(['attachment://image.webp']),
+              ]),
+            ],
+          },
+          { blob, name: 'image.webp' },
+        )
+        .then(r => r.json())
+      console.log(res)
+    }),
 )
+
 export const component_delete = factory.component(
-  new Button('delete', ['🗑️', 'Delete'], 'Secondary'),
+  makeButton('delete', ['🗑️', 'Delete']).style(buttonStyle.Secondary),
   c => c.update().resDefer(c => c.followup()),
 )
 ```
