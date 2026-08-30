@@ -1,53 +1,73 @@
 ---
 title: Modal
-description: Guide on using modals in DiscordHono, including the creation of modals with text inputs, customization options like styles, and methods for validation and placeholders.
+description: A guide to creating and using modals in Discord Hono, including text inputs, channel selection, labels, and validation.
 sidebar:
   order: 4
 ---
 
-```ts "Modal" "TextInput"
-import { Modal, TextInput } from 'discord-hono'
+```ts "makeModal"
+import {
+  makeModal,
+  makeActionRow,
+  makeTextInput,
+  makeLabel,
+  makeChannelSelect,
+} from 'discord-hono'
 
-const modal = new Modal('unique-id', 'Title').row(
-  new TextInput('custom_id', 'Label'),
+const modal = makeModal('custom_id', 'label', [
+  makeLabel('Text Input', makeTextInput('text', 'Text').required(true)),
+  makeLabel('Channel Select', makeChannelSelect('channel')),
+])
+```
+
+`custom_id` is used to identify the modal in `app.modal()`.  
+It also cannot contain `;`.
+
+If your editor supports it, typing `.` will show a list of available methods.
+
+Please refer to the [Official Docs](https://docs.discord.com/developers/components/reference#text-input) for the details of each method.
+
+## Example
+
+```ts "makeModal" "c.resModal"
+import {
+  makeActionRow,
+  makeChannelSelect,
+  makeLabel,
+  makeModal,
+  makeSlashCommand,
+  makeStringOption,
+  makeTextDisplay,
+  makeTextInput,
+} from 'discord-hono'
+import { factory } from '../init'
+
+export const command_modal = factory.command(
+  makeSlashCommand('modal', 'modal test').options([
+    makeStringOption('text', 'with text'),
+  ]),
+  c => {
+    if (!c.var.text) return c.resModal(modal_modal.modal)
+    const modal = modal_modal.modal.toJSON()
+    return c.resModal(
+      makeModal(modal.custom_id, modal.title, [
+        ...modal.components,
+        makeTextDisplay(`Text: ${c.var.text}`),
+      ]),
+    )
+  },
+)
+
+export const modal_modal = factory.modal(
+  makeModal('modal', 'Modal Test', [
+    makeActionRow([makeTextInput('modal_text', 'Modal Text').required(true)]),
+    makeLabel('Channel Select', makeChannelSelect('channel')),
+  ]),
+  c => {
+    const channelObj = c.ref.channels?.[c.var.channel?.[0] ?? '']
+    return c.res(
+      `- Text: ${c.var.modal_text}\n- Channel: ${channelObj?.name} <#${channelObj?.id}>`,
+    )
+  },
 )
 ```
-
-## .row()
-
-```ts "row"
-const modal = new Modal('unique-id', 'Modal Title')
-  .row(new TextInput('text-1', 'Label'))
-  .row(new TextInput('text-2', 'MultiInput', 'Multi'))
-```
-
-`.row()` has the same feature as [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows).
-
-## TextInput
-
-```ts "TextInput"
-import { Modal, TextInput } from 'discord-hono'
-
-type Style = 'Single' | 'Multi'
-
-const modal = new Modal('unique-id', 'Modal Title')
-  .row(new TextInput('text-1', 'Label'))
-  .row(new TextInput('custom_id', 'MultiInput', 'Multi' as Style))
-```
-
-The third argument specifies the style of the TextInput. The default is `Single`.
-
-### Method
-
-```ts
-const modal = new Modal('unique-id', 'Modal Title').row(
-  new TextInput('custom_id', 'Label')
-    .min_length()
-    .max_length()
-    .required()
-    .value()
-    .placeholder(),
-)
-```
-
-Please refer to the [Official Docs](https://discord.com/developers/docs/interactions/message-components#text-input-object).
