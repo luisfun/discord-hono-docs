@@ -5,27 +5,32 @@ sidebar:
   order: 6
 ---
 
+## 一覧
+
+```ts
+import {
+  // Main
+  makePoll,
+  // Child
+  makePollMedia,
+  makePollAnswer,
+} from 'discord-hono'
+```
+
+## Poll
+
 ```ts "Poll"
-import { DiscordHono, Poll } from 'discord-hono'
+import { DiscordHono, makePoll } from 'discord-hono'
 
 const app = new DiscordHono().command('poll', c =>
   c.res({
-    poll: new Poll()
-      .question('好きな色は？')
-      .answers(['🔴', '赤'], ['🟢', '緑'], '青', '黄'),
+    poll: makePoll('好きな色は？', [['🔴', '赤'], ['🟢', '緑'], '青', '黄'])
+      .allow_multiselect(true)
+      .duration(1),
   }),
 )
 ```
 
-## Method
+IDEが対応していれば、`.` を打つと候補となるメソッド一覧をみれます。
 
-```ts
-const poll = new Poll()
-  .question()
-  .tyanswerse()
-  .duration()
-  .allow_multiselect()
-  .layout_type()
-```
-
-[公式ドキュメント](https://discord.com/developers/docs/resources/poll)を参照してください。
+メソッドの内容は[公式ドキュメント](https://docs.discord.com/developers/resources/poll)を参照してください。
