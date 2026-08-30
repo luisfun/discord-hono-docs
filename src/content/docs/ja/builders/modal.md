@@ -5,49 +5,69 @@ sidebar:
   order: 4
 ---
 
-```ts "Modal" "TextInput"
-import { Modal, TextInput } from 'discord-hono'
+```ts "makeModal"
+import {
+  makeModal,
+  makeActionRow,
+  makeTextInput,
+  makeLabel,
+  makeChannelSelect,
+} from 'discord-hono'
 
-const modal = new Modal('unique-id', 'モーダルタイトル').row(
-  new TextInput('custom_id', 'テキストラベル'),
+const modal = makeModal('custom_id', 'label', [
+  makeLabel('Text Input', makeTextInput('text', 'Text').required(true)),
+  makeLabel('Channel Select', makeChannelSelect('channel')),
+])
+```
+
+`custom_id` は `app.modal()` で識別するために使います。  
+また、`custom_id` に `;` は使用できません。
+
+IDEが対応していれば、`.` を打つと候補となるメソッド一覧をみれます。
+
+メソッドの内容は[公式ドキュメント](https://docs.discord.com/developers/components/reference#text-input)を参照してください。
+
+## コード例
+
+```ts "makeModal" "c.resModal"
+import {
+  makeActionRow,
+  makeChannelSelect,
+  makeLabel,
+  makeModal,
+  makeSlashCommand,
+  makeStringOption,
+  makeTextDisplay,
+  makeTextInput,
+} from 'discord-hono'
+import { factory } from '../init'
+
+export const command_modal = factory.command(
+  makeSlashCommand('modal', 'modal test').options([
+    makeStringOption('text', 'with text'),
+  ]),
+  c => {
+    if (!c.var.text) return c.resModal(modal_modal.modal)
+    const modal = modal_modal.modal.toJSON()
+    return c.resModal(
+      makeModal(modal.custom_id, modal.title, [
+        ...modal.components,
+        makeTextDisplay(`Text: ${c.var.text}`),
+      ]),
+    )
+  },
+)
+
+export const modal_modal = factory.modal(
+  makeModal('modal', 'Modal Test', [
+    makeActionRow([makeTextInput('modal_text', 'Modal Text').required(true)]),
+    makeLabel('Channel Select', makeChannelSelect('channel')),
+  ]),
+  c => {
+    const channelObj = c.ref.channels?.[c.var.channel?.[0] ?? '']
+    return c.res(
+      `- Text: ${c.var.modal_text}\n- Channel: ${channelObj?.name} <#${channelObj?.id}>`,
+    )
+  },
 )
 ```
-
-## .row()
-
-```ts "row"
-const modal = new Modal('unique-id', 'モーダルタイトル')
-  .row(new TextInput('text-1', 'テキストラベル'))
-  .row(new TextInput('text-2', '複数行入力', 'Multi'))
-```
-
-`.row()` は [Action Rows](https://discord.com/developers/docs/interactions/message-components#action-rows) と同じ機能です。
-
-## TextInput
-
-```ts "TextInput"
-import { Modal, TextInput } from 'discord-hono'
-
-type Style = 'Single' | 'Multi'
-
-const modal = new Modal('unique-id', 'モーダルタイトル')
-  .row(new TextInput('text-1', 'テキストラベル'))
-  .row(new TextInput('custom_id', '複数行入力', 'Multi' as Style))
-```
-
-第3引数には TextInput のスタイルを指定します。デフォルトは `Single` です。
-
-### Method
-
-```ts
-const modal = new Modal('unique-id', 'モーダルタイトル').row(
-  new TextInput('custom_id', 'テキストラベル')
-    .min_length()
-    .max_length()
-    .required()
-    .value()
-    .placeholder(),
-)
-```
-
-[公式ドキュメント](https://discord.com/developers/docs/interactions/message-components#text-input-object)を参照してください。
