@@ -63,7 +63,7 @@ The command target for message- or user-triggered commands.
 Main usage
 
 ```ts
-c.ref.messages?.[c.ref.target_id]?.content // Get the content of the trigger message
+c.ref.messages[c.ref.target_id]?.content // Get the content of the trigger message
 ```
 
 ### c.ref.custom_value
@@ -74,7 +74,7 @@ A library-specific transferable variable.
 
 ```ts
 // Component definition
-new Button('button', 'Button').custom_value('value-string')
+makeButton('button', 'Button').custom_value('value-string')
 // Inside handler code
 console.log(c.ref.custom_value) // value-string
 ```
@@ -103,15 +103,15 @@ command, autocomplete
 
 ```ts "sub.string" "sub.group" "sub.command"
 const commands = [
-  new Command('slash', 'slash description').options(
-    new SubCommand('sub1', 'Subcommand 1'),
-    new SubGroup('group', 'group description').options(
-      new SubCommand('sub2', 'Subcommand 2').options(
-        new Option('text', 'text'),
-      ),
-      new SubCommand('sub3', 'Subcommand 3'),
-    ),
-  ),
+  makeSlashCommand('slash', 'slash description').options([
+    makeSubCommand('sub1', 'Subcommand 1'),
+    makeSubCommandGroup('group', 'group description').options([
+      makeSubCommand('sub2', 'Subcommand 2').options([
+        makeStringOption('text', 'text'),
+      ]),
+      makeSubCommand('sub3', 'Subcommand 3'),
+    ]),
+  ]),
 ]
 const app = new DiscordHono().command('slash', c => {
   switch (c.sub.string) {
@@ -202,9 +202,9 @@ command, component
 ```ts "resModal"
 const app = new DiscordHono().command('ping', c =>
   c.resModal(
-    new Modal('custom_id', 'Modal Title').row(
-      new TextInput('text-id', 'Label'),
-    ),
+    makeModal('custom_id', 'Modal Title', [
+      makeLabel('Label', makeTextInput('text-id', 'Label')),
+    ]),
   ),
 )
 ```

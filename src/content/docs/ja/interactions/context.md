@@ -63,7 +63,7 @@ command
 主な使い方
 
 ```ts
-c.ref.messages?.[c.ref.target_id]?.content // トリガーメッセージのコンテンツを取得
+c.ref.messages[c.ref.target_id]?.content // トリガーメッセージのコンテンツを取得
 ```
 
 ### c.ref.custom_value
@@ -74,7 +74,7 @@ component, modal
 
 ```ts
 // コンポーネント定義
-new Button('button', 'ボタン').custom_value('value-string')
+makeButton('button', 'ボタン').custom_value('value-string')
 // ハンドル内コード
 console.log(c.ref.custom_value) // value-string
 ```
@@ -103,15 +103,15 @@ command, autocomplete
 
 ```ts "sub.string" "sub.group" "sub.command"
 const commands = [
-  new Command('slash', 'slash description').options(
-    new SubCommand('sub1', 'サブコマンド 1'),
-    new SubGroup('group', 'サブコマンドグループ description').options(
-      new SubCommand('sub2', 'サブコマンド 2').options(
-        new Option('text', 'テキスト'),
-      ),
-      new SubCommand('sub3', 'サブコマンド 3'),
-    ),
-  ),
+  makeSlashCommand('slash', 'slash description').options([
+    makeSubCommand('sub1', 'サブコマンド 1'),
+    makeSubCommandGroup('group', 'サブコマンドグループ description').options([
+      makeSubCommand('sub2', 'サブコマンド 2').options([
+        makeStringOption('text', 'テキスト'),
+      ]),
+      makeSubCommand('sub3', 'サブコマンド 3'),
+    ]),
+  ]),
 ]
 const app = new DiscordHono().command('slash', c => {
   switch (c.sub.string) {
@@ -202,9 +202,9 @@ command, component
 ```ts "resModal"
 const app = new DiscordHono().command('ping', c =>
   c.resModal(
-    new Modal('custom_id', 'タイトル').row(
-      new TextInput('text-id', 'テキストラベル'),
-    ),
+    makeModal('custom_id', 'タイトル', [
+      makeLabel('テキストラベル', makeTextInput('text-id', 'テキストラベル')),
+    ]),
   ),
 )
 ```
