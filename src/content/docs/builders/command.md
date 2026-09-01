@@ -127,3 +127,29 @@ export const command_slash = factory.command(
   },
 )
 ```
+
+## Message Command Example
+
+```ts
+import {
+  makeContainer,
+  makeMessageCommand,
+  makeTextDisplay,
+} from 'discord-hono'
+import { factory } from '../init.js'
+
+export const command_repost = factory.command(
+  makeMessageCommand('repost'),
+  c => {
+    return c.flags('IS_COMPONENTS_V2').res({
+      components: [
+        makeContainer([
+          makeTextDisplay(
+            c.ref.messages[c.ref.target_id]?.content || 'Error: not found',
+          ),
+        ]),
+      ],
+    })
+  },
+)
+```

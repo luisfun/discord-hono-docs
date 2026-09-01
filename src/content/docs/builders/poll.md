@@ -24,7 +24,12 @@ import { DiscordHono, makePoll } from 'discord-hono'
 
 const app = new DiscordHono().command('poll', c =>
   c.res({
-    poll: makePoll('What is your favorite color?', [['🔴', 'Red'], ['🟢', 'Green'], 'Blue', 'Yellow'])
+    poll: makePoll('What is your favorite color?', [
+      ['🔴', 'Red'],
+      ['🟢', 'Green'],
+      'Blue',
+      'Yellow',
+    ])
       .allow_multiselect(true)
       .duration(1),
   }),
