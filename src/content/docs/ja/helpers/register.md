@@ -7,13 +7,13 @@ sidebar:
 
 ```ts "register"
 // register.ts
-import { Command, Option, register } from 'discord-hono'
+import { makeSlashCommand, makeStringOption, register } from 'discord-hono'
 
 const commands = [
-  new Command('ping', 'pong を返答'),
-  new Command('image', '画像ファイルを返答').options(
-    new Option('text', 'テキスト付で').required(),
-  ),
+  makeSlashCommand('ping', 'pong を返答'),
+  makeSlashCommand('image', '画像ファイルを返答').options([
+    makeStringOption('text', 'テキスト付で').required(true),
+  ]),
 ]
 
 register(
