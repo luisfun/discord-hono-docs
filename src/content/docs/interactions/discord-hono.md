@@ -18,8 +18,8 @@ export default app
 
 ```ts /command(?!s)/ "ping" "image"
 const commands = [
-  new Command('ping', 'response Pong'),
-  new Command('image', 'response Image'),
+  makeSlashCommand('ping', 'response Pong'),
+  makeSlashCommand('image', 'response Image'),
 ]
 const app = new DiscordHono()
   .command('ping', c => c.res('Pong!!'))
@@ -38,17 +38,19 @@ const app = new DiscordHono()
   .command('components', c =>
     c.res({
       content: 'No button clicked yet',
-      components: new Components().row(
-        new Button('button-1', 'Button'),
-        new Button('button-2', 'Second'),
-      ),
+      components: [
+        makeActionRow([
+          makeButton('button-1', 'Button'),
+          makeButton('button-2', 'Second'),
+        ]),
+      ],
     }),
   )
   .component('button-1', c => c.update().res('Button clicked'))
   .component('button-2', c => c.update().res('Second clicked'))
 ```
 
-The first argument of the component element `Button()` must match the first argument of `.component()`.  
+The first argument of the component element `makeButton()` must match the first argument of `.component()`.  
 The second argument of the matched `.component()` is executed.
 
 Specifying `''` as the first argument functions as a catch-all pattern.
@@ -57,25 +59,23 @@ Specifying `''` as the first argument functions as a catch-all pattern.
 
 ```ts /autocomplete(?!')/ "hello"
 const commands = [
-  new Command('hello', 'command').options(
-    new Option('option', 'selector').autocomplete().required(),
-  ),
+  makeSlashCommand('hello', 'command').options([
+    makeStringOption('option', 'selector').autocomplete(true).required(true),
+  ]),
 ]
 const app = new DiscordHono().autocomplete(
   'hello',
   c =>
-    c.resAutocomplete(
-      new Autocomplete(c.focused?.value).choices(
-        { name: 'world', value: 'world!!!' },
-        { name: 'hi', value: 'hi!' },
-      ),
-    ),
+    c.resAutocomplete([
+      { name: 'world', value: 'world!!!' },
+      { name: 'hi', value: 'hi!' },
+    ]),
   c => c.res(c.var.option),
 )
 ```
 
-Add `.autocomplete()` to `Option()` of the command.  
-The first argument of `Command()` must match the first argument of `.autocomplete()`.  
+Add `.autocomplete(true)` to `makeStringOption()` of the command.  
+The first argument of `makeSlashCommand()` must match the first argument of `.autocomplete()`.  
 The second argument of the matched `.autocomplete()` is the handler for choice generation, and the third argument is the handler for execution.
 
 The third argument of `.autocomplete()` is the same as the second argument of `.command()`.
@@ -86,15 +86,16 @@ The third argument of `.autocomplete()` is the same as the second argument of `.
 const app = new DiscordHono()
   .command('modal', c =>
     c.resModal(
-      new Modal('modal-1', 'Modal Title')
-        .row(new TextInput('text-1', 'Text'))
-        .row(new TextInput('text-2', 'Second')),
+      makeModal('modal-1', 'モーダル タイトル', [
+        makeLabel('テキスト', makeTextInput('text-1', 'テキスト'))
+        makeLabel('2つ目', makeTextInput('text-2', '2つ目'))
+      ])
     ),
   )
   .modal('modal-1', c => c.res('Modal submitted'))
 ```
 
-The first argument of `Modal()` must match the first argument of `.modal()`.  
+The first argument of `makeModal()` must match the first argument of `.modal()`.  
 The second argument of the matched `.modal()` is executed.
 
 Specifying `''` as the first argument functions as a catch-all pattern.

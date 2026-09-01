@@ -18,8 +18,8 @@ export default app
 
 ```ts /command(?!s)/ "ping" "image"
 const commands = [
-  new Command('ping', 'Pong を返答'),
-  new Command('image', 'Image を返答'),
+  makeSlashCommand('ping', 'Pong を返答'),
+  makeSlashCommand('image', 'Image を返答'),
 ]
 const app = new DiscordHono()
   .command('ping', c => c.res('Pong!!'))
@@ -38,17 +38,19 @@ const app = new DiscordHono()
   .command('components', c =>
     c.res({
       content: 'まだボタンはクリックされていない',
-      components: new Components().row(
-        new Button('button-1', 'ボタン'),
-        new Button('button-2', '2つ目'),
-      ),
+      components: [
+        makeActionRow([
+          makeButton('button-1', 'ボタン'),
+          makeButton('button-2', '2つ目'),
+        ]),
+      ],
     }),
   )
   .component('button-1', c => c.update().res('ボタン がクリックされた'))
   .component('button-2', c => c.update().res('2つ目 がクリックされた'))
 ```
 
-コンポーネント要素 `Button()` の第1引数と `.component()` の第1引数を一致させてください。  
+コンポーネント要素 `makeButton()` の第1引数と `.component()` の第1引数を一致させてください。  
 一致した `.component()` の第2引数が実行されます。
 
 第1引数に `''` を指定すると、キャッチオールパターンとして機能します。
@@ -57,25 +59,23 @@ const app = new DiscordHono()
 
 ```ts /autocomplete(?!')/ "hello"
 const commands = [
-  new Command('hello', 'command').options(
-    new Option('option', 'selector').autocomplete().required(),
-  ),
+  makeSlashCommand('hello', 'command').options([
+    makeStringOption('option', 'selector').autocomplete(true).required(true),
+  ]),
 ]
 const app = new DiscordHono().autocomplete(
   'hello',
   c =>
-    c.resAutocomplete(
-      new Autocomplete(c.focused?.value).choices(
-        { name: 'world', value: 'world!!!' },
-        { name: 'hi', value: 'hi!' },
-      ),
-    ),
+    c.resAutocomplete([
+      { name: 'world', value: 'world!!!' },
+      { name: 'hi', value: 'hi!' },
+    ]),
   c => c.res(c.var.option),
 )
 ```
 
-コマンドの `Option()` に `.autocomplete()` を付与してください。  
-`Command()` の第1引数と `.autocomplete()` の第1引数を一致させてください。  
+コマンドの `makeStringOption()` に `.autocomplete(true)` を付与してください。  
+`makeSlashCommand()` の第1引数と `.autocomplete()` の第1引数を一致させてください。  
 一致した `.autocomplete()` の第2引数が選択肢生成用のハンドラ、第3引数が実行用のハンドラです。
 
 `.autocomplete()` の第3引数は `.command()` の第2引数と同じです。
@@ -86,15 +86,16 @@ const app = new DiscordHono().autocomplete(
 const app = new DiscordHono()
   .command('modal', c =>
     c.resModal(
-      new Modal('modal-1', 'モーダル タイトル')
-        .row(new TextInput('text-1', 'テキスト'))
-        .row(new TextInput('text-2', '2つ目')),
+      makeModal('modal-1', 'モーダル タイトル', [
+        makeLabel('テキスト', makeTextInput('text-1', 'テキスト'))
+        makeLabel('2つ目', makeTextInput('text-2', '2つ目'))
+      ])
     ),
   )
   .modal('modal-1', c => c.res('モーダルが送信された'))
 ```
 
-`Modal()` の第1引数と `.modal()` の第1引数を一致させてください。  
+`makeModal()` の第1引数と `.modal()` の第1引数を一致させてください。  
 一致した `.modal()` の第2引数が実行されます。
 
 第1引数に `''` を指定すると、キャッチオールパターンとして機能します。
