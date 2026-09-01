@@ -1,2 +1,5 @@
 /builders/components/ /builders/component/
 /ja/builders/components/ /ja/builders/component/
+
+/examples/command-type-message/ /
+/ja/examples/command-type-message/ /ja/

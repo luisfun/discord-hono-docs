@@ -4,60 +4,60 @@ description: Discord Hono でページネーションを実装する例で、ペ
 ---
 
 ```ts
-// index.ts
+// src/handlers/pagination.ts
 import {
+  buttonStyle,
   type CommandContext,
   type ComponentContext,
-  Button,
-  Components,
-  DiscordHono,
-  Embed,
+  makeActionRow,
+  makeButton,
+  makeEmbed,
+  makeModal,
+  makeSlashCommand,
+  makeStringOption,
+  makeTextInput,
 } from 'discord-hono'
-
-type Env = {
-  Variables: {
-    content?: string
-  }
-}
+import { type Env, factory } from '../init.js'
 
 const pageContent = (
-  c: CommandContext<Env> | ComponentContext<Env, Button>,
+  c: CommandContext<Env> | ComponentContext<Env>,
   page: number,
   content: string,
-) => {
+): ReturnType<typeof c.res> => {
   ///// Process /////
-  const db = c.env.DB
+  const _db = c.env.DB
   ///// Response Build /////
   const maxPage = 3
-  const embed = new Embed()
+  const embed = makeEmbed()
     .title('Title')
     .description(`${content}\nPage: ${page}`)
-  const components = new Components().row(
-    new Button('page', ['⬅️', 'Previous'])
-      .custom_value(JSON.stringify([page - 1, content]))
-      .disabled(page <= 1),
-    new Button('page', ['➡️', 'Next'])
-      .custom_value(JSON.stringify([page + 1, content]))
-      .disabled(maxPage <= page),
-  )
-  return { embeds: [embed], components }
+  const previousButton = component_page.component
+    .clone()
+    .emoji({ name: '⬅️' } as const)
+    .label('Previous')
+    .style(buttonStyle.Success)
+    .custom_value(JSON.stringify([page - 1, content]))
+    .disabled(page <= 1)
+  const nextButton = component_page.component
+    .clone()
+    .emoji({ name: '➡️' } as const)
+    .label('Next')
+    .style(buttonStyle.Primary)
+    .custom_value(JSON.stringify([page + 1, content]))
+    .disabled(maxPage <= page)
+  const components = [makeActionRow([previousButton, nextButton])]
+  return c.res({ embeds: [embed], components })
 }
 
-const app = new DiscordHono<Env>()
-  .command('page', c => c.res(pageContent(c, 1, c.var.content)))
-  .component('page', c => {
-    const arr: [number, string] = JSON.parse(c.ref.custom_value ?? '')
-    return c.resUpdate(pageContent(c, ...arr))
-  })
+export const command_page = factory.command(
+  makeSlashCommand('page', 'pagination').options([
+    makeStringOption('content', 'page content').required(true),
+  ]),
+  c => pageContent(c, 1, c.var.content),
+)
 
-export default app
-```
-
-```ts
-// register.ts
-const commands = [
-  new Command('page', 'pagination').options(
-    new Option('content', 'page content').required(),
-  ),
-]
+export const component_page = factory.component(makeButton('page', ''), c => {
+  const arr: [number, string] = JSON.parse(c.ref.custom_value ?? '')
+  return pageContent(c.update(), ...arr)
+})
 ```
