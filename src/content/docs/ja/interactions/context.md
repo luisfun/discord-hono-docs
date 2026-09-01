@@ -202,7 +202,7 @@ command, component
 ```ts "resModal"
 const app = new DiscordHono().command('ping', c =>
   c.resModal(
-    new Modal('unique-id', 'タイトル').row(
+    new Modal('custom_id', 'タイトル').row(
       new TextInput('text-id', 'テキストラベル'),
     ),
   ),
