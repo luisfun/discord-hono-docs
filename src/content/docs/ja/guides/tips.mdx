@@ -75,7 +75,7 @@ Discord ダッシュボードの INTERACTIONS ENDPOINT URL に URL を登録す�
 ## 絵文字(emoji)に関する注意点
 
 ```ts "🔄"
-new Button('button-1', 'ボタン').emoji('🔄')
+makeButton('button-1', ['🔄', 'ボタン'])
 ```
 
 絵文字を設定し Discord へ送信したとき、何も応答しない事があります。  
