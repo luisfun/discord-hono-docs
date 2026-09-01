@@ -61,79 +61,22 @@ const options: InitOptions<Env> = {
 const app = new DiscordHono<Env>(options)
 ```
 
-## Context Types
+## Context, Handler Types
 
-```ts "Env" "CommandContext" "ComponentContext" "ModalContext" "CronContext" "AutocompleteContext"
+ライブラリとして用意していますが、可能な限り `createFactory` を使い、Context と関係ない部分を切り離すことを推奨します。
+
+```ts
 import type {
-  CommandContext,
-  ComponentContext,
   AutocompleteContext,
-  ModalContext,
+  AutocompleteHandler,
+  CommandContext,
+  CommandHandler,
+  ComponentContext,
+  ComponentHandler,
   CronContext,
+  CronHandler,
+  InitOptions,
+  ModalContext,
+  ModalHandler,
 } from 'discord-hono'
-import {
-  DiscordHono,
-  Components,
-  Button,
-  Modal,
-  TextInput,
-  Autocomplete,
-} from 'discord-hono'
-
-type Env = {
-  Bindings: {
-    DB: D1Database
-  }
-}
-
-const commandHandler = async (c: CommandContext<Env>) => {
-  const db = c.env.DB
-  /* 何かしらの処理 */
-  return c.res({
-    components: new Components().row(new Button('button', 'Yo!!')),
-  })
-}
-
-const componentHandler = async (c: ComponentContext<Env, Button>) => {
-  const db = c.env.DB
-  /* 何かしらの処理 */
-  return c.resModal(
-    new Modal('modal', 'これはモーダル').row(
-      new TextInput('id', '何か入力して'),
-    ),
-  )
-}
-
-const modalHandler = async (c: ModalContext<Env>) => {
-  const db = c.env.DB
-  /* 何かしらの処理 */
-  return c.res('モーダルが送信された')
-}
-
-const autocompleteHandler = async (c: AutocompleteContext<Env>) => {
-  const db = c.env.DB
-  /* 何かしらの処理 */
-  return c.resAutocomplete(new Autocomplete().choices())
-}
-
-const autocompleteCommandHandler = async (c: CommandContext<Env>) => {
-  const db = c.env.DB
-  /* 何かしらの処理 */
-  return c.res('オートコンプリートコマンド')
-}
-
-const cronHandler = async (c: CronContext<Env>) => {
-  const db = c.env.DB
-  /* 何かしらの処理 */
-}
-
-const app = new DiscordHono<Env>()
-  .command('hey', commandHandler)
-  .component('button', componentHandler)
-  .modal('modal', modalHandler)
-  .autocomplete('autocomplete', autocompleteHandler, autocompleteCommandHandler)
-  .cron('', cronHandler)
-export default app
 ```
-
-それぞれの `app.***()` の第2引数で受け取ったコンテキストに対応します。

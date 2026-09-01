@@ -62,79 +62,22 @@ const options: InitOptions<Env> = {
 const app = new DiscordHono<Env>(options)
 ```
 
-## Context Types
+## Context, Handler Types
 
-```ts "Env" "CommandContext" "ComponentContext" "ModalContext" "CronContext" "AutocompleteContext"
+The library includes these types, but we recommend using `createFactory` whenever possible and separating parts that are not related to the context.
+
+```ts
 import type {
-  CommandContext,
-  ComponentContext,
   AutocompleteContext,
-  ModalContext,
+  AutocompleteHandler,
+  CommandContext,
+  CommandHandler,
+  ComponentContext,
+  ComponentHandler,
   CronContext,
+  CronHandler,
+  InitOptions,
+  ModalContext,
+  ModalHandler,
 } from 'discord-hono'
-import {
-  DiscordHono,
-  Components,
-  Button,
-  Modal,
-  TextInput,
-  Autocomplete,
-} from 'discord-hono'
-
-type Env = {
-  Bindings: {
-    DB: D1Database
-  }
-}
-
-const commandHandler = async (c: CommandContext<Env>) => {
-  const db = c.env.DB
-  /* Perform some operation */
-  return c.res({
-    components: new Components().row(new Button('button', 'Yo!!')),
-  })
-}
-
-const componentHandler = async (c: ComponentContext<Env, Button>) => {
-  const db = c.env.DB
-  /* Perform some operation */
-  return c.resModal(
-    new Modal('modal', 'This is Modal').row(
-      new TextInput('id', 'Type something'),
-    ),
-  )
-}
-
-const modalHandler = async (c: ModalContext<Env>) => {
-  const db = c.env.DB
-  /* Perform some operation */
-  return c.res('Modal Submit')
-}
-
-const autocompleteHandler = async (c: AutocompleteContext<Env>) => {
-  const db = c.env.DB
-  /* Perform some operation */
-  return c.resAutocomplete(new Autocomplete().choices())
-}
-
-const autocompleteCommandHandler = async (c: CommandContext<Env>) => {
-  const db = c.env.DB
-  /* Perform some operation */
-  return c.res('Autocomplete Command')
-}
-
-const cronHandler = async (c: CronContext<Env>) => {
-  const db = c.env.DB
-  /* Perform some operation */
-}
-
-const app = new DiscordHono<Env>()
-  .command('hey', commandHandler)
-  .component('button', componentHandler)
-  .modal('modal', modalHandler)
-  .autocomplete('autocomplete', autocompleteHandler, autocompleteCommandHandler)
-  .cron('', cronHandler)
-export default app
 ```
-
-It corresponds to the context received as the second argument of each `app.***()`.
