@@ -80,6 +80,8 @@ For some restrictions and rules, see the [official documentation](https://discor
 
 `makeSubCommand.options` can accept the same values as `makeSlashCommand.options`.
 
+If you want to split subcommands into separate files, refer to [this repository](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-subcommand-separation).
+
 ## Options
 
 ```ts ".options" "makeStringOption" "makeChannelOption"

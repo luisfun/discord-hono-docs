@@ -80,6 +80,8 @@ const commands = [
 
 `makeSubCommand.options` には `makeSlashCommand.options` と同じものを設定できます。
 
+Subcommand をファイル毎に分割したい場合、[このリポジトリ](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-subcommand-separation)を参考にしてください。
+
 ## Options
 
 ```ts ".options" "makeStringOption" "makeChannelOption"
