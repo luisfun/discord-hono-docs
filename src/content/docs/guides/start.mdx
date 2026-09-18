@@ -18,7 +18,7 @@ import { FileTree } from '@astrojs/starlight/components'
    npm create cloudflare@latest
    cd YOUR_PROJECT
    npm i discord-hono
-   npm i -D discord-api-types # When using TypeScript
+   npm i -D discord-api-types tsx # When using TypeScript
    # npm i -D @types/node # As needed
    ```
 
@@ -31,17 +31,15 @@ import { FileTree } from '@astrojs/starlight/components'
      - [register.ts](https://github.com/luisfun/discord-hono-examples/blob/main/workerd-hello-world/src/register.ts)
    - [.env.example](https://github.com/luisfun/discord-hono-examples/blob/main/workerd-hello-world/.env.example) Rename file to .env
    - package.json
-   - [tsconfig.json](https://github.com/luisfun/discord-hono-examples/blob/main/workerd-hello-world/tsconfig.json) When using TypeScript
    - ...
    </FileTree>
 
-   Add to `package.json` type and scripts.
+   Add to `package.json` scripts.
 
    ```json
    // package.json
-   "type": "module",
    "scripts": {
-     "register": "tsc && node --env-file=.env dist/register.js",
+     "register": "tsx --env-file=.env src/register.ts",
    },
    ```
 
