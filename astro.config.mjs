@@ -40,6 +40,11 @@ export default defineConfig({
           href: 'https://github.com/luisfun/discord-hono',
         },
         {
+          icon: 'npm',
+          label: 'npm',
+          href: 'https://www.npmjs.com/package/discord-hono',
+        },
+        {
           icon: 'discord',
           label: 'Discord',
           href: 'https://discord.gg/KFAgHFwBsr',
