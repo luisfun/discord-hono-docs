@@ -51,9 +51,7 @@ import { FileTree } from '@astrojs/starlight/components'
    Storing secrets.
 
    ```sh
-   npx wrangler secret put DISCORD_APPLICATION_ID
-   npx wrangler secret put DISCORD_PUBLIC_KEY
-   npx wrangler secret put DISCORD_TOKEN
+   npx wrangler secret bulk .env
    ```
 
    Register commands and deploy.
