@@ -10,5 +10,6 @@ sidebar:
   - [createFactory の使い方](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-use-factory): 推奨スタイル
   - [サブコマンドの分離](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-subcommand-separation)
   - [匿名投稿](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-2ch): Cloudflare D1 を利用
+  - [お問い合わせBot](https://github.com/luisfun/discord-hono-examples/tree/main/workerd-support-ticket)
 - [Github トピック](https://github.com/topics/discord-hono)
 - [依存リポジトリ](https://github.com/luisfun/discord-hono/network/dependents)
