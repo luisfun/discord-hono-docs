@@ -1,11 +1,11 @@
 ---
 title: デバッグ
-description: Discord APIとの応答に関する基本的なデバッグ方法
+description: Discord APIへの応答をデバッグする基本的な方法
 sidebar:
   order: 4
 ---
 
-## c.res* のデバッグ
+## `c.res*` メソッドのデバッグ
 
 `c.res`, `c.resModal`, `c.resAutocomplete`
 
@@ -16,10 +16,10 @@ return c.resModal(modal, async res => {
 })
 ```
 
-引数の最後に、コールバック関数を含めることで、`c.res` が[コールバックモード](https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-callback)として動作する。  
-コールバックモードにすることで、Discord API から `Response` を受け取ることができ、Discord への返信内容に誤りがあれば、容易に発見できる。
+`c.res*` メソッドの最後の引数にコールバック関数を渡すと、[コールバックモード](https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-callback)で動作する。  
+コールバックモードでは、Discord API から返される `Response` を確認できるため、応答内容に問題がないか調べやすくなる。
 
-## c.followup のデバッグ
+## `c.followup` のデバッグ
 
 ```ts
 return c.resDefer(async c => {
@@ -29,4 +29,4 @@ return c.resDefer(async c => {
 })
 ```
 
-`c.followup` の場合、そのまま `Response` を受け取ることができる。  
+`c.followup` では、返される `Response` を直接確認できる。  
